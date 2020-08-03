@@ -2,7 +2,7 @@
 try:
     from pytube import YouTube, Stream
     from subprocess import call
-    from os import path, remove
+    from os import path, remove, rename
     from time import sleep
 except Exception as e:
     print()
@@ -412,15 +412,17 @@ else:
                     elif opt_format == 2:
                         if ytb.streams.get_by_itag('140') in ytb.streams:
                             print('\n\033[34m> Downloading... \033[33mPlease, wait.\033[m')
-                            YouTube(url).streams.get_by_itag('140').download()
+                            YouTube(url).streams.get_by_itag('140').download(filename='music')
                             print('\n\033[32m> Download Completed.\033[m')
                             print('\n\033[34m> Starting Conversion...\033[m\n')
                             sleep(4)
                             call(["ffmpeg", "-i",
-                            path.join(f'{ytb.title}.mp4'),
-                            path.join(f'{ytb.title}.mp3')
+                            path.join('music.mp4'),
+                            path.join('music.mp3')
                             ])
-                            remove(f'{ytb.title}.mp4')
+                            remove('music.mp4')
+                            sleep(2)
+                            rename('music.mp3', f'{ytb.title}.mp3')
                             break
                     elif opt_format == 0:
                         print('\033[m')
@@ -454,8 +456,6 @@ else:
             except KeyboardInterrupt:
                 print('\n\n\033[33mThanks for using.\033[m\n')
                 break
-            except FileNotFoundError:
-                print('\n\033[31m> Try not to download songs with characters like [] or () in name.\033[m')
             except:
                 print('\n\033[31m> An unknown error has occurred.\033[m\n')
                 break
