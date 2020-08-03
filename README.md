@@ -2,8 +2,6 @@
 
 <img src="https://i.imgur.com/Sls6pOV.gif">
 
-A IP Tracker Tool to Geolocate a IP Protocol easily.
-
 **IF YOU HAVE ANOTHER PYTHON VERSION BEYOND Python 3, USE 'python3' BEFORE THE PARAMETERS**
 
 Dependencies:
