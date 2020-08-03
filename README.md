@@ -4,6 +4,8 @@
 
 **IF YOU HAVE ANOTHER PYTHON VERSION BEYOND Python 3, USE 'python3' BEFORE THE PARAMETERS**
 
+**THE FILES GOES TO SCRIPT FOLDER**
+
 Dependencies:
 - Python 3
 - pytube3
