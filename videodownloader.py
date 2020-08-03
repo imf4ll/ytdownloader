@@ -32,25 +32,20 @@ else:
                                     continue
                                 print('\n\033[34m> Downloading... \033[33mPlease, wait.\033[m')
                                 if opt_download == 1:
-                                    if YouTube(url).streams.get_by_itag('37') in ytb.streams:
-                                        YouTube(url).streams.get_by_itag('37').download()
-                                        print('\n\033[32m> Download Completed.\033[m\n')
-                                        break
-                                    else:
-                                        YouTube(url).streams.get_by_itag('137').download(filename='video')
-                                        YouTube(url).streams.get_by_itag('140').download(filename='audio')
-                                        print('\n\033[32m> Download Completed.\033[m\n')
-                                        print('\n\033[34m> Starting Merging...\033[m\n')
-                                        sleep(4)
-                                        call(["ffmpeg", "-i",
-                                        path.join('video.mp4'),
-                                        "-i", 
-                                        path.join('audio.mp4'),
-                                        path.join(f'{ytb.title}.mp4')
-                                        ])
-                                        remove('video.mp4')
-                                        remove('audio.mp4')
-                                        break
+                                    YouTube(url).streams.get_by_itag('137').download(filename='video')
+                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                    print('\n\033[32m> Download Completed.\033[m\n')
+                                    print('\n\033[34m> Starting Merging...\033[m\n')
+                                    sleep(4)
+                                    call(["ffmpeg", "-i",
+                                    path.join('video.mp4'),
+                                    "-i", 
+                                    path.join('audio.mp4'),
+                                    path.join(f'{ytb.title}.mp4')
+                                    ])
+                                    remove('video.mp4')
+                                    remove('audio.mp4')
+                                    break
                                 elif opt_download == 2:
                                     if YouTube(url).streams.get_by_itag('22') in ytb.streams:
                                         YouTube(url).streams.get_by_itag('22').download()
@@ -462,5 +457,5 @@ else:
             except FileNotFoundError:
                 print('\n\033[31m> Try not to download songs with characters like [] or () in name.\033[m')
             except:
-                print('\n\033[31m> An unknown error has occured.\033[m\n')
+                print('\n\033[31m> An unknown error has occurred.\033[m\n')
                 break
