@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 try:
-    from pytube import YouTube
+    from pytube import YouTube, Stream
     from subprocess import call
     from os import path, remove
     from time import sleep
@@ -32,28 +32,94 @@ else:
                                     continue
                                 print('\n\033[34m> Downloading... \033[33mPlease, wait.\033[m')
                                 if opt_download == 1:
-                                    YouTube(url).streams.get_by_itag('137').download()
+                                    YouTube(url).streams.get_by_itag('137').download(filename='video')
+                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
                                     print('\n\033[32m> Download Completed.\033[m\n')
+                                    print('\n\033[34m> Starting Merging...\033[m\n')
+                                    sleep(4)
+                                    call(["ffmpeg", "-i",
+                                    path.join('video.mp4'),
+                                    "-i", 
+                                    path.join('audio.mp4'),
+                                    path.join(f'{ytb.title}.mp4')
+                                    ])
+                                    remove('video.mp4')
+                                    remove('audio.mp4')
                                     break
                                 elif opt_download == 2:
-                                    YouTube(url).streams.get_by_itag('136').download()
+                                    YouTube(url).streams.get_by_itag('136').download(filename='video')
+                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
                                     print('\n\033[32m> Download Completed.\033[m\n')
+                                    print('\n\033[34m> Starting Merging...\033[m\n')
+                                    sleep(4)
+                                    call(["ffmpeg", "-i",
+                                    path.join('video.mp4'),
+                                    "-i", 
+                                    path.join('audio.mp4'),
+                                    path.join(f'{ytb.title}.mp4')
+                                    ])
+                                    remove('video.mp4')
+                                    remove('audio.mp4')
                                     break
                                 elif opt_download == 3:
-                                    YouTube(url).streams.get_by_itag('135').download()
+                                    YouTube(url).streams.get_by_itag('135').download(filename='video')
+                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
                                     print('\n\033[32m> Download Completed.\033[m\n')
+                                    print('\n\033[34m> Starting Merging...\033[m\n')
+                                    sleep(4)
+                                    call(["ffmpeg", "-i",
+                                    path.join('video.mp4'),
+                                    "-i", 
+                                    path.join('audio.mp4'),
+                                    path.join(f'{ytb.title}.mp4')
+                                    ])
+                                    remove('video.mp4')
+                                    remove('audio.mp4')
                                     break
                                 elif opt_download == 4:
-                                    YouTube(url).streams.get_by_itag('134').download()
+                                    YouTube(url).streams.get_by_itag('134').download(filename='video')
+                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
                                     print('\n\033[32m> Download Completed.\033[m\n')
+                                    print('\n\033[34m> Starting Merging...\033[m\n')
+                                    sleep(4)
+                                    call(["ffmpeg", "-i",
+                                    path.join('video.mp4'),
+                                    "-i", 
+                                    path.join('audio.mp4'),
+                                    path.join(f'{ytb.title}.mp4')
+                                    ])
+                                    remove('video.mp4')
+                                    remove('audio.mp4')
                                     break
                                 elif opt_download == 5:
-                                    YouTube(url).streams.get_by_itag('133').download()
+                                    YouTube(url).streams.get_by_itag('133').download(filename='video')
+                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
                                     print('\n\033[32m> Download Completed.\033[m\n')
+                                    print('\n\033[34m> Starting Merging...\033[m\n')
+                                    sleep(4)
+                                    call(["ffmpeg", "-i",
+                                    path.join('video.mp4'),
+                                    "-i", 
+                                    path.join('audio.mp4'),
+                                    path.join(f'{ytb.title}.mp4')
+                                    ])
+                                    remove('video.mp4')
+                                    remove('audio.mp4')
                                     break
                                 elif opt_download == 6:
-                                    YouTube(url).streams.get_by_itag('160').download()
+                                    YouTube(url).streams.get_by_itag('160').download(filename='video')
+                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
                                     print('\n\033[32m> Download Completed.\033[m\n')
+                                    print('\n\033[34m> Starting Merging...\033[m\n')
+                                    sleep(4)
+                                    call(["ffmpeg", "-i",
+                                    path.join('video.mp4'),
+                                    "-i", 
+                                    path.join('audio.mp4'),
+                                    path.join(f'{ytb.title}.mp4')
+                                    ])
+                                    remove('video.mp4')
+                                    remove('audio.mp4')
                                     break
                             elif ytb.streams.get_by_itag('136') and ytb.streams.get_by_itag('135') and ytb.streams.get_by_itag('134') and ytb.streams.get_by_itag('133') and ytb.streams.get_by_itag('160') in ytb.streams:
                                 opt_download = int(input('\033[33m[ 1 ] \033[33m720p\n\033[33m[ 2 ] \033[34m480p\n\033[33m[ 3 ] \033[34m360p\n\033[33m[ 4 ] \033[34m240p\n\033[33m[ 5 ] \033[34m144p\n> \033[m'))
@@ -62,24 +128,79 @@ else:
                                     continue
                                 print('\n\033[34m> Downloading... \033[33mPlease, wait.\033[m')
                                 if opt_download == 1:
-                                    YouTube(url).streams.get_by_itag('136').download()
+                                    YouTube(url).streams.get_by_itag('136').download(filename='video')
+                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
                                     print('\n\033[32m> Download Completed.\033[m\n')
+                                    print('\n\033[34m> Starting Merging...\033[m\n')
+                                    sleep(4)
+                                    call(["ffmpeg", "-i",
+                                    path.join('video.mp4'),
+                                    "-i", 
+                                    path.join('audio.mp4'),
+                                    path.join(f'{ytb.title}.mp4')
+                                    ])
+                                    remove('video.mp4')
+                                    remove('audio.mp4')
                                     break
                                 elif opt_download == 2:
-                                    YouTube(url).streams.get_by_itag('135').download()
+                                    YouTube(url).streams.get_by_itag('135').download(filename='video')
+                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
                                     print('\n\033[32m> Download Completed.\033[m\n')
+                                    print('\n\033[34m> Starting Merging...\033[m\n')
+                                    sleep(4)
+                                    call(["ffmpeg", "-i",
+                                    path.join('video.mp4'),
+                                    "-i", 
+                                    path.join('audio.mp4'),
+                                    path.join(f'{ytb.title}.mp4')
+                                    ])
+                                    remove('video.mp4')
+                                    remove('audio.mp4')
                                     break
                                 elif opt_download == 3:
-                                    YouTube(url).streams.get_by_itag('134').download()
+                                    YouTube(url).streams.get_by_itag('134').download(filename='video')
+                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
                                     print('\n\033[32m> Download Completed.\033[m\n')
+                                    print('\n\033[34m> Starting Merging...\033[m\n')
+                                    sleep(4)
+                                    call(["ffmpeg", "-i",
+                                    path.join('video.mp4'),
+                                    "-i", 
+                                    path.join('audio.mp4'),
+                                    path.join(f'{ytb.title}.mp4')
+                                    ])
+                                    remove('video.mp4')
+                                    remove('audio.mp4')
                                     break
                                 elif opt_download == 4:
-                                    YouTube(url).streams.get_by_itag('133').download()
+                                    YouTube(url).streams.get_by_itag('133').download(filename='video')
+                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
                                     print('\n\033[32m> Download Completed.\033[m\n')
+                                    print('\n\033[34m> Starting Merging...\033[m\n')
+                                    sleep(4)
+                                    call(["ffmpeg", "-i",
+                                    path.join('video.mp4'),
+                                    "-i", 
+                                    path.join('audio.mp4'),
+                                    path.join(f'{ytb.title}.mp4')
+                                    ])
+                                    remove('video.mp4')
+                                    remove('audio.mp4')
                                     break
                                 elif opt_download == 5:
-                                    YouTube(url).streams.get_by_itag('160').download()
+                                    YouTube(url).streams.get_by_itag('160').download(filename='video')
+                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
                                     print('\n\033[32m> Download Completed.\033[m\n')
+                                    print('\n\033[34m> Starting Merging...\033[m\n')
+                                    sleep(4)
+                                    call(["ffmpeg", "-i",
+                                    path.join('video.mp4'),
+                                    "-i", 
+                                    path.join('audio.mp4'),
+                                    path.join(f'{ytb.title}.mp4')
+                                    ])
+                                    remove('video.mp4')
+                                    remove('audio.mp4')
                                     break
                             elif ytb.streams.get_by_itag('135') and ytb.streams.get_by_itag('134') and ytb.streams.get_by_itag('133') and ytb.streams.get_by_itag('160') in ytb.streams:
                                 opt_download = int(input('\033[33m[ 1 ] \033[33m480p\n\033[33m[ 2 ] \033[34m360p\n\033[33m[ 3 ] \033[34m240p\n\033[33m[ 4 ] \033[34m144p\n> \033[m'))
@@ -88,20 +209,64 @@ else:
                                     continue
                                 print('\n\033[34m> Downloading... \033[33mPlease, wait.\033[m')
                                 if opt_download == 1:
-                                    YouTube(url).streams.get_by_itag('135').download()
+                                    YouTube(url).streams.get_by_itag('135').download(filename='video')
+                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
                                     print('\n\033[32m> Download Completed.\033[m\n')
+                                    print('\n\033[34m> Starting Merging...\033[m\n')
+                                    sleep(4)
+                                    call(["ffmpeg", "-i",
+                                    path.join('video.mp4'),
+                                    "-i", 
+                                    path.join('audio.mp4'),
+                                    path.join(f'{ytb.title}.mp4')
+                                    ])
+                                    remove('video.mp4')
+                                    remove('audio.mp4')
                                     break
                                 elif opt_download == 2:
-                                    YouTube(url).streams.get_by_itag('134').download()
+                                    YouTube(url).streams.get_by_itag('134').download(filename='video')
+                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
                                     print('\n\033[32m> Download Completed.\033[m\n')
+                                    print('\n\033[34m> Starting Merging...\033[m\n')
+                                    sleep(4)
+                                    call(["ffmpeg", "-i",
+                                    path.join('video.mp4'),
+                                    "-i", 
+                                    path.join('audio.mp4'),
+                                    path.join(f'{ytb.title}.mp4')
+                                    ])
+                                    remove('video.mp4')
+                                    remove('audio.mp4')
                                     break
                                 elif opt_download == 3:
-                                    YouTube(url).streams.get_by_itag('133').download()
+                                    YouTube(url).streams.get_by_itag('133').download(filename='video')
+                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
                                     print('\n\033[32m> Download Completed.\033[m\n')
+                                    print('\n\033[34m> Starting Merging...\033[m\n')
+                                    sleep(4)
+                                    call(["ffmpeg", "-i",
+                                    path.join('video.mp4'),
+                                    "-i", 
+                                    path.join('audio.mp4'),
+                                    path.join(f'{ytb.title}.mp4')
+                                    ])
+                                    remove('video.mp4')
+                                    remove('audio.mp4')
                                     break
                                 elif opt_download == 4:
-                                    YouTube(url).streams.get_by_itag('160').download()
+                                    YouTube(url).streams.get_by_itag('160').download(filename='video')
+                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
                                     print('\n\033[32m> Download Completed.\033[m\n')
+                                    print('\n\033[34m> Starting Merging...\033[m\n')
+                                    sleep(4)
+                                    call(["ffmpeg", "-i",
+                                    path.join('video.mp4'),
+                                    "-i", 
+                                    path.join('audio.mp4'),
+                                    path.join(f'{ytb.title}.mp4')
+                                    ])
+                                    remove('video.mp4')
+                                    remove('audio.mp4')
                                     break
                             elif ytb.streams.get_by_itag('134') and ytb.streams.get_by_itag('133') and ytb.streams.get_by_itag('160') in ytb.streams:
                                 opt_download = int(input('\033[33m[ 1 ] \033[33m360p\n\033[33m[ 2 ] \033[34m240p\n\033[33m[ 3 ] \033[34m144p\n> \033[m'))
@@ -110,16 +275,49 @@ else:
                                     continue
                                 print('\n\033[34m> Downloading... \033[33mPlease, wait.\033[m')
                                 if opt_download == 1:
-                                    YouTube(url).streams.get_by_itag('134').download()
+                                    YouTube(url).streams.get_by_itag('134').download(filename='video')
+                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
                                     print('\n\033[32m> Download Completed.\033[m\n')
+                                    print('\n\033[34m> Starting Merging...\033[m\n')
+                                    sleep(4)
+                                    call(["ffmpeg", "-i",
+                                    path.join('video.mp4'),
+                                    "-i", 
+                                    path.join('audio.mp4'),
+                                    path.join(f'{ytb.title}.mp4')
+                                    ])
+                                    remove('video.mp4')
+                                    remove('audio.mp4')
                                     break
                                 elif opt_download == 2:
-                                    YouTube(url).streams.get_by_itag('133').download()
+                                    YouTube(url).streams.get_by_itag('133').download(filename='video')
+                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
                                     print('\n\033[32m> Download Completed.\033[m\n')
+                                    print('\n\033[34m> Starting Merging...\033[m\n')
+                                    sleep(4)
+                                    call(["ffmpeg", "-i",
+                                    path.join('video.mp4'),
+                                    "-i", 
+                                    path.join('audio.mp4'),
+                                    path.join(f'{ytb.title}.mp4')
+                                    ])
+                                    remove('video.mp4')
+                                    remove('audio.mp4')
                                     break
                                 elif opt_download == 3:
-                                    YouTube(url).streams.get_by_itag('160').download()
+                                    YouTube(url).streams.get_by_itag('160').download(filename='video')
+                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
                                     print('\n\033[32m> Download Completed.\033[m\n')
+                                    print('\n\033[34m> Starting Merging...\033[m\n')
+                                    sleep(4)
+                                    call(["ffmpeg", "-i",
+                                    path.join('video.mp4'),
+                                    "-i", 
+                                    path.join('audio.mp4'),
+                                    path.join(f'{ytb.title}.mp4')
+                                    ])
+                                    remove('video.mp4')
+                                    remove('audio.mp4')
                                     break
                             elif ytb.streams.get_by_itag('133') and ytb.streams.get_by_itag('160') in ytb.streams:
                                 opt_download = int(input('\033[33m[ 1 ] \033[33m240p\n\033[33m[ 2 ] \033[34m144p\n> \033[m'))
@@ -128,12 +326,34 @@ else:
                                     continue
                                 print('\n\033[34m> Downloading... \033[33mPlease, wait.\033[m')
                                 if opt_download == 1:
-                                    YouTube(url).streams.get_by_itag('133').download()
+                                    YouTube(url).streams.get_by_itag('133').download(filename='video')
+                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
                                     print('\n\033[32m> Download Completed.\033[m\n')
+                                    print('\n\033[34m> Starting Merging...\033[m\n')
+                                    sleep(4)
+                                    call(["ffmpeg", "-i",
+                                    path.join('video.mp4'),
+                                    "-i", 
+                                    path.join('audio.mp4'),
+                                    path.join(f'{ytb.title}.mp4')
+                                    ])
+                                    remove('video.mp4')
+                                    remove('audio.mp4')
                                     break
                                 elif opt_download == 2:
-                                    YouTube(url).streams.get_by_itag('160').download()
+                                    YouTube(url).streams.get_by_itag('160').download(filename='video')
+                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
                                     print('\n\033[32m> Download Completed.\033[m\n')
+                                    print('\n\033[34m> Starting Merging...\033[m\n')
+                                    sleep(4)
+                                    call(["ffmpeg", "-i",
+                                    path.join('video.mp4'),
+                                    "-i", 
+                                    path.join('audio.mp4'),
+                                    path.join(f'{ytb.title}.mp4')
+                                    ])
+                                    remove('video.mp4')
+                                    remove('audio.mp4')
                                     break
                             elif ytb.streams.get_by_itag('160') in ytb.streams:
                                 opt_download = int(input('\033[33m[ 1 ] \033[33m144p\n> \033[m'))
@@ -142,8 +362,19 @@ else:
                                     continue
                                 print('\n\033[34m> Downloading... \033[33mPlease, wait.\033[m')
                                 if opt_download == 1:
-                                    YouTube(url).streams.get_by_itag('160').download()
+                                    YouTube(url).streams.get_by_itag('160').download(filename='video')
+                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
                                     print('\n\033[32m> Download Completed.\033[m\n')
+                                    print('\n\033[34m> Starting Merging...\033[m\n')
+                                    sleep(4)
+                                    call(["ffmpeg", "-i",
+                                    path.join('video.mp4'),
+                                    "-i", 
+                                    path.join('audio.mp4'),
+                                    path.join(f'{ytb.title}.mp4')
+                                    ])
+                                    remove('video.mp4')
+                                    remove('audio.mp4')
                                     break
                             else:
                                 print('Erro')
