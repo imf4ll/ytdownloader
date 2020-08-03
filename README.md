@@ -6,6 +6,8 @@
 
 **THE FILES GOES TO SCRIPT FOLDER**
 
+**720p AND 360p DON'T NEED POS-PROCESSING**
+
 Dependencies:
 - Python 3
 - pytube3
