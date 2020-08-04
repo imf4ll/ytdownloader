@@ -28,7 +28,7 @@ Termux:
 Linux:
   - sudo apt install ffmpeg
   - pip3 install --update pytube3
-  - Move the extract.py to pytube folder in site-packages
+  - mv extract.py -f /home/kali/.local/lib/python3.8/site-packages/pytube/
 
 Known Issues:
 - pytube:
