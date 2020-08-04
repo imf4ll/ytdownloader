@@ -17,6 +17,10 @@ Documentation:
 - Install dependencies:
   - pip install -r dependencies.txt
 
+- Install <a href="https://ffmpeg.zeranoe.com/builds/">FFmpeg</a> static.
+  - In Windows, for your terminal recognize, install <a href="http://blog.gregzaal.com/how-to-install-ffmpeg-on-windows/#:~:text=If%20you%20try%20that%20right,and%20it%27ll%20understand%20us.">this</a>.
+  - In Termux or Linux, the steps are below.
+
 - Valid parameters:
   python ytdownloader.py
 
