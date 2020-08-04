@@ -19,7 +19,17 @@ Documentation:
 
 - Valid parameters:
   python videodownloader.py
-  
+
+Termux:
+  - pkg install ffmpeg
+  - mv extract.py -f /data/data/files/use/lib/python3.8/site-packages/pytube/
+  - pip3 install --update pytube3
+
+Linux:
+  - sudo apt install ffmpeg
+  - pip3 install --update pytube3
+  - Move the extract.py to pytube folder in site-packages
+
 Known Issues:
 - pytube:
   - ImportError: cannot import name 'quote' from 'pytube.compat' : Install pytube3 with 'pip install -r dependencies.txt'
