@@ -456,6 +456,6 @@ else:
             except KeyboardInterrupt:
                 print('\n\n\033[33mThanks for using.\033[m\n')
                 break
-            # except:
-            #     print('\n\033[31m> An unknown error has occurred.\033[m\n')
-            #     break
+            except:
+                print('\n\033[31m> An unknown error has occurred.\033[m\n')
+                break
