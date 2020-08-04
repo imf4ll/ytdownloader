@@ -2,11 +2,17 @@
 
 <img src="https://i.imgur.com/qFfBMCU.png">
 
+<img src="https://i.imgur.com/GDA8oID.png">
+
 **IF YOU HAVE ANOTHER PYTHON VERSION BEYOND Python 3, USE 'python3' BEFORE THE PARAMETERS**
 
 **THE FILES GOES TO SCRIPT FOLDER**
 
 **SOMETIMES 720p AND 360p DON'T NEED POS-PROCESSING**
+
+Changelog 0.2:
+- Now you can download videos or musics of any playlist;
+- Some corrections in code.
 
 Dependencies:
 - Python 3
