@@ -1,6 +1,6 @@
-# videodownloader 0.1
+# ytdownloader 0.1
 
-<img src="https://i.imgur.com/Sls6pOV.gif">
+<img src="https://i.imgur.com/hB81PzX.png">
 
 **IF YOU HAVE ANOTHER PYTHON VERSION BEYOND Python 3, USE 'python3' BEFORE THE PARAMETERS**
 
@@ -18,7 +18,7 @@ Documentation:
   - pip install -r dependencies.txt
 
 - Valid parameters:
-  python videodownloader.py
+  python ytdownloader.py
 
 Termux:
   - pkg install ffmpeg
