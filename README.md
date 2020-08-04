@@ -23,12 +23,12 @@ Documentation:
 Termux:
   - pkg install ffmpeg
   - pip3 install --update pytube3  
-  - mv extract.py -f /data/data/files/usr/lib/python3.8/site-packages/pytube/
+  - In folder 'issuecorrection', mv extract.py -f /data/data/files/usr/lib/python3.8/site-packages/pytube/
   
 Linux:
   - sudo apt install ffmpeg
   - pip3 install --update pytube3
-  - mv extract.py -f /home/kali/.local/lib/python3.8/site-packages/pytube/
+  - Open terminal in 'issuecorrection', mv extract.py -f /home/{Your Username here}/.local/lib/python3.8/site-packages/pytube/
 
 Known Issues:
 - pytube:
