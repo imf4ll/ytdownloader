@@ -22,9 +22,9 @@ Documentation:
 
 Termux:
   - pkg install ffmpeg
+  - pip3 install --update pytube3  
   - mv extract.py -f /data/data/files/usr/lib/python3.8/site-packages/pytube/
-  - pip3 install --update pytube3
-
+  
 Linux:
   - sudo apt install ffmpeg
   - pip3 install --update pytube3
