@@ -1,4 +1,4 @@
-# ytdownloader 0.1
+# ytdownloader 0.2
 
 <img src="https://i.imgur.com/qFfBMCU.png" width='650'><img src="https://i.imgur.com/GDA8oID.png" width='650'>
 
