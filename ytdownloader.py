@@ -53,10 +53,10 @@ else:
                                         remove('audio.mp4')
                                         if platform == 'win32' or platform == 'win64':
                                             rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
-                                            print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                            print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                         elif platform == 'linux':
                                             rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
-                                            print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                            print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                         break
                                     elif opt_download == 2:
                                         if YouTube(url).streams.get_by_itag('22') in ytb.streams:
@@ -64,10 +64,10 @@ else:
                                             print('\n\033[32m> Download Completed.\033[m\n')
                                             if platform == 'win32' or platform == 'win64':
                                                 rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
-                                                print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                                print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                             elif platform == 'linux':
                                                 rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
-                                                print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                                print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                             break
                                         else:
                                             YouTube(url).streams.get_by_itag('136').download(filename='video')
@@ -85,10 +85,10 @@ else:
                                             remove('audio.mp4')
                                             if platform == 'win32' or platform == 'win64':
                                                 rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
-                                                print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                                print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                             elif platform == 'linux':
                                                 rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
-                                                print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                                print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                             break
                                     elif opt_download == 3:
                                         YouTube(url).streams.get_by_itag('135').download(filename='video')
@@ -106,10 +106,10 @@ else:
                                         remove('audio.mp4')
                                         if platform == 'win32' or platform == 'win64':
                                             rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
-                                            print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                            print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                         elif platform == 'linux':
                                             rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
-                                            print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                            print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                         break
                                     elif opt_download == 4:
                                         if YouTube(url).streams.get_by_itag('18') in ytb.streams:
@@ -117,10 +117,10 @@ else:
                                             print('\n\033[32m> Download Completed.\033[m\n')
                                             if platform == 'win32' or platform == 'win64':
                                                 rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
-                                                print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                                print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                             elif platform == 'linux':
                                                 rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
-                                                print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                                print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                             break
                                         else:
                                             YouTube(url).streams.get_by_itag('134').download(filename='video')
@@ -138,10 +138,10 @@ else:
                                             remove('audio.mp4')
                                             if platform == 'win32' or platform == 'win64':
                                                 rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
-                                                print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                                print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                             elif platform == 'linux':
                                                 rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
-                                                print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                                print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                             break
                                     elif opt_download == 5:
                                         YouTube(url).streams.get_by_itag('133').download(filename='video')
@@ -159,10 +159,10 @@ else:
                                         remove('audio.mp4')
                                         if platform == 'win32' or platform == 'win64':
                                             rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
-                                            print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                            print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                         elif platform == 'linux':
                                             rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
-                                            print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                            print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                         break
                                     elif opt_download == 6:
                                         YouTube(url).streams.get_by_itag('160').download(filename='video')
@@ -180,10 +180,10 @@ else:
                                         remove('audio.mp4')
                                         if platform == 'win32' or platform == 'win64':
                                             rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
-                                            print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                            print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                         elif platform == 'linux':
                                             rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
-                                            print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                            print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                         break
                                 elif ytb.streams.get_by_itag('136') and ytb.streams.get_by_itag('135') and ytb.streams.get_by_itag('134') and ytb.streams.get_by_itag('133') and ytb.streams.get_by_itag('160') in ytb.streams:
                                     opt_download = int(input('\033[33m[ 1 ] \033[33m720p\n\033[33m[ 2 ] \033[34m480p\n\033[33m[ 3 ] \033[34m360p\n\033[33m[ 4 ] \033[34m240p\n\033[33m[ 5 ] \033[34m144p\n> \033[m'))
@@ -197,10 +197,10 @@ else:
                                             print('\n\033[32m> Download Completed.\033[m\n')
                                             if platform == 'win32' or platform == 'win64':
                                                 rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
-                                                print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                                print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                             elif platform == 'linux':
                                                 rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
-                                                print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                                print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                             break
                                         else:
                                             YouTube(url).streams.get_by_itag('136').download(filename='video')
@@ -218,10 +218,10 @@ else:
                                             remove('audio.mp4')
                                             if platform == 'win32' or platform == 'win64':
                                                 rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
-                                                print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                                print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                             elif platform == 'linux':
                                                 rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
-                                                print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                                print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                             break
                                     elif opt_download == 2:
                                         YouTube(url).streams.get_by_itag('135').download(filename='video')
@@ -239,10 +239,10 @@ else:
                                         remove('audio.mp4')
                                         if platform == 'win32' or platform == 'win64':
                                             rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
-                                            print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                            print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                         elif platform == 'linux':
                                             rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
-                                            print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                            print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                         break
                                     elif opt_download == 3:
                                         if YouTube(url).streams.get_by_itag('18') in ytb.streams:
@@ -250,10 +250,10 @@ else:
                                             print('\n\033[32m> Download Completed.\033[m\n')
                                             if platform == 'win32' or platform == 'win64':
                                                 rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
-                                                print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                                print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                             elif platform == 'linux':
                                                 rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
-                                                print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                                print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                             break
                                         else:
                                             YouTube(url).streams.get_by_itag('134').download(filename='video')
@@ -271,10 +271,10 @@ else:
                                             remove('audio.mp4')
                                             if platform == 'win32' or platform == 'win64':
                                                 rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
-                                                print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                                print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                             elif platform == 'linux':
                                                 rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
-                                                print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                                print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                             break
                                     elif opt_download == 4:
                                         YouTube(url).streams.get_by_itag('133').download(filename='video')
@@ -292,10 +292,10 @@ else:
                                         remove('audio.mp4')
                                         if platform == 'win32' or platform == 'win64':
                                             rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
-                                            print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                            print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                         elif platform == 'linux':
                                             rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
-                                            print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                            print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                         break
                                     elif opt_download == 5:
                                         YouTube(url).streams.get_by_itag('160').download(filename='video')
@@ -340,10 +340,10 @@ else:
                                         remove('audio.mp4')
                                         if platform == 'win32' or platform == 'win64':
                                             rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
-                                            print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                            print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                         elif platform == 'linux':
                                             rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
-                                            print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                            print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                         break
                                     elif opt_download == 2:
                                         if YouTube(url).streams.get_by_itag('18') in ytb.streams:
@@ -351,10 +351,10 @@ else:
                                             print('\n\033[32m> Download Completed.\033[m\n')
                                             if platform == 'win32' or platform == 'win64':
                                                 rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
-                                                print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                                print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                             elif platform == 'linux':
                                                 rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
-                                                print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                                print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                             break
                                         else:
                                             YouTube(url).streams.get_by_itag('134').download(filename='video')
@@ -372,10 +372,10 @@ else:
                                             remove('audio.mp4')
                                             if platform == 'win32' or platform == 'win64':
                                                 rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
-                                                print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                                print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                             elif platform == 'linux':
                                                 rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
-                                                print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                                print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                             break
                                     elif opt_download == 3:
                                         YouTube(url).streams.get_by_itag('133').download(filename='video')
@@ -393,10 +393,10 @@ else:
                                         remove('audio.mp4')
                                         if platform == 'win32' or platform == 'win64':
                                             rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
-                                            print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                            print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                         elif platform == 'linux':
                                             rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
-                                            print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                            print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                         break
                                     elif opt_download == 4:
                                         YouTube(url).streams.get_by_itag('160').download(filename='video')
@@ -414,10 +414,10 @@ else:
                                         remove('audio.mp4')
                                         if platform == 'win32' or platform == 'win64':
                                             rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
-                                            print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                            print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                         elif platform == 'linux':
                                             rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
-                                            print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                            print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                         break
                                 elif ytb.streams.get_by_itag('134') and ytb.streams.get_by_itag('133') and ytb.streams.get_by_itag('160') in ytb.streams:
                                     opt_download = int(input('\033[33m[ 1 ] \033[33m360p\n\033[33m[ 2 ] \033[34m240p\n\033[33m[ 3 ] \033[34m144p\n> \033[m'))
@@ -431,10 +431,10 @@ else:
                                             print('\n\033[32m> Download Completed.\033[m\n')
                                             if platform == 'win32' or platform == 'win64':
                                                 rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
-                                                print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                                print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                             elif platform == 'linux':
                                                 rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
-                                                print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                                print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                             break
                                         else:
                                             YouTube(url).streams.get_by_itag('134').download(filename='video')
@@ -452,10 +452,10 @@ else:
                                             remove('audio.mp4')
                                             if platform == 'win32' or platform == 'win64':
                                                 rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
-                                                print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                                print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                             elif platform == 'linux':
                                                 rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
-                                                print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                                print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                             break
                                     elif opt_download == 2:
                                         YouTube(url).streams.get_by_itag('133').download(filename='video')
@@ -473,10 +473,10 @@ else:
                                         remove('audio.mp4')
                                         if platform == 'win32' or platform == 'win64':
                                             rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
-                                            print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                            print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                         elif platform == 'linux':
                                             rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
-                                            print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                            print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                         break
                                     elif opt_download == 3:
                                         YouTube(url).streams.get_by_itag('160').download(filename='video')
@@ -494,10 +494,10 @@ else:
                                         remove('audio.mp4')
                                         if platform == 'win32' or platform == 'win64':
                                             rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
-                                            print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                            print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                         elif platform == 'linux':
                                             rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
-                                            print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                            print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                         break
                                 elif ytb.streams.get_by_itag('133') and ytb.streams.get_by_itag('160') in ytb.streams:
                                     opt_download = int(input('\033[33m[ 1 ] \033[33m240p\n\033[33m[ 2 ] \033[34m144p\n> \033[m'))
@@ -521,10 +521,10 @@ else:
                                         remove('audio.mp4')
                                         if platform == 'win32' or platform == 'win64':
                                             rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
-                                            print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                            print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                         elif platform == 'linux':
                                             rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
-                                            print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                            print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                         break
                                     elif opt_download == 2:
                                         YouTube(url).streams.get_by_itag('160').download(filename='video')
@@ -542,10 +542,10 @@ else:
                                         remove('audio.mp4')
                                         if platform == 'win32' or platform == 'win64':
                                             rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
-                                            print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                            print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                         elif platform == 'linux':
                                             rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
-                                            print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                            print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                         break
                                 elif ytb.streams.get_by_itag('160') in ytb.streams:
                                     opt_download = int(input('\033[33m[ 1 ] \033[33m144p\n> \033[m'))
@@ -569,10 +569,10 @@ else:
                                         remove('audio.mp4')
                                         if platform == 'win32' or platform == 'win64':
                                             rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
-                                            print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                            print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                         elif platform == 'linux':
                                             rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
-                                            print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                            print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                         break
                                 else:
                                     print('\n\033[31m> An unknown error has occurred.\033[m')
@@ -594,10 +594,10 @@ else:
                                 sleep(1)
                                 if platform == 'win32' or platform == 'win64':
                                     rename(f'{ytb.title}.mp3', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp3')
-                                    print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                    print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                 elif platform == 'linux':
                                     rename(f'{ytb.title}.mp3', f'/home/{getuser()}/Downloads/{ytb.title}.mp3')
-                                    print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
+                                    print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                 break
                         elif opt_format == 0:
                             print('\033[m')
@@ -632,6 +632,7 @@ else:
                             for video in playlist.video_urls:
                                 i += 1
                                 if i == len(playlist.video_urls) +1:
+                                    print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                     i = 0
                                     break
                                 else:
@@ -643,15 +644,14 @@ else:
                                         print(f'\n\033[32m> {i} Downloads Completed.\033[m')
                                     if platform == 'win32' or platform == 'win64':
                                         rename(f'{YouTube(video)}.mp4', f'/home/{getuser()}/Downloads/{YouTube(video)}.mp4')
-                                        print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                     elif platform == 'linux':
                                         rename(f'{YouTube(video)}.mp4', f'/home/{getuser()}/Downloads/{YouTube(video)}.mp4')
-                                        print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                     break
                         elif opt_pl == 2:
                             for music in playlist.video_urls:
                                 i += 1
                                 if i == len(playlist.video_urls) + 1:
+                                    print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                     i = 0
                                     break
                                 else:
@@ -673,10 +673,8 @@ else:
                                     sleep(1)
                                     if platform == 'win32' or platform == 'win64':
                                         rename(f'{YouTube(music).title}.mp3', f'C:\\Users\\{getuser()}\\Downloads\\{YouTube(music).title}.mp3')
-                                        print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                     elif platform == 'linux':
                                         rename(f'{YouTube(music).title}.mp3', f'/home/{getuser()}/Downloads/{YouTube(music).title}.mp3')
-                                        print('\033[34m> Downloaded files moved to Downloads folder.\033[m')
                         elif opt_pl == 0:
                             print('\033[m')
                             break
