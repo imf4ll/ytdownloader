@@ -23,9 +23,9 @@ else:
                         print(f'\n\033[33mTitle: \033[34m{ytb.title}\033[m')
                         print(f'\033[33mAuthor: \033[34m{ytb.author}\033[m')
                         print(f'\033[33mLength: \033[34m{ytb.length/60:.0f} minutes.\033[m')
-                        print('\033[33m='*108,'\n')
+                        print('\033[33m='*50,'\n')
                         opt_format = int(input('\033[33m[ 0 ] Cancel\n\033[33m[ 1 ] \033[34mVideo\n\033[33m[ 2 ] \033[34mAudio (128 Kbps)\n> \033[m'))
-                        print('\033[33m='*108,'\n')
+                        print('\033[33m='*50,'\n')
 
                         if opt_format == 1:
                             while True:
@@ -435,9 +435,6 @@ else:
                             print('\033[31m> Invalid option.\033[m')
                             continue
                         break
-                    except KeyboardInterrupt:
-                        print('\n\n\033[33mThanks for using.\033[m\n')
-                        break
                     except Exception:
                         print('\n\033[31m> An unknown error has occurred.\033[m')
                         break
@@ -445,10 +442,10 @@ else:
                 playlist = Playlist(url)
                 playlist._video_regex = re.compile(r"\"url\":\"(/watch\?v=[\w-]*)")
                 print(f'\n\n\033[33mVideos in the following playlist: \033[34m{len(playlist.video_urls)}\033[m')
-                print('\033[33m='*108,'\n')
+                print('\033[33m='*50)
                 while True:
                     opt_pl = int(input('\n\033[33m[ 0 ] Cancel\n\033[33m[ 1 ] \033[34mVideo\n\033[33m[ 2 ] \033[34mMusic\n> \033[m'))
-                    print('\033[33m='*108)
+                    print('\033[33m='*50)
                     if opt_pl > 2 or opt_pl < 0:
                         print('\n\033[31m> Invalid option.\033[m')
                         continue
