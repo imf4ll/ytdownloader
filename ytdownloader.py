@@ -42,7 +42,7 @@ else:
                                         YouTube(url).streams.get_by_itag('140').download(filename='audio')
                                         print('\n\033[32m> Download Completed.\033[m\n')
                                         print('\n\033[34m> Starting Merging...\033[m\n')
-                                        sleep(4)
+                                        sleep(2.5)
                                         call(["ffmpeg", "-i",
                                         path.join('video.mp4'),
                                         "-i", 
@@ -74,7 +74,7 @@ else:
                                             YouTube(url).streams.get_by_itag('140').download(filename='audio')
                                             print('\n\033[32m> Download Completed.\033[m\n')
                                             print('\n\033[34m> Starting Merging...\033[m\n')
-                                            sleep(4)
+                                            sleep(2.5)
                                             call(["ffmpeg", "-i",
                                             path.join('video.mp4'),
                                             "-i", 
@@ -95,7 +95,7 @@ else:
                                         YouTube(url).streams.get_by_itag('140').download(filename='audio')
                                         print('\n\033[32m> Download Completed.\033[m\n')
                                         print('\n\033[34m> Starting Merging...\033[m\n')
-                                        sleep(4)
+                                        sleep(2.5)
                                         call(["ffmpeg", "-i",
                                         path.join('video.mp4'),
                                         "-i", 
@@ -127,7 +127,7 @@ else:
                                             YouTube(url).streams.get_by_itag('140').download(filename='audio')
                                             print('\n\033[32m> Download Completed.\033[m\n')
                                             print('\n\033[34m> Starting Merging...\033[m\n')
-                                            sleep(4)
+                                            sleep(2.5)
                                             call(["ffmpeg", "-i",
                                             path.join('video.mp4'),
                                             "-i", 
@@ -148,7 +148,7 @@ else:
                                         YouTube(url).streams.get_by_itag('140').download(filename='audio')
                                         print('\n\033[32m> Download Completed.\033[m\n')
                                         print('\n\033[34m> Starting Merging...\033[m\n')
-                                        sleep(4)
+                                        sleep(2.5)
                                         call(["ffmpeg", "-i",
                                         path.join('video.mp4'),
                                         "-i", 
@@ -169,7 +169,7 @@ else:
                                         YouTube(url).streams.get_by_itag('140').download(filename='audio')
                                         print('\n\033[32m> Download Completed.\033[m\n')
                                         print('\n\033[34m> Starting Merging...\033[m\n')
-                                        sleep(4)
+                                        sleep(2.5)
                                         call(["ffmpeg", "-i",
                                         path.join('video.mp4'),
                                         "-i", 
@@ -207,7 +207,7 @@ else:
                                             YouTube(url).streams.get_by_itag('140').download(filename='audio')
                                             print('\n\033[32m> Download Completed.\033[m\n')
                                             print('\n\033[34m> Starting Merging...\033[m\n')
-                                            sleep(4)
+                                            sleep(2.5)
                                             call(["ffmpeg", "-i",
                                             path.join('video.mp4'),
                                             "-i", 
@@ -228,7 +228,7 @@ else:
                                         YouTube(url).streams.get_by_itag('140').download(filename='audio')
                                         print('\n\033[32m> Download Completed.\033[m\n')
                                         print('\n\033[34m> Starting Merging...\033[m\n')
-                                        sleep(4)
+                                        sleep(2.5)
                                         call(["ffmpeg", "-i",
                                         path.join('video.mp4'),
                                         "-i", 
@@ -260,7 +260,7 @@ else:
                                             YouTube(url).streams.get_by_itag('140').download(filename='audio')
                                             print('\n\033[32m> Download Completed.\033[m\n')
                                             print('\n\033[34m> Starting Merging...\033[m\n')
-                                            sleep(4)
+                                            sleep(2.5)
                                             call(["ffmpeg", "-i",
                                             path.join('video.mp4'),
                                             "-i", 
@@ -281,7 +281,7 @@ else:
                                         YouTube(url).streams.get_by_itag('140').download(filename='audio')
                                         print('\n\033[32m> Download Completed.\033[m\n')
                                         print('\n\033[34m> Starting Merging...\033[m\n')
-                                        sleep(4)
+                                        sleep(2.5)
                                         call(["ffmpeg", "-i",
                                         path.join('video.mp4'),
                                         "-i", 
@@ -302,7 +302,7 @@ else:
                                         YouTube(url).streams.get_by_itag('140').download(filename='audio')
                                         print('\n\033[32m> Download Completed.\033[m\n')
                                         print('\n\033[34m> Starting Merging...\033[m\n')
-                                        sleep(4)
+                                        sleep(2.5)
                                         call(["ffmpeg", "-i",
                                         path.join('video.mp4'),
                                         "-i", 
@@ -329,7 +329,7 @@ else:
                                         YouTube(url).streams.get_by_itag('140').download(filename='audio')
                                         print('\n\033[32m> Download Completed.\033[m\n')
                                         print('\n\033[34m> Starting Merging...\033[m\n')
-                                        sleep(4)
+                                        sleep(2.5)
                                         call(["ffmpeg", "-i",
                                         path.join('video.mp4'),
                                         "-i", 
@@ -361,7 +361,7 @@ else:
                                             YouTube(url).streams.get_by_itag('140').download(filename='audio')
                                             print('\n\033[32m> Download Completed.\033[m\n')
                                             print('\n\033[34m> Starting Merging...\033[m\n')
-                                            sleep(4)
+                                            sleep(2.5)
                                             call(["ffmpeg", "-i",
                                             path.join('video.mp4'),
                                             "-i", 
@@ -382,7 +382,7 @@ else:
                                         YouTube(url).streams.get_by_itag('140').download(filename='audio')
                                         print('\n\033[32m> Download Completed.\033[m\n')
                                         print('\n\033[34m> Starting Merging...\033[m\n')
-                                        sleep(4)
+                                        sleep(2.5)
                                         call(["ffmpeg", "-i",
                                         path.join('video.mp4'),
                                         "-i", 
@@ -403,7 +403,7 @@ else:
                                         YouTube(url).streams.get_by_itag('140').download(filename='audio')
                                         print('\n\033[32m> Download Completed.\033[m\n')
                                         print('\n\033[34m> Starting Merging...\033[m\n')
-                                        sleep(4)
+                                        sleep(2.5)
                                         call(["ffmpeg", "-i",
                                         path.join('video.mp4'),
                                         "-i", 
@@ -441,7 +441,7 @@ else:
                                             YouTube(url).streams.get_by_itag('140').download(filename='audio')
                                             print('\n\033[32m> Download Completed.\033[m\n')
                                             print('\n\033[34m> Starting Merging...\033[m\n')
-                                            sleep(4)
+                                            sleep(2.5)
                                             call(["ffmpeg", "-i",
                                             path.join('video.mp4'),
                                             "-i", 
@@ -462,7 +462,7 @@ else:
                                         YouTube(url).streams.get_by_itag('140').download(filename='audio')
                                         print('\n\033[32m> Download Completed.\033[m\n')
                                         print('\n\033[34m> Starting Merging...\033[m\n')
-                                        sleep(4)
+                                        sleep(2.5)
                                         call(["ffmpeg", "-i",
                                         path.join('video.mp4'),
                                         "-i", 
@@ -483,7 +483,7 @@ else:
                                         YouTube(url).streams.get_by_itag('140').download(filename='audio')
                                         print('\n\033[32m> Download Completed.\033[m\n')
                                         print('\n\033[34m> Starting Merging...\033[m\n')
-                                        sleep(4)
+                                        sleep(2.5)
                                         call(["ffmpeg", "-i",
                                         path.join('video.mp4'),
                                         "-i", 
@@ -510,7 +510,7 @@ else:
                                         YouTube(url).streams.get_by_itag('140').download(filename='audio')
                                         print('\n\033[32m> Download Completed.\033[m\n')
                                         print('\n\033[34m> Starting Merging...\033[m\n')
-                                        sleep(4)
+                                        sleep(2.5)
                                         call(["ffmpeg", "-i",
                                         path.join('video.mp4'),
                                         "-i", 
@@ -531,7 +531,7 @@ else:
                                         YouTube(url).streams.get_by_itag('140').download(filename='audio')
                                         print('\n\033[32m> Download Completed.\033[m\n')
                                         print('\n\033[34m> Starting Merging...\033[m\n')
-                                        sleep(4)
+                                        sleep(2.5)
                                         call(["ffmpeg", "-i",
                                         path.join('video.mp4'),
                                         "-i", 
@@ -558,7 +558,7 @@ else:
                                         YouTube(url).streams.get_by_itag('140').download(filename='audio')
                                         print('\n\033[32m> Download Completed.\033[m\n')
                                         print('\n\033[34m> Starting Merging...\033[m\n')
-                                        sleep(4)
+                                        sleep(2.5)
                                         call(["ffmpeg", "-i",
                                         path.join('video.mp4'),
                                         "-i", 
@@ -583,15 +583,15 @@ else:
                                 YouTube(url).streams.get_by_itag('140').download(filename='music')
                                 print('\n\033[32m> Download Completed.\033[m')
                                 print('\n\033[34m> Starting Conversion...\033[m\n')
-                                sleep(4)
+                                sleep(2.5)
                                 call(["ffmpeg", "-i",
                                 path.join('music.mp4'),
                                 path.join('music.mp3')
                                 ])
                                 remove('music.mp4')
-                                sleep(1)
+                                sleep(0.5)
                                 rename('music.mp3', f'{ytb.title}.mp3')
-                                sleep(1)
+                                sleep(0.5)
                                 if platform == 'win32' or platform == 'win64':
                                     rename(f'{ytb.title}.mp3', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp3')
                                     print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
@@ -630,21 +630,21 @@ else:
                             continue
                         elif opt_pl == 1:
                             for video in playlist.video_urls:
-                                i += 1
-                                if i == len(playlist.video_urls) +1:
+                                if i == len(playlist.video_urls):
                                     i = 0
                                     break
                                 else:
                                     print(f'\n\033[34m> Downloading \033[31m{YouTube(video).title}\033[34m... \033[33mPlease, wait.\033[m')
                                     YouTube(video).streams.get_highest_resolution().download()
-                                    if i == 1:
-                                        print(f'\n\033[32m> {i} Download Completed.\033[m')
+                                    if i == 0:
+                                        print(f'\n\033[32m> {i+1} Download Completed.\033[m')
                                     else:
-                                        print(f'\n\033[32m> {i} Downloads Completed.\033[m')
+                                        print(f'\n\033[32m> {i+1} Downloads Completed.\033[m')
                                     if platform == 'win32' or platform == 'win64':
-                                        rename(f'{YouTube(video)}.mp4', f'/home/{getuser()}/Downloads/{YouTube(video)}.mp4')
+                                        rename(f'{YouTube(video).title}.mp4', f'/home/{getuser()}/Downloads/{YouTube(video).title}.mp4')
                                     elif platform == 'linux':
-                                        rename(f'{YouTube(video)}.mp4', f'/home/{getuser()}/Downloads/{YouTube(video)}.mp4')
+                                        rename(f'{YouTube(video).title}.mp4', f'/home/{getuser()}/Downloads/{YouTube(video).title}.mp4')
+                                    i += 1
                         elif opt_pl == 2:
                             for music in playlist.video_urls:
                                 if i == len(playlist.video_urls):
@@ -664,9 +664,9 @@ else:
                                     path.join(f'music{i+1}.mp3')
                                     ])
                                     remove(f'music{i+1}.mp4')
-                                    sleep(1)
+                                    sleep(0.5)
                                     rename(f'music{i+1}.mp3', f'{YouTube(music).title}.mp3')
-                                    sleep(1)
+                                    sleep(0.5)
                                     if platform == 'win32' or platform == 'win64':
                                         rename(f'{YouTube(music).title}.mp3', f'C:\\Users\\{getuser()}\\Downloads\\{YouTube(music).title}.mp3')
                                     elif platform == 'linux':
