@@ -631,7 +631,7 @@ else:
                         elif opt_pl == 1:
                             for video in playlist.video_urls:
                                 if i == len(playlist.video_urls):
-                                    i = 0
+                                    print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                     break
                                 else:
                                     print(f'\n\033[34m> Downloading \033[31m{YouTube(video).title}\033[34m... \033[33mPlease, wait.\033[m')
@@ -648,7 +648,7 @@ else:
                         elif opt_pl == 2:
                             for music in playlist.video_urls:
                                 if i == len(playlist.video_urls):
-                                    i = 0
+                                    print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                     break
                                 else:
                                     print(f'\n\033[34m> Downloading \033[31m{YouTube(music).title}\033[34m... \033[33mPlease, wait.\033[m')
@@ -676,7 +676,6 @@ else:
                             print('\033[m')
                             break
                         break
-                    print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                 except FileExistsError:
                     print('\n\033[31m> The file already exists.\033[m')
                     if opt_pl == 1:
