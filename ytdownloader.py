@@ -4,7 +4,9 @@ try:
     from subprocess import call
     from os import path, remove, rename
     from time import sleep
-    import re
+    from re import compile
+    from getpass import getuser
+    from sys import platform
 except Exception as e:
     print()
     print(f'\033[31mError with a module: {e}\033[m')
@@ -19,7 +21,7 @@ else:
                 while True:
                     try:
                         ytb = YouTube(url)
-                        ytb._video_regex = re.compile(r"\"url\":\"(/watch\?v=[\w-]*)")
+                        ytb._video_regex = compile(r"\"url\":\"(/watch\?v=[\w-]*)")
                         print(f'\n\033[33mTitle: \033[34m{ytb.title}\033[m')
                         print(f'\033[33mAuthor: \033[34m{ytb.author}\033[m')
                         print(f'\033[33mLength: \033[34m{ytb.length/60:.0f} minutes.\033[m')
@@ -49,11 +51,19 @@ else:
                                         ])
                                         remove('video.mp4')
                                         remove('audio.mp4')
+                                        if platform == 'win32' or platform == 'win64':
+                                            rename(f'{ytb.title}.mp3', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp3')
+                                        elif platform == 'linux':
+                                            rename(f'{ytb.title}.mp3', f'/home/{getuser()}/Downloads/{ytb.title}.mp3')
                                         break
                                     elif opt_download == 2:
                                         if YouTube(url).streams.get_by_itag('22') in ytb.streams:
                                             YouTube(url).streams.get_by_itag('22').download()
                                             print('\n\033[32m> Download Completed.\033[m\n')
+                                            if platform == 'win32' or platform == 'win64':
+                                                rename(f'{ytb.title}.mp3', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp3')
+                                            elif platform == 'linux':
+                                                rename(f'{ytb.title}.mp3', f'/home/{getuser()}/Downloads/{ytb.title}.mp3')
                                             break
                                         else:
                                             YouTube(url).streams.get_by_itag('136').download(filename='video')
@@ -69,6 +79,10 @@ else:
                                             ])
                                             remove('video.mp4')
                                             remove('audio.mp4')
+                                            if platform == 'win32' or platform == 'win64':
+                                                rename(f'{ytb.title}.mp3', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp3')
+                                            elif platform == 'linux':
+                                                rename(f'{ytb.title}.mp3', f'/home/{getuser()}/Downloads/{ytb.title}.mp3')
                                             break
                                     elif opt_download == 3:
                                         YouTube(url).streams.get_by_itag('135').download(filename='video')
@@ -84,11 +98,19 @@ else:
                                         ])
                                         remove('video.mp4')
                                         remove('audio.mp4')
+                                        if platform == 'win32' or platform == 'win64':
+                                            rename(f'{ytb.title}.mp3', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp3')
+                                        elif platform == 'linux':
+                                            rename(f'{ytb.title}.mp3', f'/home/{getuser()}/Downloads/{ytb.title}.mp3')
                                         break
                                     elif opt_download == 4:
                                         if YouTube(url).streams.get_by_itag('18') in ytb.streams:
                                             YouTube(url).streams.get_by_itag('18').download()
                                             print('\n\033[32m> Download Completed.\033[m\n')
+                                            if platform == 'win32' or platform == 'win64':
+                                                rename(f'{ytb.title}.mp3', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp3')
+                                            elif platform == 'linux':
+                                                rename(f'{ytb.title}.mp3', f'/home/{getuser()}/Downloads/{ytb.title}.mp3')
                                             break
                                         else:
                                             YouTube(url).streams.get_by_itag('134').download(filename='video')
@@ -104,6 +126,10 @@ else:
                                             ])
                                             remove('video.mp4')
                                             remove('audio.mp4')
+                                            if platform == 'win32' or platform == 'win64':
+                                                rename(f'{ytb.title}.mp3', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp3')
+                                            elif platform == 'linux':
+                                                rename(f'{ytb.title}.mp3', f'/home/{getuser()}/Downloads/{ytb.title}.mp3')
                                             break
                                     elif opt_download == 5:
                                         YouTube(url).streams.get_by_itag('133').download(filename='video')
@@ -119,6 +145,10 @@ else:
                                         ])
                                         remove('video.mp4')
                                         remove('audio.mp4')
+                                        if platform == 'win32' or platform == 'win64':
+                                            rename(f'{ytb.title}.mp3', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp3')
+                                        elif platform == 'linux':
+                                            rename(f'{ytb.title}.mp3', f'/home/{getuser()}/Downloads/{ytb.title}.mp3')
                                         break
                                     elif opt_download == 6:
                                         YouTube(url).streams.get_by_itag('160').download(filename='video')
@@ -134,6 +164,10 @@ else:
                                         ])
                                         remove('video.mp4')
                                         remove('audio.mp4')
+                                        if platform == 'win32' or platform == 'win64':
+                                            rename(f'{ytb.title}.mp3', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp3')
+                                        elif platform == 'linux':
+                                            rename(f'{ytb.title}.mp3', f'/home/{getuser()}/Downloads/{ytb.title}.mp3')
                                         break
                                 elif ytb.streams.get_by_itag('136') and ytb.streams.get_by_itag('135') and ytb.streams.get_by_itag('134') and ytb.streams.get_by_itag('133') and ytb.streams.get_by_itag('160') in ytb.streams:
                                     opt_download = int(input('\033[33m[ 1 ] \033[33m720p\n\033[33m[ 2 ] \033[34m480p\n\033[33m[ 3 ] \033[34m360p\n\033[33m[ 4 ] \033[34m240p\n\033[33m[ 5 ] \033[34m144p\n> \033[m'))
@@ -145,6 +179,10 @@ else:
                                         if YouTube(url).streams.get_by_itag('22') in ytb.streams:
                                             YouTube(url).streams.get_by_itag('22').download()
                                             print('\n\033[32m> Download Completed.\033[m\n')
+                                            if platform == 'win32' or platform == 'win64':
+                                                rename(f'{ytb.title}.mp3', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp3')
+                                            elif platform == 'linux':
+                                                rename(f'{ytb.title}.mp3', f'/home/{getuser()}/Downloads/{ytb.title}.mp3')
                                             break
                                         else:
                                             YouTube(url).streams.get_by_itag('136').download(filename='video')
@@ -160,6 +198,10 @@ else:
                                             ])
                                             remove('video.mp4')
                                             remove('audio.mp4')
+                                            if platform == 'win32' or platform == 'win64':
+                                                rename(f'{ytb.title}.mp3', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp3')
+                                            elif platform == 'linux':
+                                                rename(f'{ytb.title}.mp3', f'/home/{getuser()}/Downloads/{ytb.title}.mp3')
                                             break
                                     elif opt_download == 2:
                                         YouTube(url).streams.get_by_itag('135').download(filename='video')
@@ -175,11 +217,19 @@ else:
                                         ])
                                         remove('video.mp4')
                                         remove('audio.mp4')
+                                        if platform == 'win32' or platform == 'win64':
+                                            rename(f'{ytb.title}.mp3', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp3')
+                                        elif platform == 'linux':
+                                            rename(f'{ytb.title}.mp3', f'/home/{getuser()}/Downloads/{ytb.title}.mp3')
                                         break
                                     elif opt_download == 3:
                                         if YouTube(url).streams.get_by_itag('18') in ytb.streams:
                                             YouTube(url).streams.get_by_itag('18').download()
                                             print('\n\033[32m> Download Completed.\033[m\n')
+                                            if platform == 'win32' or platform == 'win64':
+                                                rename(f'{ytb.title}.mp3', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp3')
+                                            elif platform == 'linux':
+                                                rename(f'{ytb.title}.mp3', f'/home/{getuser()}/Downloads/{ytb.title}.mp3')
                                             break
                                         else:
                                             YouTube(url).streams.get_by_itag('134').download(filename='video')
@@ -195,6 +245,10 @@ else:
                                             ])
                                             remove('video.mp4')
                                             remove('audio.mp4')
+                                            if platform == 'win32' or platform == 'win64':
+                                                rename(f'{ytb.title}.mp3', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp3')
+                                            elif platform == 'linux':
+                                                rename(f'{ytb.title}.mp3', f'/home/{getuser()}/Downloads/{ytb.title}.mp3')
                                             break
                                     elif opt_download == 4:
                                         YouTube(url).streams.get_by_itag('133').download(filename='video')
@@ -210,6 +264,10 @@ else:
                                         ])
                                         remove('video.mp4')
                                         remove('audio.mp4')
+                                        if platform == 'win32' or platform == 'win64':
+                                            rename(f'{ytb.title}.mp3', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp3')
+                                        elif platform == 'linux':
+                                            rename(f'{ytb.title}.mp3', f'/home/{getuser()}/Downloads/{ytb.title}.mp3')
                                         break
                                     elif opt_download == 5:
                                         YouTube(url).streams.get_by_itag('160').download(filename='video')
@@ -225,6 +283,10 @@ else:
                                         ])
                                         remove('video.mp4')
                                         remove('audio.mp4')
+                                        if platform == 'win32' or platform == 'win64':
+                                            rename(f'{ytb.title}.mp3', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp3')
+                                        elif platform == 'linux':
+                                            rename(f'{ytb.title}.mp3', f'/home/{getuser()}/Downloads/{ytb.title}.mp3')
                                         break
                                 elif ytb.streams.get_by_itag('135') and ytb.streams.get_by_itag('134') and ytb.streams.get_by_itag('133') and ytb.streams.get_by_itag('160') in ytb.streams:
                                     opt_download = int(input('\033[33m[ 1 ] \033[33m480p\n\033[33m[ 2 ] \033[34m360p\n\033[33m[ 3 ] \033[34m240p\n\033[33m[ 4 ] \033[34m144p\n> \033[m'))
@@ -246,11 +308,19 @@ else:
                                         ])
                                         remove('video.mp4')
                                         remove('audio.mp4')
+                                        if platform == 'win32' or platform == 'win64':
+                                            rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                        elif platform == 'linux2' or platform == 'linux3':
+                                            rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/')
                                         break
                                     elif opt_download == 2:
                                         if YouTube(url).streams.get_by_itag('18') in ytb.streams:
                                             YouTube(url).streams.get_by_itag('18').download()
                                             print('\n\033[32m> Download Completed.\033[m\n')
+                                            if platform == 'win32' or platform == 'win64':
+                                                rename(f'{ytb.title}.mp3', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp3')
+                                            elif platform == 'linux':
+                                                rename(f'{ytb.title}.mp3', f'/home/{getuser()}/Downloads/{ytb.title}.mp3')
                                             break
                                         else:
                                             YouTube(url).streams.get_by_itag('134').download(filename='video')
@@ -266,6 +336,10 @@ else:
                                             ])
                                             remove('video.mp4')
                                             remove('audio.mp4')
+                                            if platform == 'win32' or platform == 'win64':
+                                                rename(f'{ytb.title}.mp3', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp3')
+                                            elif platform == 'linux':
+                                                rename(f'{ytb.title}.mp3', f'/home/{getuser()}/Downloads/{ytb.title}.mp3')
                                             break
                                     elif opt_download == 3:
                                         YouTube(url).streams.get_by_itag('133').download(filename='video')
@@ -281,6 +355,10 @@ else:
                                         ])
                                         remove('video.mp4')
                                         remove('audio.mp4')
+                                        if platform == 'win32' or platform == 'win64':
+                                            rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                        elif platform == 'linux2' or platform == 'linux3':
+                                            rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/')
                                         break
                                     elif opt_download == 4:
                                         YouTube(url).streams.get_by_itag('160').download(filename='video')
@@ -296,6 +374,10 @@ else:
                                         ])
                                         remove('video.mp4')
                                         remove('audio.mp4')
+                                        if platform == 'win32' or platform == 'win64':
+                                            rename(f'{ytb.title}.mp3', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp3')
+                                        elif platform == 'linux':
+                                            rename(f'{ytb.title}.mp3', f'/home/{getuser()}/Downloads/{ytb.title}.mp3')
                                         break
                                 elif ytb.streams.get_by_itag('134') and ytb.streams.get_by_itag('133') and ytb.streams.get_by_itag('160') in ytb.streams:
                                     opt_download = int(input('\033[33m[ 1 ] \033[33m360p\n\033[33m[ 2 ] \033[34m240p\n\033[33m[ 3 ] \033[34m144p\n> \033[m'))
@@ -307,6 +389,10 @@ else:
                                         if YouTube(url).streams.get_by_itag('18') in ytb.streams:
                                             YouTube(url).streams.get_by_itag('18').download()
                                             print('\n\033[32m> Download Completed.\033[m\n')
+                                            if platform == 'win32' or platform == 'win64':
+                                                rename(f'{ytb.title}.mp3', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp3')
+                                            elif platform == 'linux':
+                                                rename(f'{ytb.title}.mp3', f'/home/{getuser()}/Downloads/{ytb.title}.mp3')
                                             break
                                         else:
                                             YouTube(url).streams.get_by_itag('134').download(filename='video')
@@ -322,6 +408,10 @@ else:
                                             ])
                                             remove('video.mp4')
                                             remove('audio.mp4')
+                                            if platform == 'win32' or platform == 'win64':
+                                                rename(f'{ytb.title}.mp3', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp3')
+                                            elif platform == 'linux':
+                                                rename(f'{ytb.title}.mp3', f'/home/{getuser()}/Downloads/{ytb.title}.mp3')
                                             break
                                     elif opt_download == 2:
                                         YouTube(url).streams.get_by_itag('133').download(filename='video')
@@ -337,6 +427,10 @@ else:
                                         ])
                                         remove('video.mp4')
                                         remove('audio.mp4')
+                                        if platform == 'win32' or platform == 'win64':
+                                            rename(f'{ytb.title}.mp3', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp3')
+                                        elif platform == 'linux':
+                                            rename(f'{ytb.title}.mp3', f'/home/{getuser()}/Downloads/{ytb.title}.mp3')
                                         break
                                     elif opt_download == 3:
                                         YouTube(url).streams.get_by_itag('160').download(filename='video')
@@ -352,6 +446,10 @@ else:
                                         ])
                                         remove('video.mp4')
                                         remove('audio.mp4')
+                                        if platform == 'win32' or platform == 'win64':
+                                            rename(f'{ytb.title}.mp3', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp3')
+                                        elif platform == 'linux':
+                                            rename(f'{ytb.title}.mp3', f'/home/{getuser()}/Downloads/{ytb.title}.mp3')
                                         break
                                 elif ytb.streams.get_by_itag('133') and ytb.streams.get_by_itag('160') in ytb.streams:
                                     opt_download = int(input('\033[33m[ 1 ] \033[33m240p\n\033[33m[ 2 ] \033[34m144p\n> \033[m'))
@@ -373,6 +471,10 @@ else:
                                         ])
                                         remove('video.mp4')
                                         remove('audio.mp4')
+                                        if platform == 'win32' or platform == 'win64':
+                                            rename(f'{ytb.title}.mp3', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp3')
+                                        elif platform == 'linux':
+                                            rename(f'{ytb.title}.mp3', f'/home/{getuser()}/Downloads/{ytb.title}.mp3')
                                         break
                                     elif opt_download == 2:
                                         YouTube(url).streams.get_by_itag('160').download(filename='video')
@@ -388,6 +490,10 @@ else:
                                         ])
                                         remove('video.mp4')
                                         remove('audio.mp4')
+                                        if platform == 'win32' or platform == 'win64':
+                                            rename(f'{ytb.title}.mp3', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp3')
+                                        elif platform == 'linux':
+                                            rename(f'{ytb.title}.mp3', f'/home/{getuser()}/Downloads/{ytb.title}.mp3')
                                         break
                                 elif ytb.streams.get_by_itag('160') in ytb.streams:
                                     opt_download = int(input('\033[33m[ 1 ] \033[33m144p\n> \033[m'))
@@ -409,9 +515,13 @@ else:
                                         ])
                                         remove('video.mp4')
                                         remove('audio.mp4')
+                                        if platform == 'win32' or platform == 'win64':
+                                            rename(f'{ytb.title}.mp3', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp3')
+                                        elif platform == 'linux':
+                                            rename(f'{ytb.title}.mp3', f'/home/{getuser()}/Downloads/{ytb.title}.mp3')
                                         break
                                 else:
-                                    print('Erro')
+                                    print('\n\033[31m> An unknown error has occurred.\033[m')
                                     break
                         elif opt_format == 2:
                             if ytb.streams.get_by_itag('140') in ytb.streams:
@@ -425,8 +535,13 @@ else:
                                 path.join('music.mp3')
                                 ])
                                 remove('music.mp4')
-                                sleep(2)
+                                sleep(1)
                                 rename('music.mp3', f'{ytb.title}.mp3')
+                                sleep(1)
+                                if platform == 'win32' or platform == 'win64':
+                                    rename(f'{ytb.title}.mp3', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp3')
+                                elif platform == 'linux':
+                                    rename(f'{ytb.title}.mp3', f'/home/{getuser()}/Downloads/{ytb.title}.mp3')
                                 break
                         elif opt_format == 0:
                             print('\033[m')
@@ -435,58 +550,83 @@ else:
                             print('\033[31m> Invalid option.\033[m')
                             continue
                         break
-                    except Exception:
-                        print('\n\033[31m> An unknown error has occurred.\033[m')
+                    except FileExistsError:
+                        print('\n\033[31m> The file already exists.\033[m')
+                        if opt_format == 2:
+                            remove(f'{ytb.title}.mp3')
+                        else:
+                            remove(f'{ytb.title}.mp4')
+                        break
+                    except:
+                        print('\n\033[31m> An unknown error has occurred.\033[m\n')
                         break
             elif opt_type == 2:
-                playlist = Playlist(url)
-                playlist._video_regex = re.compile(r"\"url\":\"(/watch\?v=[\w-]*)")
-                print(f'\n\n\033[33mVideos in the following playlist: \033[34m{len(playlist.video_urls)}\033[m')
-                print('\033[33m='*50)
-                while True:
-                    opt_pl = int(input('\n\033[33m[ 0 ] Cancel\n\033[33m[ 1 ] \033[34mVideo\n\033[33m[ 2 ] \033[34mMusic\n> \033[m'))
+                try:
+                    playlist = Playlist(url)
+                    playlist._video_regex = compile(r"\"url\":\"(/watch\?v=[\w-]*)")
+                    print(f'\n\n\033[33mVideos in the following playlist: \033[34m{len(playlist.video_urls)}\033[m')
                     print('\033[33m='*50)
-                    if opt_pl > 2 or opt_pl < 0:
-                        print('\n\033[31m> Invalid option.\033[m')
-                        continue
-                    elif opt_pl == 1:
-                        for video in playlist.video_urls:
-                            i += 1
-                            if i == len(playlist.video_urls) +1:
-                                i = 0
-                                break
-                            else:
-                                print(f'\n\033[34m> Downloading \033[31m{YouTube(video).title}\033[34m... \033[33mPlease, wait.\033[m')
-                                YouTube(video).streams.get_highest_resolution().download()
-                                if i == 1:
-                                    print(f'\n\033[32m> {i} Download Completed.\033[m')
+                    while True:
+                        opt_pl = int(input('\n\033[33m[ 0 ] Cancel\n\033[33m[ 1 ] \033[34mVideo\n\033[33m[ 2 ] \033[34mMusic\n> \033[m'))
+                        print('\033[33m='*50)
+                        if opt_pl > 2 or opt_pl < 0:
+                            print('\n\033[31m> Invalid option.\033[m')
+                            continue
+                        elif opt_pl == 1:
+                            for video in playlist.video_urls:
+                                i += 1
+                                if i == len(playlist.video_urls) +1:
+                                    i = 0
+                                    break
                                 else:
-                                    print(f'\n\033[32m> {i} Downloads Completed.\033[m')
-                    elif opt_pl == 2:
-                        for music in playlist.video_urls:
-                            i += 1
-                            if i == len(playlist.video_urls) + 1:
-                                i = 0
-                                break
-                            else:
-                                print(f'\n\033[34m> Downloading \033[31m{YouTube(music).title}\033[34m... \033[33mPlease, wait.\033[m')
-                                YouTube(music).streams.get_audio_only().download(filename=f'music{i}')
-                                if i == 1:
-                                    print(f'\n\033[32m> {i} Download Completed.\033[m')
+                                    print(f'\n\033[34m> Downloading \033[31m{YouTube(video).title}\033[34m... \033[33mPlease, wait.\033[m')
+                                    YouTube(video).streams.get_highest_resolution().download()
+                                    if i == 1:
+                                        print(f'\n\033[32m> {i} Download Completed.\033[m')
+                                    else:
+                                        print(f'\n\033[32m> {i} Downloads Completed.\033[m')
+                                    if platform == 'win32' or platform == 'win64':
+                                        rename(f'{YouTube(video)}.mp4', f'/home/{getuser()}/Downloads/{YouTube(video)}.mp4')
+                                    elif platform == 'linux':
+                                        rename(f'{YouTube(video)}.mp4', f'/home/{getuser()}/Downloads/{YouTube(video)}.mp4')
+                                    break
+                        elif opt_pl == 2:
+                            for music in playlist.video_urls:
+                                i += 1
+                                if i == len(playlist.video_urls) + 1:
+                                    i = 0
+                                    break
                                 else:
-                                    print(f'\n\033[32m> {i} Downloads Completed.\033[m')
-                                print('\n\033[34m> Starting Conversion...\033[m\n')
-                                sleep(2.5)
-                                call(["ffmpeg", "-i",
-                                path.join(f'music{i}.mp4'),
-                                path.join(f'music{i}.mp3')
-                                ])
-                                remove(f'music{i}.mp4')
-                                sleep(1)
-                                rename(f'music{i}.mp3', f'{YouTube(music).title}.mp3')
-                    elif opt_pl == 0:
-                        print('\033[m')
+                                    print(f'\n\033[34m> Downloading \033[31m{YouTube(music).title}\033[34m... \033[33mPlease, wait.\033[m')
+                                    YouTube(music).streams.get_audio_only().download(filename=f'music{i}')
+                                    if i == 1:
+                                        print(f'\n\033[32m> {i} Download Completed.\033[m')
+                                    else:
+                                        print(f'\n\033[32m> {i} Downloads Completed.\033[m')
+                                    print('\n\033[34m> Starting Conversion...\033[m\n')
+                                    sleep(2.5)
+                                    call(["ffmpeg", "-i",
+                                    path.join(f'music{i}.mp4'),
+                                    path.join(f'music{i}.mp3')
+                                    ])
+                                    remove(f'music{i}.mp4')
+                                    sleep(1)
+                                    rename(f'music{i}.mp3', f'{YouTube(music).title}.mp3')
+                                    sleep(1)
+                                    if platform == 'win32' or platform == 'win64':
+                                        rename(f'{YouTube(music).title}.mp3', f'C:\\Users\\{getuser()}\\Downloads\\{YouTube(music).title}.mp3')
+                                    elif platform == 'linux':
+                                        rename(f'{YouTube(music).title}.mp3', f'/home/{getuser()}/Downloads/{YouTube(music).title}.mp3')
+                        elif opt_pl == 0:
+                            print('\033[m')
+                            break
                         break
+                except FileExistsError:
+                    print('\n\033[31m> The file already exists.\033[m')
+                    if opt_pl == 1:
+                        remove(f'{YouTube(video).title}.mp4')
+                    elif opt_pl == 2:
+                        remove(f'{YouTube(music).title}.mp3')
                     break
             print('\n\033[33mThanks for using.\033[m\n')
             break
