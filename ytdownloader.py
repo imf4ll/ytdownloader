@@ -14,7 +14,7 @@ except Exception as e:
     print()
 else:
     def yt(url):
-        i = 0
+        i = 1
         while True:
             opt_type = int(input('\n\n\033[33m[ 0 ] Cancel\n\033[33m[ 1 ] \033[34mVideo\n\033[33m[ 2 ] \033[34mPlaylist\n> \033[m'))
             if opt_type == 1:
@@ -630,48 +630,44 @@ else:
                             continue
                         elif opt_pl == 1:
                             for video in playlist.video_urls:
+                                print(f'\n\033[34m> Downloading \033[31m{YouTube(video).title}\033[34m... \033[33mPlease, wait.\033[m')
+                                YouTube(video).streams.get_highest_resolution().download()
+                                if i == 0:
+                                    print(f'\n\033[32m> {i} Download Completed.\033[m')
+                                else:
+                                    print(f'\n\033[32m> {i} Downloads Completed.\033[m')
+                                if platform == 'win32' or platform == 'win64':
+                                    rename(f'{YouTube(video).title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{YouTube(video).title}.mp4')
+                                elif platform == 'linux':
+                                    rename(f'{YouTube(video).title}.mp4', f'/home/{getuser()}/Downloads/{YouTube(video).title}.mp4')
                                 if i == len(playlist.video_urls):
                                     print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
-                                    break
-                                else:
-                                    print(f'\n\033[34m> Downloading \033[31m{YouTube(video).title}\033[34m... \033[33mPlease, wait.\033[m')
-                                    YouTube(video).streams.get_highest_resolution().download()
-                                    if i == 0:
-                                        print(f'\n\033[32m> {i+1} Download Completed.\033[m')
-                                    else:
-                                        print(f'\n\033[32m> {i+1} Downloads Completed.\033[m')
-                                    if platform == 'win32' or platform == 'win64':
-                                        rename(f'{YouTube(video).title}.mp4', f'/home/{getuser()}/Downloads/{YouTube(video).title}.mp4')
-                                    elif platform == 'linux':
-                                        rename(f'{YouTube(video).title}.mp4', f'/home/{getuser()}/Downloads/{YouTube(video).title}.mp4')
-                                    i += 1
+                                i += 1
                         elif opt_pl == 2:
                             for music in playlist.video_urls:
+                                print(f'\n\033[34m> Downloading \033[31m{YouTube(music).title}\033[34m... \033[33mPlease, wait.\033[m')
+                                YouTube(music).streams.get_audio_only().download(filename=f'music{i}')
+                                if i == 0:
+                                    print(f'\n\033[32m> {i} Download Completed.\033[m')
+                                else:
+                                    print(f'\n\033[32m> {i} Downloads Completed.\033[m')
+                                print('\n\033[34m> Starting Conversion...\033[m\n')
+                                sleep(2.5)
+                                call(["ffmpeg", "-i",
+                                path.join(f'music{i}.mp4'),
+                                path.join(f'music{i}.mp3')
+                                ])
+                                remove(f'music{i}.mp4')
+                                sleep(0.5)
+                                rename(f'music{i}.mp3', f'{YouTube(music).title}.mp3')
+                                sleep(0.5)
+                                if platform == 'win32' or platform == 'win64':
+                                    rename(f'{YouTube(music).title}.mp3', f'C:\\Users\\{getuser()}\\Downloads\\{YouTube(music).title}.mp3')
+                                elif platform == 'linux':
+                                    rename(f'{YouTube(music).title}.mp3', f'/home/{getuser()}/Downloads/{YouTube(music).title}.mp3')
                                 if i == len(playlist.video_urls):
                                     print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
-                                    break
-                                else:
-                                    print(f'\n\033[34m> Downloading \033[31m{YouTube(music).title}\033[34m... \033[33mPlease, wait.\033[m')
-                                    YouTube(music).streams.get_audio_only().download(filename=f'music{i+1}')
-                                    if i == 0:
-                                        print(f'\n\033[32m> {i+1} Download Completed.\033[m')
-                                    else:
-                                        print(f'\n\033[32m> {i+1} Downloads Completed.\033[m')
-                                    print('\n\033[34m> Starting Conversion...\033[m\n')
-                                    sleep(2.5)
-                                    call(["ffmpeg", "-i",
-                                    path.join(f'music{i+1}.mp4'),
-                                    path.join(f'music{i+1}.mp3')
-                                    ])
-                                    remove(f'music{i+1}.mp4')
-                                    sleep(0.5)
-                                    rename(f'music{i+1}.mp3', f'{YouTube(music).title}.mp3')
-                                    sleep(0.5)
-                                    if platform == 'win32' or platform == 'win64':
-                                        rename(f'{YouTube(music).title}.mp3', f'C:\\Users\\{getuser()}\\Downloads\\{YouTube(music).title}.mp3')
-                                    elif platform == 'linux':
-                                        rename(f'{YouTube(music).title}.mp3', f'/home/{getuser()}/Downloads/{YouTube(music).title}.mp3')
-                                    i += 1
+                                i += 1
                         elif opt_pl == 0:
                             print('\033[m')
                             break
