@@ -10,6 +10,7 @@
 
 Changelog 0.2:
 - Now you can download videos or musics of any playlist;
+- Now downloaded files goes to 'Downloads' folder (Windows/Linux);
 - Some corrections in code.
 
 Dependencies:
