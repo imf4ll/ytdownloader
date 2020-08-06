@@ -1,6 +1,6 @@
 # ytdownloader 0.3
 
-<img src="https://i.imgur.com/06yHDdW.gif" width="750">
+<img src="https://i.imgur.com/06yHDdW.gif" width="920">
 
 **IF YOU HAVE ANOTHER PYTHON VERSION BEYOND Python 3, USE 'python3' BEFORE THE PARAMETERS**
 
