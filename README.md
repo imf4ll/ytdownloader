@@ -1,6 +1,6 @@
-# ytdownloader 0.2
+# ytdownloader 0.3
 
-<img src="https://i.imgur.com/qFfBMCU.png" width='650'><img src="https://i.imgur.com/GDA8oID.png" width='650'>
+<img src="https://i.imgur.com/Xu38oVV.png" width='650'><img src="https://i.imgur.com/SjHgeRe.png" width='650'>
 
 **IF YOU HAVE ANOTHER PYTHON VERSION BEYOND Python 3, USE 'python3' BEFORE THE PARAMETERS**
 
@@ -8,10 +8,9 @@
 
 **SOMETIMES 720p AND 360p DON'T NEED POS-PROCESSING**
 
-Changelog 0.2:
-- Now you can download videos or musics of any playlist;
-- Now downloaded files goes to 'Downloads' folder (Windows/Linux);
-- Some corrections in code.
+Changelog 0.3:
+- Now downloads in 4K and 60 FPS are available;
+- Some corrections in the code.
 
 Dependencies:
 - Python 3
