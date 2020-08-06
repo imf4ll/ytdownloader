@@ -665,7 +665,7 @@ else:
                                                         print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                                     break
                                             elif ytb.streams.get_by_itag('137') and ytb.streams.get_by_itag('136') and ytb.streams.get_by_itag('135') and ytb.streams.get_by_itag('134') and ytb.streams.get_by_itag('133') and ytb.streams.get_by_itag('160') in ytb.streams:
-                                                opt_download = int(input('\033[33m[ 0 ] \033[33mCancel\n\033[33m[ 1 ] \033[34m1080p\n\033[33m[ 2 ] \033[33m720p\n\033[33m[ 3 ] \033[34m480p\n\033[33m[ 4 ] \033[34m360p\n\033[33m[ 5 ] \033[34m240p\n\033[33m[ 6 ] \033[34m144p\n> \033[m'))
+                                                opt_download = int(input('\033[33m[ 0 ] \033[33mCancel\n\033[33m[ 1 ] \033[34m1080p\n\033[33m[ 2 ] \033[34m720p\n\033[33m[ 3 ] \033[34m480p\n\033[33m[ 4 ] \033[34m360p\n\033[33m[ 5 ] \033[34m240p\n\033[33m[ 6 ] \033[34m144p\n> \033[m'))
                                                 if opt_download > 6 or opt_download < 0:
                                                     print('\n\033[31m> Invalid option.\033[m\n')
                                                     continue
@@ -1658,7 +1658,7 @@ else:
                                                     print('\n\033[34m> Downloaded files moved to Downloads folder.\033[m')
                                                 break
                                         elif ytb.streams.get_by_itag('137') and ytb.streams.get_by_itag('136') and ytb.streams.get_by_itag('135') and ytb.streams.get_by_itag('134') and ytb.streams.get_by_itag('133') and ytb.streams.get_by_itag('160') in ytb.streams:
-                                            opt_download = int(input('\033[33m[ 0 ] \033[33mCancel\n\033[33m[ 1 ] \033[34m1080p\n\033[33m[ 2 ] \033[33m720p\n\033[33m[ 3 ] \033[34m480p\n\033[33m[ 4 ] \033[34m360p\n\033[33m[ 5 ] \033[34m240p\n\033[33m[ 6 ] \033[34m144p\n> \033[m'))
+                                            opt_download = int(input('\033[33m[ 0 ] \033[33mCancel\n\033[33m[ 1 ] \033[34m1080p\n\033[33m[ 2 ] \033[34m720p\n\033[33m[ 3 ] \033[34m480p\n\033[33m[ 4 ] \033[34m360p\n\033[33m[ 5 ] \033[34m240p\n\033[33m[ 6 ] \033[34m144p\n> \033[m'))
                                             if opt_download > 6 or opt_download < 0:
                                                 print('\n\033[31m> Invalid option.\033[m\n')
                                                 continue
