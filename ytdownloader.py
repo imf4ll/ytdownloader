@@ -9,6 +9,7 @@ from subprocess import call
 from os import path, remove, rename
 from time import sleep
 from urllib import error
+from sys import platform
 
 sg.theme('SystemDefault1')
 frame_layout = [
@@ -242,8 +243,12 @@ AUDIO
                     remove('video.webm')
                     remove('audio.webm')
                     sleep(0.5)
-                    if path_file != '':
-                        rename(f'{yt.title}.mp4', f'{path_file}\\{yt.title}.mp4')
+                    if platform == 'win32' or platform == 'win64':
+                        if path_file != '':
+                            rename(f'{yt.title}.mp4', f'{path_file}\\{yt.title}.mp4')
+                    elif platform == 'linux':
+                        if path_file != '':
+                            rename(f'{yt.title}.mp4', f'{path_file}/{yt.title}.mp4')
                     window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.\n\nMerging... Check terminal to follow the process.\n\nMerging completed, downloaded files has moved to output path.')
                 elif combo == '1440p60':
                     extension = 'mp4'
@@ -264,8 +269,12 @@ AUDIO
                     remove('video.webm')
                     remove('audio.webm')
                     sleep(0.5)
-                    if path_file != '':
-                        rename(f'{yt.title}.mp4', f'{path_file}\\{yt.title}.mp4')
+                    if platform == 'win32' or platform == 'win64':
+                        if path_file != '':
+                            rename(f'{yt.title}.mp4', f'{path_file}\\{yt.title}.mp4')
+                    elif platform == 'linux':
+                        if path_file != '':
+                            rename(f'{yt.title}.mp4', f'{path_file}/{yt.title}.mp4')
                     window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.\n\nMerging... Check terminal to follow the process.\n\nMerging completed, downloaded files has moved to output path.')
                 elif combo == '1080p60':
                     extension = 'mp4'
@@ -286,8 +295,12 @@ AUDIO
                     remove('video.mp4')
                     remove('audio.mp4')
                     sleep(0.5)
-                    if path_file != '':
-                        rename(f'{yt.title}.mp4', f'{path_file}\\{yt.title}.mp4')
+                    if platform == 'win32' or platform == 'win64':
+                        if path_file != '':
+                            rename(f'{yt.title}.mp4', f'{path_file}\\{yt.title}.mp4')
+                    elif platform == 'linux':
+                        if path_file != '':
+                            rename(f'{yt.title}.mp4', f'{path_file}/{yt.title}.mp4')
                     window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.\n\nMerging... Check terminal to follow the process.\n\nMerging completed, downloaded files has moved to output path.')
                 elif combo == '720p60':
                     extension = 'mp4'
@@ -308,8 +321,12 @@ AUDIO
                     remove('video.mp4')
                     remove('audio.mp4')
                     sleep(0.5)
-                    if path_file != '':
-                        rename(f'{yt.title}.mp4', f'{path_file}\\{yt.title}.mp4')
+                    if platform == 'win32' or platform == 'win64':
+                        if path_file != '':
+                            rename(f'{yt.title}.mp4', f'{path_file}\\{yt.title}.mp4')
+                    elif platform == 'linux':
+                        if path_file != '':
+                            rename(f'{yt.title}.mp4', f'{path_file}/{yt.title}.mp4')
                     window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.\n\nMerging... Check terminal to follow the process.\n\nMerging completed, downloaded files has moved to output path.')
                 elif combo == '2160p':
                     extension = 'mp4'
@@ -330,8 +347,12 @@ AUDIO
                     remove('video.webm')
                     remove('audio.webm')
                     sleep(0.5)
-                    if path_file != '':
-                        rename(f'{yt.title}.mp4', f'{path_file}\\{yt.title}.mp4')
+                    if platform == 'win32' or platform == 'win64':
+                        if path_file != '':
+                            rename(f'{yt.title}.mp4', f'{path_file}\\{yt.title}.mp4')
+                    elif platform == 'linux':
+                        if path_file != '':
+                            rename(f'{yt.title}.mp4', f'{path_file}/{yt.title}.mp4')
                     window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.\n\nMerging... Check terminal to follow the process.\n\nMerging completed, downloaded files has moved to output path.')
                 elif combo == '1440p':
                     extension = 'mp4'
@@ -352,8 +373,12 @@ AUDIO
                     remove('video.webm')
                     remove('audio.webm')
                     sleep(0.5)
-                    if path_file != '':
-                        rename(f'{yt.title}.mp4', f'{path_file}\\{yt.title}.mp4')
+                    if platform == 'win32' or platform == 'win64':
+                        if path_file != '':
+                            rename(f'{yt.title}.mp4', f'{path_file}\\{yt.title}.mp4')
+                    elif platform == 'linux':
+                        if path_file != '':
+                            rename(f'{yt.title}.mp4', f'{path_file}/{yt.title}.mp4')
                     window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.\n\nMerging... Check terminal to follow the process.\n\nMerging completed, downloaded files has moved to output path.')
                 elif combo == '1080p':
                     extension = 'mp4'
@@ -374,8 +399,12 @@ AUDIO
                     remove('video.mp4')
                     remove('audio.mp4')
                     sleep(0.5)
-                    if path_file != '':
-                        rename(f'{yt.title}.mp4', f'{path_file}\\{yt.title}.mp4')
+                    if platform == 'win32' or platform == 'win64':
+                        if path_file != '':
+                            rename(f'{yt.title}.mp4', f'{path_file}\\{yt.title}.mp4')
+                    elif platform == 'linux':
+                        if path_file != '':
+                            rename(f'{yt.title}.mp4', f'{path_file}/{yt.title}.mp4')
                     window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.\n\nMerging... Check terminal to follow the process.\n\nMerging completed, downloaded files has moved to output path.')
                 elif combo == '720p':
                     extension = 'mp4'
@@ -384,10 +413,15 @@ AUDIO
                         window.Refresh()
                         YouTube(values['url']).streams.get_by_itag('22').download()
                         window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.')
-                        if path_file != '':
-                            rename(f'{yt.title}.mp4', f'{path_file}\\{yt.title}.mp4')
+                        if platform == 'win32' or platform == 'win64':
+                            if path_file != '':
+                                rename(f'{yt.title}.mp4', f'{path_file}\\{yt.title}.mp4')
+                        elif platform == 'linux':
+                            if path_file != '':
+                                rename(f'{yt.title}.mp4', f'{path_file}/{yt.title}.mp4')
                         window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.\n\nDownloaded files has moved to output path.')
                     else:
+                        extension = 'mp4'
                         window['return'].update(f'Downloading {yt.title}... Please Wait.')
                         window.Refresh()
                         YouTube(values['url']).streams.get_by_itag('136').download(filename = 'video')
@@ -405,8 +439,12 @@ AUDIO
                         remove('video.mp4')
                         remove('audio.mp4')
                         sleep(0.5)
-                        if path_file != '':
-                            rename(f'{yt.title}.mp4', f'{path_file}\\{yt.title}.mp4')
+                        if platform == 'win32' or platform == 'win64':
+                            if path_file != '':
+                                rename(f'{yt.title}.mp4', f'{path_file}\\{yt.title}.mp4')
+                        elif platform == 'linux':
+                            if path_file != '':
+                                rename(f'{yt.title}.mp4', f'{path_file}/{yt.title}.mp4')
                         window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.\n\nMerging... Check terminal to follow the process.\n\nMerging completed, downloaded files has moved to output path.')
                 elif combo == '480p':
                     extension = 'mp4'
@@ -427,8 +465,12 @@ AUDIO
                     remove('video.mp4')
                     remove('audio.mp4')
                     sleep(0.5)
-                    if path_file != '':
-                        rename(f'{yt.title}.mp4', f'{path_file}\\{yt.title}.mp4')
+                    if platform == 'win32' or platform == 'win64':
+                        if path_file != '':
+                            rename(f'{yt.title}.mp4', f'{path_file}\\{yt.title}.mp4')
+                    elif platform == 'linux':
+                        if path_file != '':
+                            rename(f'{yt.title}.mp4', f'{path_file}/{yt.title}.mp4')
                     window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.\n\nMerging... Check terminal to follow the process.\n\nMerging completed, downloaded files has moved to output path.')
                 elif combo == '360p':
                     extension = 'mp4'
@@ -458,8 +500,12 @@ AUDIO
                         remove('video.mp4')
                         remove('audio.mp4')
                         sleep(0.5)
-                        if path_file != '':
-                            rename(f'{yt.title}.mp4', f'{path_file}\\{yt.title}.mp4')
+                        if platform == 'win32' or platform == 'win64':
+                            if path_file != '':
+                                rename(f'{yt.title}.mp4', f'{path_file}\\{yt.title}.mp4')
+                        elif platform == 'linux':
+                            if path_file != '':
+                                rename(f'{yt.title}.mp4', f'{path_file}/{yt.title}.mp4')
                         window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.\n\nMerging... Check terminal to follow the process.\n\nMerging completed, downloaded files has moved to output path.')
                 elif combo == '240p':
                     extension = 'mp4'
@@ -480,8 +526,12 @@ AUDIO
                     remove('video.mp4')
                     remove('audio.mp4')
                     sleep(0.5)
-                    if path_file != '':
-                        rename(f'{yt.title}.mp4', f'{path_file}\\{yt.title}.mp4')
+                    if platform == 'win32' or platform == 'win64':
+                        if path_file != '':
+                            rename(f'{yt.title}.mp4', f'{path_file}\\{yt.title}.mp4')
+                    elif platform == 'linux':
+                        if path_file != '':
+                            rename(f'{yt.title}.mp4', f'{path_file}/{yt.title}.mp4')
                     window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.\n\nMerging... Check terminal to follow the process.\n\nMerging completed, downloaded files has moved to output path.')
                 elif combo == '144p':
                     extension = 'mp4'
@@ -502,8 +552,12 @@ AUDIO
                     remove('video.mp4')
                     remove('audio.mp4')
                     sleep(0.5)
-                    if path_file != '':
-                        rename(f'{yt.title}.mp4', f'{path_file}\\{yt.title}.mp4')
+                    if platform == 'win32' or platform == 'win64':
+                        if path_file != '':
+                            rename(f'{yt.title}.mp4', f'{path_file}\\{yt.title}.mp4')
+                    elif platform == 'linux':
+                        if path_file != '':
+                            rename(f'{yt.title}.mp4', f'{path_file}/{yt.title}.mp4')
                     window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.\n\nMerging... Check terminal to follow the process.\n\nMerging completed, downloaded files has moved to output path.')
                 elif combo == 'Video (Progressive)':
                     extension = 'mp4p'
@@ -515,8 +569,12 @@ AUDIO
                             window['return'].update(f'Downloading {YouTube(video).title}... Please Wait.\n\n{i} Download Completed.')
                         else:
                             window['return'].update(f'Downloading {YouTube(video).title}... Please Wait.\n\n{i} Downloads Completed.')
-                        if path_file != '':
-                            rename(f'{YouTube(video).title}.mp4', f'{path_file}\\{YouTube(video).title}.mp4')
+                        if platform == 'win32' or platform == 'win64':
+                            if path_file != '':
+                                rename(f'{YouTube(video).title}.mp4', f'{path_file}\\{YouTube(video).title}.mp4')
+                        elif platform == 'linux':
+                            if path_file != '':
+                                rename(f'{YouTube(video).title}.mp4', f'{path_file}/{YouTube(video).title}.mp4')
                         if i == len(pl.video_urls):
                             window['return'].update(f'Downloading {YouTube(video).title}... Please Wait.\n\n{i} Downloads Completed.\n\nDownloaded files has moved to output path.')
                         i += 1
@@ -545,8 +603,12 @@ AUDIO
                     sleep(0.5)
                     remove('audio.mp4')
                     sleep(0.5)
-                    if path_file != '':
-                        rename(f'{yt.title}.mp3', f'{path_file}\\{yt.title}.mp3')
+                    if platform == 'win32' or platform == 'win64':
+                        if path_file != '':
+                            rename(f'{yt.title}.mp3', f'{path_file}\\{yt.title}.mp3')
+                    elif platform == 'linux':
+                        if path_file != '':
+                            rename(f'{yt.title}.mp3', f'{path_file}/{yt.title}.mp3')
                     window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.\n\nConverting... Check terminal to follow the process.\n\nConverting completed, downloaded files has moved to output path.')
                 elif combo == '160kbps':
                     extension = 'mp3'
@@ -563,8 +625,12 @@ AUDIO
                     sleep(0.5)
                     remove('audio.webm')
                     sleep(0.5)
-                    if path_file != '':
-                        rename(f'{yt.title}.mp3', f'{path_file}\\{yt.title}.mp3')
+                    if platform == 'win32' or platform == 'win64':
+                        if path_file != '':
+                            rename(f'{yt.title}.mp3', f'{path_file}\\{yt.title}.mp3')
+                    elif platform == 'linux':
+                        if path_file != '':
+                            rename(f'{yt.title}.mp3', f'{path_file}/{yt.title}.mp3')
                     window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.\n\nConverting... Check terminal to follow the process.\n\nConverting completed, downloaded files has moved to output path.')
                 elif combo == 'Audio (128kbps)':
                     extension = 'mp3p'
@@ -586,8 +652,12 @@ AUDIO
                         sleep(0.5)
                         rename(f'music{i}.mp3', f'{YouTube(music).title}.mp3')
                         sleep(0.5)
-                        if path_file != '':
-                            rename(f'{YouTube(music).title}.mp3', f'{path_file}\\{YouTube(music).title}.mp3')
+                        if platform == 'win32' or platform == 'win64':
+                            if path_file != '':
+                                rename(f'{YouTube(video).title}.mp3', f'{path_file}\\{YouTube(video).title}.mp3')
+                        elif platform == 'linux':
+                            if path_file != '':
+                                rename(f'{YouTube(video).title}.mp3', f'{path_file}/{YouTube(video).title}.mp3')
                         if i == len(pl.video_urls):
                             window['return'].update(f'Downloading {YouTube(music).title}... Please Wait.\n\n{i} Downloads Completed.\n\nConverting completed, downloaded files has moved to output path.')
                         i +=1
