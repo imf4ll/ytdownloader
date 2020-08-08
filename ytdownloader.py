@@ -13,8 +13,8 @@ from sys import platform
 
 sg.theme('SystemDefault1')
 frame_layout = [
-    [sg.Text('       URL', justification = 'left', font = 'Calibri'), sg.InputText(size = (70, 0), key = 'url', font = 'Calibri'), sg.Button('Go', button_color = ('Black', 'White'), font = 'Calibri')],
-    [sg.Text('  Output', justification = 'left', font = 'Calibri'), sg.InputText(size = (70, 0), key = 'path', disabled = True, font = 'Calibri'), sg.FolderBrowse('Browse', button_color = ('Black', 'White'), font = 'Calibri')],
+    [sg.Text('       URL', justification = 'left', font = 'Calibri'), sg.InputText(size = (85, 0), key = 'url', font = 'Calibri'), sg.Button('     GO    ', button_color = ('Black', 'White'), font = 'Calibri')],
+    [sg.Text('  Output', justification = 'left', font = 'Calibri'), sg.InputText(size = (85, 0), key = 'path', disabled = True, font = 'Calibri'), sg.FolderBrowse('BROWSE', button_color = ('Black', 'White'), font = 'Calibri')],
     [sg.Text('')],
     [sg.Text('Title: ', font = 'Calibri', size = (90, 0), key = 'title')],
     [sg.Text('Author: ', font = 'Calibri', size = (90,0), key = 'author')],
@@ -35,7 +35,7 @@ while True:
     path_file = values['path']
     if event == sg.WINDOW_CLOSED:
         break
-    if event == 'Go':
+    if event == '     GO    ':
         try:
             yt = YouTube(values['url'])
             window['title'].update(f'Title: {yt.title}')
