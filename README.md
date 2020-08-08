@@ -1,6 +1,6 @@
-# ytdownloader 0.3
+# ytdownloader 0.4
 
-<img src="https://i.imgur.com/4vdlKI9.gif">
+<img src="https://i.imgur.com/P3b4dO3.gif">
 
 **IF YOU HAVE ANOTHER PYTHON VERSION BEYOND Python 3, USE 'python3' BEFORE THE PARAMETERS**
 
@@ -8,13 +8,16 @@
 
 **SOMETIMES 720p AND 360p DON'T NEED POS-PROCESSING**
 
-Changelog 0.3:
-- Now downloads in 4K and 60 FPS are available;
-- Some corrections in the code.
+Changelog 0.4:
+- Graphical Interface added ( For now simple );
+- Biggest change in code because GUI.
+
+**IF YOU WANT TERMINAL APP: <a href="https://github.com/f4ll-py/ytdownloader/tree/4d2b4565ad9fca2868849c1966033fcd0d925f4d">Click here</a>**
 
 Dependencies:
 - Python 3
 - pytube3
+- PySimpleGUI
 - <a href="https://ffmpeg.zeranoe.com/builds/">FFmpeg</a>
 
 Documentation:
