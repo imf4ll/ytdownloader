@@ -19,25 +19,18 @@ Dependencies:
 - <a href="https://ffmpeg.zeranoe.com/builds/">FFmpeg</a>
 
 Documentation:
-- Install dependencies:
-  - pip install -r dependencies.txt
 
-- Install <a href="https://ffmpeg.zeranoe.com/builds/">FFmpeg</a> static.
-  - In Windows, for your terminal recognize, install <a href="http://blog.gregzaal.com/how-to-install-ffmpeg-on-windows/#:~:text=If%20you%20try%20that%20right,and%20it%27ll%20understand%20us.">this</a>.
-  - In Termux or Linux, the steps are below.
-
-- Valid parameters:
-  python ytdownloader.py
-
-Termux:
-  - pkg install ffmpeg
-  - pip3 install --update pytube3  
-  - In folder 'issuecorrection', mv extract.py -f /data/data/files/usr/lib/python3.8/site-packages/pytube/
-  
-Linux:
-  - sudo apt install ffmpeg
-  - pip3 install --update pytube3
-  - Open terminal in 'issuecorrection', mv extract.py -f /home/{Your Username here}/.local/lib/python3.8/site-packages/pytube/
+  - Windows:
+    - Install <a href="https://ffmpeg.zeranoe.com/builds/">ffmpeg</a>
+    - Add ffmpeg.exe to windows path ( <a href="http://blog.gregzaal.com/how-to-install-ffmpeg-on-windows/#:~:text=If%20you%20try%20that%20right,and%20it%27ll%20understand%20us.">tutorial</a> )
+    - pip3 install -r dependencies.txt
+    - Move 'extract.py' in folder issuecorrection, to pytube folder ( normally in "C:\Users\{Username}\AppData\Local\Programs\Python\Python38\Lib\site-packages\pytube" )
+    - Run script in terminal a with 'python ytdownloader.py'.
+  - Linux:
+    - sudo apt install ffmpeg
+    - pip3 install -r dependencies.txt
+    - Open terminal in 'issuecorrection', mv extract.py -f /home/{Your Username here}/.local/lib/python3.8/site-packages/pytube/
+    - Run script in terminal a with 'python3 ytdownloader.py'
 
 Known Issues:
 - pytube:
