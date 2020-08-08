@@ -202,6 +202,8 @@ AUDIO
 AUDIO
         160kbps
         128kbps''')
+        except KeyError:
+            window['return'].update('An error with the cipher has ocurred. See documentation in Github to resolve.')
         except:
             i = 1
             pl = Playlist(values['url'])
@@ -518,6 +520,8 @@ AUDIO
                         if i == len(pl.video_urls):
                             window['return'].update(f'Downloading {YouTube(video).title}... Please Wait.\n\n{i} Downloads Completed.\n\nDownloaded files has moved to output path.')
                         i += 1
+            except KeyError:
+                window['return'].update('An error with the cipher has ocurred. See documentation in Github to resolve.')
             except FileExistsError:
                 window['return'].update('Another file with same name already exists.')
                 if extension == 'mp4':
@@ -587,12 +591,16 @@ AUDIO
                         if i == len(pl.video_urls):
                             window['return'].update(f'Downloading {YouTube(music).title}... Please Wait.\n\n{i} Downloads Completed.\n\nConverting completed, downloaded files has moved to output path.')
                         i +=1
+            except KeyError:
+                window['return'].update('An error with the cipher has ocurred. See documentation in Github to resolve.')
             except FileExistsError:
                 window['return'].update('Another file with same name already exists.')
                 if extension == 'mp3':
                     remove(f'{yt.title}.mp3')
                 elif extension == 'mp3p':
                     remove(f'{YouTube(music).title}.mp3')
+        except KeyError:
+            window['return'].update('An error with the cipher has ocurred. See documentation in Github to resolve.')
         except error.HTTPError:
             window['return'].update('This file is unavailable. Try another.')
 window.close()
