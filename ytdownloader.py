@@ -49,163 +49,163 @@ else:
                         window['output'].update(values = ['_______60FPS_______', '2160p60', '1440p60', '1080p60', '720p60', '_______30FPS_______','2160p','1440p','1080p', '720p', '480p', '360p', '240p', '144p', '_______AUDIO_______', '160kbps', '128kbps'])
                         window['return'].update('')
                         window['return'].update('''60FPS
-            2160p60
-            1440p60
-            1080p60
-                720p60
-        30FPS
-                2160p
-                1440p
-                1080p
-                720p
-                480p
-                360p
-                240p
-                144p
-        AUDIO
-                160kbps
-                128kbps''')
+        2160p60
+        1440p60
+        1080p60
+        720p60
+30FPS
+        2160p
+        1440p
+        1080p
+        720p
+        480p
+        360p
+        240p
+        144p
+AUDIO
+        160kbps
+        128kbps''')
                     elif yt.streams.get_by_itag('308') and yt.streams.get_by_itag('299') and yt.streams.get_by_itag('298') in yt.streams:
                         window['output'].update(values = ['_______60FPS_______', '1440p60', '1080p60', '720p60', '_______30FPS_______','1440p','1080p', '720p', '480p', '360p', '240p', '144p', '_______AUDIO_______', '160kbps', '128kbps'])
                         window['return'].update('')
                         window['return'].update('''60FPS
-            1440p60
-            1080p60
-                720p60
-        30FPS
-                1440p
-                1080p
-                720p
-                480p
-                360p
-                240p
-                144p
-        AUDIO
-                160kbps
-                128kbps''')
+        1440p60
+        1080p60
+        720p60
+30FPS
+        1440p
+        1080p
+        720p
+        480p
+        360p
+        240p
+        144p
+AUDIO
+        160kbps
+        128kbps''')
                     elif yt.streams.get_by_itag('299') and yt.streams.get_by_itag('298') in yt.streams:
                             window['output'].update(values = ['_______60FPS_______', '1080p60', '720p60', '_______30FPS_______','1080p', '720p', '480p', '360p', '240p', '144p', '_______AUDIO_______', '160kbps', '128kbps'])
                             window['return'].update('')
                             window['return'].update('''60FPS
-                1080p60
-                720p60
-        30FPS
-                1080p
-                720p
-                480p
-                360p
-                240p
-                144p
-        AUDIO
-                160kbps
-                128kbps''')
+        1080p60
+        720p60
+30FPS
+        1080p
+        720p
+        480p
+        360p
+        240p
+        144p
+AUDIO
+        160kbps
+        128kbps''')
                     elif yt.streams.get_by_itag('298') in yt.streams:
                             window['output'].update(values = ['_______60FPS_______', '720p60', '_______30FPS_______', '720p', '480p', '360p', '240p', '144p', '_______AUDIO_______', '160kbps', '128kbps'])
                             window['return'].update('')
                             window['return'].update('''60FPS
-                720p60
-        30FPS
-                720p
-                480p
-                360p
-                240p
-                144p
-        AUDIO
-                160kbps
-                128kbps''')
+        720p60
+30FPS
+        720p
+        480p
+        360p
+        240p
+        144p
+AUDIO
+        160kbps
+        128kbps''')
                 #30FPS
                     elif yt.streams.get_by_itag('313') and yt.streams.get_by_itag('271') and yt.streams.get_by_itag('137') and yt.streams.get_by_itag('136') and yt.streams.get_by_itag('135') and yt.streams.get_by_itag('134') and yt.streams.get_by_itag('133') and yt.streams.get_by_itag('160') in yt.streams:
                         window['output'].update(values = ['_______30FPS_______', '2160p', '1440p', '1080p', '720p', '480p', '360p', '240p', '144p', '_______AUDIO_______', '160kbps', '128kbps'])
                         window['return'].update('')
                         window['return'].update('''30FPS
-                2160p
-                1440p
-                1080p
-                720p
-                480p
-                360p
-                240p
-                144p
-        AUDIO
-                160kbps
-                128kbps''')
+        2160p
+        1440p
+        1080p
+        720p
+        480p
+        360p
+        240p
+        144p
+AUDIO
+        160kbps
+        128kbps''')
                     elif yt.streams.get_by_itag('271') and yt.streams.get_by_itag('137') and yt.streams.get_by_itag('136') and yt.streams.get_by_itag('135') and yt.streams.get_by_itag('134') and yt.streams.get_by_itag('133') and yt.streams.get_by_itag('160') in yt.streams:
                         window['output'].update(values = ['_______30FPS_______', '1440p', '1080p', '720p', '480p', '360p', '240p', '144p', '_______AUDIO_______', '160kbps', '128kbps'])
                         window['return'].update('')
                         window['return'].update('''30FPS
-                1440p
-                1080p
-                720p
-                480p
-                360p
-                240p
-                144p
-        AUDIO
-                160kbps
-                128kbps''')
+        1440p
+        1080p
+        720p
+        480p
+        360p
+        240p
+        144p
+AUDIO
+        160kbps
+        128kbps''')
                     elif yt.streams.get_by_itag('137') and yt.streams.get_by_itag('136') and yt.streams.get_by_itag('135') and yt.streams.get_by_itag('134') and yt.streams.get_by_itag('133') and yt.streams.get_by_itag('160') in yt.streams:
                         window['output'].update(values = ['_______30FPS_______', '1080p', '720p', '480p', '360p', '240p', '144p', '_______AUDIO_______', '160kbps', '128kbps'])
                         window['return'].update('')
                         window['return'].update('''30FPS
-                1080p
-                720p
-                480p
-                360p
-                240p
-                144p
-        AUDIO
-                160kbps
-                128kbps''')
+        1080p
+        720p
+        480p
+        360p
+        240p
+        144p
+AUDIO
+        160kbps
+        128kbps''')
                     elif yt.streams.get_by_itag('136') and yt.streams.get_by_itag('135') and yt.streams.get_by_itag('134') and yt.streams.get_by_itag('133') and yt.streams.get_by_itag('160') in yt.streams:
                         window['output'].update(values = ['_______30FPS_______', '720p', '480p', '360p', '240p', '144p', '_______AUDIO_______', '160kbps', '128kbps'])
                         window['return'].update('')
                         window['return'].update('''30FPS
-                720p
-                480p
-                360p
-                240p
-                144p
-        AUDIO
-                160kbps
-                128kbps''')
+        720p
+        480p
+        360p
+        240p
+        144p
+AUDIO
+        160kbps
+        128kbps''')
                     elif yt.streams.get_by_itag('135') and yt.streams.get_by_itag('134') and yt.streams.get_by_itag('133') and yt.streams.get_by_itag('160') in yt.streams:
                         window['output'].update(values = ['_______30FPS_______', '480p', '360p', '240p', '144p', '_______AUDIO_______', '160kbps', '128kbps'])
                         window['return'].update('')
                         window['return'].update('''30FPS
-                480p
-                360p
-                240p
-                144p
-        AUDIO
-                160kbps
-                128kbps''')
+        480p
+        360p
+        240p
+        144p
+AUDIO
+        160kbps
+        128kbps''')
                     elif yt.streams.get_by_itag('134') and yt.streams.get_by_itag('133') and yt.streams.get_by_itag('160') in yt.streams:
                         window['output'].update(values = ['_______30FPS_______', '360p', '240p', '144p', '_______AUDIO_______', '160kbps', '128kbps'])
                         window['return'].update('')
                         window['return'].update('''30FPS
-                360p
-                240p
-                144p
-        AUDIO
-                160kbps
-                128kbps''')
+        360p
+        240p
+        144p
+AUDIO
+        160kbps
+        128kbps''')
                     elif yt.streams.get_by_itag('133') and yt.streams.get_by_itag('160') in yt.streams:
                         window['output'].update(values = ['_______30FPS_______', '240p', '144p', '_______AUDIO_______', '160kbps', '128kbps'])
                         window['return'].update('')
                         window['return'].update('''30FPS
-                240p
-                144p
-        AUDIO
-                160kbps
-                128kbps''')
+        240p
+        144p
+AUDIO
+        160kbps
+        128kbps''')
                     elif yt.streams.get_by_itag('160') in yt.streams:
                         window['output'].update(values = ['_______30FPS_______', '144p', '_______AUDIO_______', '160kbps', '128kbps'])
                         window['return'].update('')
                         window['return'].update('''30FPS
-                144p
-        AUDIO
-                160kbps
-                128kbps''')
+        144p
+AUDIO
+        160kbps
+        128kbps''')
                 except KeyError:
                     window['return'].update('An error with the cipher has ocurred. See documentation in Github to resolve.')
                 except:
@@ -218,9 +218,9 @@ else:
                     window['output'].update(values = ['Video (Progressive)', 'Audio (128kbps)'])
                     window['return'].update('')
                     window['return'].update('''VIDEO
-                The best quality until 720p
-        AUDIO
-                128kbps''')
+        The best quality until 720p
+AUDIO
+        128kbps''')
             #DOWNLOAD - VIDEO
             if event == 'Download':
                 try:
