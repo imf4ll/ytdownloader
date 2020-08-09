@@ -39,8 +39,8 @@ while True:
         try:
             yt = YouTube(values['url'])
             window['title'].update(f'Title: {yt.title}')
-            window['author'].update(f'Author: {yt.author}')
-            window['length'].update(f'Length: {yt.length/60:.0f} minutes')
+            window['author'].update(f'Author: {yt.author}', visible = True)
+            window['length'].update(f'Length: {yt.length/60:.0f} minutes', visible = True)
             #60FPS
             if yt.streams.get_by_itag('315') and yt.streams.get_by_itag('308') and yt.streams.get_by_itag('299') and yt.streams.get_by_itag('298') in yt.streams:
                 window['output'].update(values = ['_______60FPS_______', '2160p60', '1440p60', '1080p60', '720p60', '_______30FPS_______','2160p','1440p','1080p', '720p', '480p', '360p', '240p', '144p', '_______AUDIO_______', '160kbps', '128kbps'])
