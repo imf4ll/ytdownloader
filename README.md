@@ -1,9 +1,9 @@
 # ytdownloader 0.4
 
-![Downloads](https://img.shields.io/github/downloads/f4ll-py/fbdownloader/total)
-![LastCommit](https://img.shields.io/github/last-commit/f4ll-py/fbdownloader)
-![Issues](https://img.shields.io/github/issues/f4ll-py/fbdownloader)
-![PullRequests](https://img.shields.io/github/issues-pr/f4ll-py/fbdownloader)
+![Downloads](https://img.shields.io/github/downloads/f4ll-py/ytdownloader/total)
+![LastCommit](https://img.shields.io/github/last-commit/f4ll-py/ytdownloader)
+![Issues](https://img.shields.io/github/issues/f4ll-py/ytdownloader)
+![PullRequests](https://img.shields.io/github/issues-pr/f4ll-py/ytdownloader)
 ![Followers](https://img.shields.io/github/followers/f4ll-py?label=Follow)
 
 <img src="https://i.imgur.com/PFr5ejx.gif">
