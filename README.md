@@ -1,4 +1,4 @@
-# ytdownloader 0.4
+# ytdownloader 0.3b
 
 ![Downloads](https://img.shields.io/github/downloads/f4ll-py/ytdownloader/total)
 ![LastCommit](https://img.shields.io/github/last-commit/f4ll-py/ytdownloader)
@@ -6,22 +6,19 @@
 ![PullRequests](https://img.shields.io/github/issues-pr/f4ll-py/ytdownloader)
 ![Followers](https://img.shields.io/github/followers/f4ll-py?label=Follow)
 
-<img src="https://i.imgur.com/PFr5ejx.gif">
+<img src="https://i.imgur.com/y1WKgQj.png">
 
 **IF YOU HAVE ANOTHER PYTHON VERSION BEYOND Python 3, USE 'python3' BEFORE THE PARAMETERS**
 
 **SOMETIMES 720p AND 360p DON'T NEED POS-PROCESSING**
 
-Changelog 0.4:
-- Graphical Interface added ( For now simple );
-- Biggest change in code because GUI.
-
-**IF YOU WANT TERMINAL APP: <a href="https://github.com/f4ll-py/ytdownloader/tree/4d2b4565ad9fca2868849c1966033fcd0d925f4d">Click here</a>**
+Changelog 0.3b:
+- Last update of terminal app;
+- Some changes in code.
 
 Dependencies:
 - Python 3
 - pytube3
-- PySimpleGUI
 - <a href="https://ffmpeg.zeranoe.com/builds/">FFmpeg</a>
 
 Documentation:
