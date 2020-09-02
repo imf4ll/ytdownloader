@@ -16,7 +16,7 @@ Changelog 0.4:
 - Graphical Interface added ( For now simple );
 - Biggest change in code because GUI.
 
-**IF YOU WANT TERMINAL APP: <a href="https://github.com/f4ll-py/ytdownloader/tree/4d2b4565ad9fca2868849c1966033fcd0d925f4d">Click here</a>**
+**IF YOU WANT TERMINAL APP: <a href="https://github.com/f4ll-py/ytdownloader/tree/ytdownloader_0.3b">Click here</a>**
 
 Dependencies:
 - Python 3
