@@ -1,652 +1,2311 @@
 #!/usr/bin/env python3
-
-# Coded By f4ll_py #
 try:
-    import PySimpleGUI as sg
     from pytube import YouTube, Playlist
-    from re import compile
     from subprocess import call
     from os import path, remove, rename
     from time import sleep
-    from urllib import error
+    from re import compile
+    from getpass import getuser
     from sys import platform
+    from urllib import error
 except Exception as e:
-    print(f'An error has occurred with a module: {e}')
+    print()
+    print(f'\033[31mError with a module: {e}\033[m')
+    print("\033[31mTry 'pip install -r dependencies.txt' to install all modules.\033[m")
+    print()
 else:
-    def ytdownloader():
-        sg.theme('SystemDefault1')
-        frame_layout = [
-            [sg.Text('       URL', justification = 'left', font = 'Calibri'), sg.InputText(size = (85, 0), key = 'url', font = 'Calibri'), sg.Button('     GO    ', button_color = ('Black', 'White'), font = 'Calibri')],
-            [sg.Text('  Output', justification = 'left', font = 'Calibri'), sg.InputText(size = (85, 0), key = 'path', disabled = True, font = 'Calibri'), sg.FolderBrowse('BROWSE', button_color = ('Black', 'White'), font = 'Calibri')],
-            [sg.Text('')],
-            [sg.Text('Title: ', font = 'Calibri', size = (90, 0), key = 'title')],
-            [sg.Text('Author: ', font = 'Calibri', size = (90,0), key = 'author')],
-            [sg.Text('Length: ', font = 'Calibri', size = (90, 0), key = 'length')],
-            [sg.Text('')],
-            [sg.Text('Output:', font = 'Calibri')],
-            [sg.Multiline(font = 'Calibri', key = 'return', size = (100, 15), disabled = True, border_width = '0')],
-            [sg.Text(' Stream', font = 'Calibri', justification = 'left'), sg.Combo(values = '', size = (20, 0), key = 'output', readonly = True, font = 'Calibri'), sg.Button('Download', font = 'Calibri')]
-        ]
-
-        layout = [
-            [sg.Frame('', frame_layout)]
-        ]
-
-        window = sg.Window('YTDownloader 0.4', layout, icon = r'icon.ico')
+    def yt(url):
+        i = 1
         while True:
-            event, values = window.read()
-            path_file = values['path']
-            if event == sg.WINDOW_CLOSED:
-                break
-            if event == '     GO    ':
-                try:
-                    yt = YouTube(values['url'])
-                    window['title'].update(f'Title: {yt.title}')
-                    window['author'].update(f'Author: {yt.author}', visible = True)
-                    window['length'].update(f'Length: {yt.length/60:.0f} minutes', visible = True)
-                    #60FPS
-                    if yt.streams.get_by_itag('315') and yt.streams.get_by_itag('308') and yt.streams.get_by_itag('299') and yt.streams.get_by_itag('298') in yt.streams:
-                        window['output'].update(values = ['_______60FPS_______', '2160p60', '1440p60', '1080p60', '720p60', '_______30FPS_______','2160p','1440p','1080p', '720p', '480p', '360p', '240p', '144p', '_______AUDIO_______', '160kbps', '128kbps'])
-                        window['return'].update('')
-                        window['return'].update('''60FPS
-        2160p60
-        1440p60
-        1080p60
-        720p60
-30FPS
-        2160p
-        1440p
-        1080p
-        720p
-        480p
-        360p
-        240p
-        144p
-AUDIO
-        160kbps
-        128kbps''')
-                    elif yt.streams.get_by_itag('308') and yt.streams.get_by_itag('299') and yt.streams.get_by_itag('298') in yt.streams:
-                        window['output'].update(values = ['_______60FPS_______', '1440p60', '1080p60', '720p60', '_______30FPS_______','1440p','1080p', '720p', '480p', '360p', '240p', '144p', '_______AUDIO_______', '160kbps', '128kbps'])
-                        window['return'].update('')
-                        window['return'].update('''60FPS
-        1440p60
-        1080p60
-        720p60
-30FPS
-        1440p
-        1080p
-        720p
-        480p
-        360p
-        240p
-        144p
-AUDIO
-        160kbps
-        128kbps''')
-                    elif yt.streams.get_by_itag('299') and yt.streams.get_by_itag('298') in yt.streams:
-                            window['output'].update(values = ['_______60FPS_______', '1080p60', '720p60', '_______30FPS_______','1080p', '720p', '480p', '360p', '240p', '144p', '_______AUDIO_______', '160kbps', '128kbps'])
-                            window['return'].update('')
-                            window['return'].update('''60FPS
-        1080p60
-        720p60
-30FPS
-        1080p
-        720p
-        480p
-        360p
-        240p
-        144p
-AUDIO
-        160kbps
-        128kbps''')
-                    elif yt.streams.get_by_itag('298') in yt.streams:
-                            window['output'].update(values = ['_______60FPS_______', '720p60', '_______30FPS_______', '720p', '480p', '360p', '240p', '144p', '_______AUDIO_______', '160kbps', '128kbps'])
-                            window['return'].update('')
-                            window['return'].update('''60FPS
-        720p60
-30FPS
-        720p
-        480p
-        360p
-        240p
-        144p
-AUDIO
-        160kbps
-        128kbps''')
-                #30FPS
-                    elif yt.streams.get_by_itag('313') and yt.streams.get_by_itag('271') and yt.streams.get_by_itag('137') and yt.streams.get_by_itag('136') and yt.streams.get_by_itag('135') and yt.streams.get_by_itag('134') and yt.streams.get_by_itag('133') and yt.streams.get_by_itag('160') in yt.streams:
-                        window['output'].update(values = ['_______30FPS_______', '2160p', '1440p', '1080p', '720p', '480p', '360p', '240p', '144p', '_______AUDIO_______', '160kbps', '128kbps'])
-                        window['return'].update('')
-                        window['return'].update('''30FPS
-        2160p
-        1440p
-        1080p
-        720p
-        480p
-        360p
-        240p
-        144p
-AUDIO
-        160kbps
-        128kbps''')
-                    elif yt.streams.get_by_itag('271') and yt.streams.get_by_itag('137') and yt.streams.get_by_itag('136') and yt.streams.get_by_itag('135') and yt.streams.get_by_itag('134') and yt.streams.get_by_itag('133') and yt.streams.get_by_itag('160') in yt.streams:
-                        window['output'].update(values = ['_______30FPS_______', '1440p', '1080p', '720p', '480p', '360p', '240p', '144p', '_______AUDIO_______', '160kbps', '128kbps'])
-                        window['return'].update('')
-                        window['return'].update('''30FPS
-        1440p
-        1080p
-        720p
-        480p
-        360p
-        240p
-        144p
-AUDIO
-        160kbps
-        128kbps''')
-                    elif yt.streams.get_by_itag('137') and yt.streams.get_by_itag('136') and yt.streams.get_by_itag('135') and yt.streams.get_by_itag('134') and yt.streams.get_by_itag('133') and yt.streams.get_by_itag('160') in yt.streams:
-                        window['output'].update(values = ['_______30FPS_______', '1080p', '720p', '480p', '360p', '240p', '144p', '_______AUDIO_______', '160kbps', '128kbps'])
-                        window['return'].update('')
-                        window['return'].update('''30FPS
-        1080p
-        720p
-        480p
-        360p
-        240p
-        144p
-AUDIO
-        160kbps
-        128kbps''')
-                    elif yt.streams.get_by_itag('136') and yt.streams.get_by_itag('135') and yt.streams.get_by_itag('134') and yt.streams.get_by_itag('133') and yt.streams.get_by_itag('160') in yt.streams:
-                        window['output'].update(values = ['_______30FPS_______', '720p', '480p', '360p', '240p', '144p', '_______AUDIO_______', '160kbps', '128kbps'])
-                        window['return'].update('')
-                        window['return'].update('''30FPS
-        720p
-        480p
-        360p
-        240p
-        144p
-AUDIO
-        160kbps
-        128kbps''')
-                    elif yt.streams.get_by_itag('135') and yt.streams.get_by_itag('134') and yt.streams.get_by_itag('133') and yt.streams.get_by_itag('160') in yt.streams:
-                        window['output'].update(values = ['_______30FPS_______', '480p', '360p', '240p', '144p', '_______AUDIO_______', '160kbps', '128kbps'])
-                        window['return'].update('')
-                        window['return'].update('''30FPS
-        480p
-        360p
-        240p
-        144p
-AUDIO
-        160kbps
-        128kbps''')
-                    elif yt.streams.get_by_itag('134') and yt.streams.get_by_itag('133') and yt.streams.get_by_itag('160') in yt.streams:
-                        window['output'].update(values = ['_______30FPS_______', '360p', '240p', '144p', '_______AUDIO_______', '160kbps', '128kbps'])
-                        window['return'].update('')
-                        window['return'].update('''30FPS
-        360p
-        240p
-        144p
-AUDIO
-        160kbps
-        128kbps''')
-                    elif yt.streams.get_by_itag('133') and yt.streams.get_by_itag('160') in yt.streams:
-                        window['output'].update(values = ['_______30FPS_______', '240p', '144p', '_______AUDIO_______', '160kbps', '128kbps'])
-                        window['return'].update('')
-                        window['return'].update('''30FPS
-        240p
-        144p
-AUDIO
-        160kbps
-        128kbps''')
-                    elif yt.streams.get_by_itag('160') in yt.streams:
-                        window['output'].update(values = ['_______30FPS_______', '144p', '_______AUDIO_______', '160kbps', '128kbps'])
-                        window['return'].update('')
-                        window['return'].update('''30FPS
-        144p
-AUDIO
-        160kbps
-        128kbps''')
-                except KeyError:
-                    window['return'].update('An error with the cipher has ocurred. See documentation in Github to resolve.')
-                except:
-                    i = 1
-                    pl = Playlist(values['url'])
-                    pl._video_regex = compile(r"\"url\":\"(/watch\?v=[\w-]*)")
-                    window['title'].update(f'Videos in current playlist: {len(pl.video_urls)}')
-                    window['author'].update(visible = False)
-                    window['length'].update(visible = False)
-                    window['output'].update(values = ['Video (Progressive)', 'Audio (128kbps)'])
-                    window['return'].update('')
-                    window['return'].update('''VIDEO
-        The best quality until 720p
-AUDIO
-        128kbps''')
-            #DOWNLOAD - VIDEO
-            if event == 'Download':
-                try:
-                    combo = values['output']
-                    print(combo)
+            opt_type = int(input('\n\n\033[33m[ 0 ] Cancel\n\033[33m[ 1 ] \033[34mVideo\n\033[33m[ 2 ] \033[34mPlaylist\n> \033[m'))
+            if opt_type == 1:
+                while True:
                     try:
-                        if combo == '2160p60':
-                            extension = 'mp4'
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.')
-                            window.Refresh()
-                            YouTube(values['url']).streams.get_by_itag('315').download(filename = 'video')
-                            YouTube(values['url']).streams.get_by_itag('251').download(filename = 'audio')
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.')
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.\n\nMerging... Check terminal to follow the process.')
-                            window.Refresh()
-                            call(["ffmpeg", "-i",
-                            path.join('video.webm'),
-                            "-i", 
-                            path.join('audio.webm'),
-                            path.join(f'{yt.title}.mp4')
-                            ])
-                            sleep(0.5)
-                            remove('video.webm')
-                            remove('audio.webm')
-                            sleep(0.5)
-                            if platform == 'win32' or platform == 'win64':
-                                if path_file != '':
-                                    rename(f'{yt.title}.mp4', f'{path_file}\\{yt.title}.mp4')
-                            elif platform == 'linux':
-                                if path_file != '':
-                                    rename(f'{yt.title}.mp4', f'{path_file}/{yt.title}.mp4')
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.\n\nMerging... Check terminal to follow the process.\n\nMerging completed, downloaded files has moved to output path.')
-                        elif combo == '1440p60':
-                            extension = 'mp4'
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.')
-                            window.Refresh()
-                            YouTube(values['url']).streams.get_by_itag('308').download(filename = 'video')
-                            YouTube(values['url']).streams.get_by_itag('251').download(filename = 'audio')
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.')
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.\n\nMerging... Check terminal to follow the process.')
-                            window.Refresh()
-                            call(["ffmpeg", "-i",
-                            path.join('video.webm'),
-                            "-i", 
-                            path.join('audio.webm'),
-                            path.join(f'{yt.title}.mp4')
-                            ])
-                            sleep(0.5)
-                            remove('video.webm')
-                            remove('audio.webm')
-                            sleep(0.5)
-                            if platform == 'win32' or platform == 'win64':
-                                if path_file != '':
-                                    rename(f'{yt.title}.mp4', f'{path_file}\\{yt.title}.mp4')
-                            elif platform == 'linux':
-                                if path_file != '':
-                                    rename(f'{yt.title}.mp4', f'{path_file}/{yt.title}.mp4')
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.\n\nMerging... Check terminal to follow the process.\n\nMerging completed, downloaded files has moved to output path.')
-                        elif combo == '1080p60':
-                            extension = 'mp4'
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.')
-                            window.Refresh()
-                            YouTube(values['url']).streams.get_by_itag('299').download(filename = 'video')
-                            YouTube(values['url']).streams.get_by_itag('140').download(filename = 'audio')
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.')
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.\n\nMerging... Check terminal to follow the process.')
-                            window.Refresh()
-                            call(["ffmpeg", "-i",
-                            path.join('video.mp4'),
-                            "-i", 
-                            path.join('audio.mp4'),
-                            path.join(f'{yt.title}.mp4')
-                            ])
-                            sleep(0.5)
-                            remove('video.mp4')
-                            remove('audio.mp4')
-                            sleep(0.5)
-                            if platform == 'win32' or platform == 'win64':
-                                if path_file != '':
-                                    rename(f'{yt.title}.mp4', f'{path_file}\\{yt.title}.mp4')
-                            elif platform == 'linux':
-                                if path_file != '':
-                                    rename(f'{yt.title}.mp4', f'{path_file}/{yt.title}.mp4')
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.\n\nMerging... Check terminal to follow the process.\n\nMerging completed, downloaded files has moved to output path.')
-                        elif combo == '720p60':
-                            extension = 'mp4'
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.')
-                            window.Refresh()
-                            YouTube(values['url']).streams.get_by_itag('298').download(filename = 'video')
-                            YouTube(values['url']).streams.get_by_itag('140').download(filename = 'audio')
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.')
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.\n\nMerging... Check terminal to follow the process.')
-                            window.Refresh()
-                            call(["ffmpeg", "-i",
-                            path.join('video.mp4'),
-                            "-i", 
-                            path.join('audio.mp4'),
-                            path.join(f'{yt.title}.mp4')
-                            ])
-                            sleep(0.5)
-                            remove('video.mp4')
-                            remove('audio.mp4')
-                            sleep(0.5)
-                            if platform == 'win32' or platform == 'win64':
-                                if path_file != '':
-                                    rename(f'{yt.title}.mp4', f'{path_file}\\{yt.title}.mp4')
-                            elif platform == 'linux':
-                                if path_file != '':
-                                    rename(f'{yt.title}.mp4', f'{path_file}/{yt.title}.mp4')
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.\n\nMerging... Check terminal to follow the process.\n\nMerging completed, downloaded files has moved to output path.')
-                        elif combo == '2160p':
-                            extension = 'mp4'
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.')
-                            window.Refresh()
-                            YouTube(values['url']).streams.get_by_itag('313').download(filename = 'video')
-                            YouTube(values['url']).streams.get_by_itag('251').download(filename = 'audio')
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.')
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.\n\nMerging... Check terminal to follow the process.')
-                            window.Refresh()
-                            call(["ffmpeg", "-i",
-                            path.join('video.webm'),
-                            "-i", 
-                            path.join('audio.webm'),
-                            path.join(f'{yt.title}.mp4')
-                            ])
-                            sleep(0.5)
-                            remove('video.webm')
-                            remove('audio.webm')
-                            sleep(0.5)
-                            if platform == 'win32' or platform == 'win64':
-                                if path_file != '':
-                                    rename(f'{yt.title}.mp4', f'{path_file}\\{yt.title}.mp4')
-                            elif platform == 'linux':
-                                if path_file != '':
-                                    rename(f'{yt.title}.mp4', f'{path_file}/{yt.title}.mp4')
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.\n\nMerging... Check terminal to follow the process.\n\nMerging completed, downloaded files has moved to output path.')
-                        elif combo == '1440p':
-                            extension = 'mp4'
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.')
-                            window.Refresh()
-                            YouTube(values['url']).streams.get_by_itag('271').download(filename = 'video')
-                            YouTube(values['url']).streams.get_by_itag('251').download(filename = 'audio')
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.')
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.\n\nMerging... Check terminal to follow the process.')
-                            window.Refresh()
-                            call(["ffmpeg", "-i",
-                            path.join('video.webm'),
-                            "-i", 
-                            path.join('audio.webm'),
-                            path.join(f'{yt.title}.mp4')
-                            ])
-                            sleep(0.5)
-                            remove('video.webm')
-                            remove('audio.webm')
-                            sleep(0.5)
-                            if platform == 'win32' or platform == 'win64':
-                                if path_file != '':
-                                    rename(f'{yt.title}.mp4', f'{path_file}\\{yt.title}.mp4')
-                            elif platform == 'linux':
-                                if path_file != '':
-                                    rename(f'{yt.title}.mp4', f'{path_file}/{yt.title}.mp4')
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.\n\nMerging... Check terminal to follow the process.\n\nMerging completed, downloaded files has moved to output path.')
-                        elif combo == '1080p':
-                            extension = 'mp4'
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.')
-                            window.Refresh()
-                            YouTube(values['url']).streams.get_by_itag('137').download(filename = 'video')
-                            YouTube(values['url']).streams.get_by_itag('140').download(filename = 'audio')
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.')
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.\n\nMerging... Check terminal to follow the process.')
-                            window.Refresh()
-                            call(["ffmpeg", "-i",
-                            path.join('video.mp4'),
-                            "-i", 
-                            path.join('audio.mp4'),
-                            path.join(f'{yt.title}.mp4')
-                            ])
-                            sleep(0.5)
-                            remove('video.mp4')
-                            remove('audio.mp4')
-                            sleep(0.5)
-                            if platform == 'win32' or platform == 'win64':
-                                if path_file != '':
-                                    rename(f'{yt.title}.mp4', f'{path_file}\\{yt.title}.mp4')
-                            elif platform == 'linux':
-                                if path_file != '':
-                                    rename(f'{yt.title}.mp4', f'{path_file}/{yt.title}.mp4')
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.\n\nMerging... Check terminal to follow the process.\n\nMerging completed, downloaded files has moved to output path.')
-                        elif combo == '720p':
-                            extension = 'mp4'
-                            if yt.streams.get_by_itag('22') in yt.streams:
-                                window['return'].update(f'Downloading {yt.title}... Please Wait.')
-                                window.Refresh()
-                                YouTube(values['url']).streams.get_by_itag('22').download()
-                                window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.')
-                                if platform == 'win32' or platform == 'win64':
-                                    if path_file != '':
-                                        rename(f'{yt.title}.mp4', f'{path_file}\\{yt.title}.mp4')
-                                elif platform == 'linux':
-                                    if path_file != '':
-                                        rename(f'{yt.title}.mp4', f'{path_file}/{yt.title}.mp4')
-                                window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.\n\nDownloaded files has moved to output path.')
-                            else:
-                                extension = 'mp4'
-                                window['return'].update(f'Downloading {yt.title}... Please Wait.')
-                                window.Refresh()
-                                YouTube(values['url']).streams.get_by_itag('136').download(filename = 'video')
-                                YouTube(values['url']).streams.get_by_itag('140').download(filename = 'audio')
-                                window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.')
-                                window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.\n\nMerging... Check terminal to follow the process.')
-                                window.Refresh()
-                                call(["ffmpeg", "-i",
-                                path.join('video.mp4'),
-                                "-i", 
-                                path.join('audio.mp4'),
-                                path.join(f'{yt.title}.mp4')
-                                ])
-                                sleep(0.5)
-                                remove('video.mp4')
-                                remove('audio.mp4')
-                                sleep(0.5)
-                                if platform == 'win32' or platform == 'win64':
-                                    if path_file != '':
-                                        rename(f'{yt.title}.mp4', f'{path_file}\\{yt.title}.mp4')
-                                elif platform == 'linux':
-                                    if path_file != '':
-                                        rename(f'{yt.title}.mp4', f'{path_file}/{yt.title}.mp4')
-                                window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.\n\nMerging... Check terminal to follow the process.\n\nMerging completed, downloaded files has moved to output path.')
-                        elif combo == '480p':
-                            extension = 'mp4'
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.')
-                            window.Refresh()
-                            YouTube(values['url']).streams.get_by_itag('135').download(filename = 'video')
-                            YouTube(values['url']).streams.get_by_itag('140').download(filename = 'audio')
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.')
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.\n\nMerging... Check terminal to follow the process.')
-                            window.Refresh()
-                            call(["ffmpeg", "-i",
-                            path.join('video.mp4'),
-                            "-i", 
-                            path.join('audio.mp4'),
-                            path.join(f'{yt.title}.mp4')
-                            ])
-                            sleep(0.5)
-                            remove('video.mp4')
-                            remove('audio.mp4')
-                            sleep(0.5)
-                            if platform == 'win32' or platform == 'win64':
-                                if path_file != '':
-                                    rename(f'{yt.title}.mp4', f'{path_file}\\{yt.title}.mp4')
-                            elif platform == 'linux':
-                                if path_file != '':
-                                    rename(f'{yt.title}.mp4', f'{path_file}/{yt.title}.mp4')
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.\n\nMerging... Check terminal to follow the process.\n\nMerging completed, downloaded files has moved to output path.')
-                        elif combo == '360p':
-                            extension = 'mp4'
-                            if yt.streams.get_by_itag('18') in yt.streams:
-                                window['return'].update(f'Downloading {yt.title}... Please Wait.')
-                                window.Refresh()
-                                YouTube(values['url']).streams.get_by_itag('18').download()
-                                window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.')
-                                if path_file != '':
-                                    rename(f'{yt.title}.mp4', f'{path_file}\\{yt.title}.mp4')
-                                window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.\n\nDownloaded files has moved to output path.')
-                            else:
-                                window['return'].update(f'Downloading {yt.title}... Please Wait.')
-                                window.Refresh()
-                                YouTube(values['url']).streams.get_by_itag('134').download(filename = 'video')
-                                YouTube(values['url']).streams.get_by_itag('140').download(filename = 'audio')
-                                window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.')
-                                window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.\n\nMerging... Check terminal to follow the process.')
-                                window.Refresh()
-                                call(["ffmpeg", "-i",
-                                path.join('video.mp4'),
-                                "-i", 
-                                path.join('audio.mp4'),
-                                path.join(f'{yt.title}.mp4')
-                                ])
-                                sleep(0.5)
-                                remove('video.mp4')
-                                remove('audio.mp4')
-                                sleep(0.5)
-                                if platform == 'win32' or platform == 'win64':
-                                    if path_file != '':
-                                        rename(f'{yt.title}.mp4', f'{path_file}\\{yt.title}.mp4')
-                                elif platform == 'linux':
-                                    if path_file != '':
-                                        rename(f'{yt.title}.mp4', f'{path_file}/{yt.title}.mp4')
-                                window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.\n\nMerging... Check terminal to follow the process.\n\nMerging completed, downloaded files has moved to output path.')
-                        elif combo == '240p':
-                            extension = 'mp4'
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.')
-                            window.Refresh()
-                            YouTube(values['url']).streams.get_by_itag('133').download(filename = 'video')
-                            YouTube(values['url']).streams.get_by_itag('140').download(filename = 'audio')
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.')
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.\n\nMerging... Check terminal to follow the process.')
-                            window.Refresh()
-                            call(["ffmpeg", "-i",
-                            path.join('video.mp4'),
-                            "-i", 
-                            path.join('audio.mp4'),
-                            path.join(f'{yt.title}.mp4')
-                            ])
-                            sleep(0.5)
-                            remove('video.mp4')
-                            remove('audio.mp4')
-                            sleep(0.5)
-                            if platform == 'win32' or platform == 'win64':
-                                if path_file != '':
-                                    rename(f'{yt.title}.mp4', f'{path_file}\\{yt.title}.mp4')
-                            elif platform == 'linux':
-                                if path_file != '':
-                                    rename(f'{yt.title}.mp4', f'{path_file}/{yt.title}.mp4')
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.\n\nMerging... Check terminal to follow the process.\n\nMerging completed, downloaded files has moved to output path.')
-                        elif combo == '144p':
-                            extension = 'mp4'
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.')
-                            window.Refresh()
-                            YouTube(values['url']).streams.get_by_itag('160').download(filename = 'video')
-                            YouTube(values['url']).streams.get_by_itag('140').download(filename = 'audio')
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.')
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.\n\nMerging... Check terminal to follow the process.')
-                            window.Refresh()
-                            call(["ffmpeg", "-i",
-                            path.join('video.mp4'),
-                            "-i", 
-                            path.join('audio.mp4'),
-                            path.join(f'{yt.title}.mp4')
-                            ])
-                            sleep(0.5)
-                            remove('video.mp4')
-                            remove('audio.mp4')
-                            sleep(0.5)
-                            if platform == 'win32' or platform == 'win64':
-                                if path_file != '':
-                                    rename(f'{yt.title}.mp4', f'{path_file}\\{yt.title}.mp4')
-                            elif platform == 'linux':
-                                if path_file != '':
-                                    rename(f'{yt.title}.mp4', f'{path_file}/{yt.title}.mp4')
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.\n\nMerging... Check terminal to follow the process.\n\nMerging completed, downloaded files has moved to output path.')
-                        elif combo == 'Video (Progressive)':
-                            extension = 'mp4p'
-                            for video in pl.video_urls:
-                                window['return'].update(f'Downloading {YouTube(video).title}... Please Wait.')
-                                window.Refresh()
+                        ytb = YouTube(url)
+                        ytb._video_regex = compile(r"\"url\":\"(/watch\?v=[\w-]*)")
+                        print(f'\n\033[33mTitle: \033[34m{ytb.title}\033[m')
+                        print(f'\033[33mAuthor: \033[34m{ytb.author}\033[m')
+                        print(f'\033[33mLength: \033[34m{ytb.length/60:.0f} minutes.\033[m')
+                        print('\033[33m='*50,'\n')
+                        if ytb.streams.get_by_itag('299') or ytb.streams.get_by_itag('298') or ytb.streams.get_by_itag('308') or ytb.streams.get_by_itag('315') in ytb.streams:
+                            opt_format60 = int(input('\033[33m[ 0 ] Cancel\n\033[33m[ 1 ] \033[34mVideo \033[33m(60 FPS)\n\033[33m[ 2 ] \033[34mVideo \033[33m(30 FPS)\n\033[33m[ 3 ] \033[34mAudio \033[33m(128 Kbps)\033[34m\n> \033[m'))
+                            print('\033[33m='*50,'\n')
+                            if opt_format60 == 1:
+                                while True:
+                                    try:
+                                        if ytb.streams.get_by_itag('315') and ytb.streams.get_by_itag('308') and ytb.streams.get_by_itag('299') and ytb.streams.get_by_itag('298') in ytb.streams:
+                                            opt_download = int(input('\033[33m[ 0 ] \033[33mCancel\n\033[33m[ 1 ] \033[34m2160p60\n\033[33m[ 2 ] \033[34m1440p60\n\033[33m[ 3 ] \033[34m1080p60\n\033[33m[ 4 ] \033[34m720p60\n> \033[m'))
+                                            if opt_download > 4 or opt_download < 0:
+                                                print('\n\033[31m[-] Invalid option.\033[m\n')
+                                                continue
+                                            if opt_download == 0:
+                                                break
+                                            print(f'\n\033[34m[+] Downloading \033[31m{ytb.title}\033[34m... \033[33mPlease, wait.\033[m')
+                                            if opt_download == 1:
+                                                YouTube(url).streams.get_by_itag('315').download(filename='video')
+                                                YouTube(url).streams.get_by_itag('251').download(filename='audio')
+                                                print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                sleep(2.5)
+                                                call(["ffmpeg", "-i",
+                                                path.join('video.webm'),
+                                                "-i", 
+                                                path.join('audio.webm'),
+                                                path.join(f'{ytb.title}.mp4')
+                                                ])
+                                                remove('video.webm')
+                                                remove('audio.webm')
+                                                if platform == 'win32' or platform == 'win64':
+                                                    rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                elif platform == 'linux':
+                                                    rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                break
+                                            elif opt_download == 2:
+                                                YouTube(url).streams.get_by_itag('308').download(filename='video')
+                                                YouTube(url).streams.get_by_itag('251').download(filename='audio')
+                                                print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                sleep(2.5)
+                                                call(["ffmpeg", "-i",
+                                                path.join('video.webm'),
+                                                "-i", 
+                                                path.join('audio.webm'),
+                                                path.join(f'{ytb.title}.mp4')
+                                                ])
+                                                remove('video.webm')
+                                                remove('audio.webm')
+                                                if platform == 'win32' or platform == 'win64':
+                                                    rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                elif platform == 'linux':
+                                                    rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                break
+                                            elif opt_download == 3:
+                                                YouTube(url).streams.get_by_itag('299').download(filename='video')
+                                                YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                sleep(2.5)
+                                                call(["ffmpeg", "-i",
+                                                path.join('video.mp4'),
+                                                "-i", 
+                                                path.join('audio.mp4'),
+                                                path.join(f'{ytb.title}.mp4')
+                                                ])
+                                                remove('video.mp4')
+                                                remove('audio.mp4')
+                                                if platform == 'win32' or platform == 'win64':
+                                                    rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                elif platform == 'linux':
+                                                    rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                break
+                                            elif opt_download == 4:
+                                                YouTube(url).streams.get_by_itag('298').download(filename='video')
+                                                YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                sleep(2.5)
+                                                call(["ffmpeg", "-i",
+                                                path.join('video.mp4'),
+                                                "-i", 
+                                                path.join('audio.mp4'),
+                                                path.join(f'{ytb.title}.mp4')
+                                                ])
+                                                remove('video.mp4')
+                                                remove('audio.mp4')
+                                                if platform == 'win32' or platform == 'win64':
+                                                    rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                elif platform == 'linux':
+                                                    rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                break
+                                        elif ytb.streams.get_by_itag('308') and ytb.streams.get_by_itag('299') and ytb.streams.get_by_itag('298') in ytb.streams:
+                                            opt_download = int(input('\033[33m[ 0 ] \033[33mCancel\n\033[33m[ 1 ] \033[34m1440p60\n\033[33m[ 2 ] \033[34m1080p60\n\033[33m[ 3 ] \033[34m720p60\n> \033[m'))
+                                            if opt_download > 3 or opt_download < 0:
+                                                print('\n\033[31m[-] Invalid option.\033[m\n')
+                                                continue
+                                            if opt_download == 0:
+                                                break
+                                            print(f'\n\033[34m[+] Downloading \033[31m{ytb.title}\033[34m... \033[33mPlease, wait.\033[m')
+                                            if opt_download == 1:
+                                                YouTube(url).streams.get_by_itag('308').download(filename='video')
+                                                YouTube(url).streams.get_by_itag('251').download(filename='audio')
+                                                print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                sleep(2.5)
+                                                call(["ffmpeg", "-i",
+                                                path.join('video.webm'),
+                                                "-i", 
+                                                path.join('audio.webm'),
+                                                path.join(f'{ytb.title}.mp4')
+                                                ])
+                                                remove('video.webm')
+                                                remove('audio.webm')
+                                                if platform == 'win32' or platform == 'win64':
+                                                    rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                elif platform == 'linux':
+                                                    rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                break
+                                            elif opt_download == 2:
+                                                YouTube(url).streams.get_by_itag('299').download(filename='video')
+                                                YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                sleep(2.5)
+                                                call(["ffmpeg", "-i",
+                                                path.join('video.mp4'),
+                                                "-i", 
+                                                path.join('audio.mp4'),
+                                                path.join(f'{ytb.title}.mp4')
+                                                ])
+                                                remove('video.mp4')
+                                                remove('audio.mp4')
+                                                if platform == 'win32' or platform == 'win64':
+                                                    rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                elif platform == 'linux':
+                                                    rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                break
+                                            elif opt_download == 3:
+                                                YouTube(url).streams.get_by_itag('298').download(filename='video')
+                                                YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                sleep(2.5)
+                                                call(["ffmpeg", "-i",
+                                                path.join('video.mp4'),
+                                                "-i", 
+                                                path.join('audio.mp4'),
+                                                path.join(f'{ytb.title}.mp4')
+                                                ])
+                                                remove('video.mp4')
+                                                remove('audio.mp4')
+                                                if platform == 'win32' or platform == 'win64':
+                                                    rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                elif platform == 'linux':
+                                                    rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                break
+                                        elif ytb.streams.get_by_itag('299') and ytb.streams.get_by_itag('298')  in ytb.streams:
+                                            opt_download = int(input('\033[33m[ 0 ] \033[33mCancel\n\033[33m[ 1 ] \033[34m1080p60\n\033[33m[ 2 ] \033[34m720p60\n> \033[m'))
+                                            if opt_download > 2 or opt_download < 0:
+                                                print('\n\033[31m[-] Invalid option.\033[m\n')
+                                                continue
+                                            if opt_download == 0:
+                                                break
+                                            print(f'\n\033[34m[+] Downloading \033[31m{ytb.title}\033[34m... \033[33mPlease, wait.\033[m')
+                                            if opt_download == 1:
+                                                YouTube(url).streams.get_by_itag('299').download(filename='video')
+                                                YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                sleep(2.5)
+                                                call(["ffmpeg", "-i",
+                                                path.join('video.mp4'),
+                                                "-i", 
+                                                path.join('audio.mp4'),
+                                                path.join(f'{ytb.title}.mp4')
+                                                ])
+                                                remove('video.mp4')
+                                                remove('audio.mp4')
+                                                if platform == 'win32' or platform == 'win64':
+                                                    rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                elif platform == 'linux':
+                                                    rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                break
+                                            elif opt_download == 2:
+                                                YouTube(url).streams.get_by_itag('298').download(filename='video')
+                                                YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                sleep(2.5)
+                                                call(["ffmpeg", "-i",
+                                                path.join('video.mp4'),
+                                                "-i", 
+                                                path.join('audio.mp4'),
+                                                path.join(f'{ytb.title}.mp4')
+                                                ])
+                                                remove('video.mp4')
+                                                remove('audio.mp4')
+                                                if platform == 'win32' or platform == 'win64':
+                                                    rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                elif platform == 'linux':
+                                                    rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                break
+                                        elif ytb.streams.get_by_itag('298') in ytb.streams:
+                                            opt_download = int(input('\033[33m[ 0 ] \033[33mCancel\n\033[33m[ 1 ] \033[34m720p60\n\033[34m> \033[m'))
+                                            if opt_download > 1 or opt_download < 0:
+                                                print('\n\033[31m[-] Invalid option.\033[m\n')
+                                                continue
+                                            if opt_download == 0:
+                                                break
+                                            print(f'\n\033[34m[+] Downloading \033[31m{ytb.title}\033[34m... \033[33mPlease, wait.\033[m')
+                                            if opt_download == 1:
+                                                YouTube(url).streams.get_by_itag('298').download(filename='video')
+                                                YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                sleep(2.5)
+                                                call(["ffmpeg", "-i",
+                                                path.join('video.mp4'),
+                                                "-i", 
+                                                path.join('audio.mp4'),
+                                                path.join(f'{ytb.title}.mp4')
+                                                ])
+                                                remove('video.mp4')
+                                                remove('audio.mp4')
+                                                if platform == 'win32' or platform == 'win64':
+                                                    rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                elif platform == 'linux':
+                                                    rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                break
+                                        break
+                                    except error.HTTPError:
+                                        print('\n\033[31m[-] This file is unavailable for download, please choose another.\033[m\n')
+                                        continue
+                                    except FileExistsError:
+                                        print('\n\033[31m[-] The file already exists.\033[m')
+                                        remove(f'{ytb.title}.mp4')
+                                        break   
+                                    except:
+                                        print('\n\033[31m> An unknown error has occurred.\033[m\n')
+                                        break
+                            elif opt_format60 == 2:
+                                while True:
+                                        try:
+                                            if ytb.streams.get_by_itag('313') and ytb.streams.get_by_itag('271') and ytb.streams.get_by_itag('137') and ytb.streams.get_by_itag('136') and ytb.streams.get_by_itag('135') and ytb.streams.get_by_itag('134') and ytb.streams.get_by_itag('133') and ytb.streams.get_by_itag('160') in ytb.streams:
+                                                opt_download = int(input('\033[33m[ 0 ] \033[33mCancel\n\033[33m[ 1 ] \033[34m2160p\n\033[33m[ 2 ] \033[34m1440p\n\033[33m[ 3 ] \033[34m1080p\n\033[33m[ 4 ] \033[34m720p\n\033[33m[ 5 ] \033[34m480p\n\033[33m[ 6 ] \033[34m360p\n\033[33m[ 7 ] \033[34m240p\n\033[33m[ 8 ] \033[34m144p\n> \033[m'))
+                                                if opt_download > 8 or opt_download < 0:
+                                                    print('\n\033[31m[-] Invalid option.\033[m\n')
+                                                    continue
+                                                if opt_download == 0:
+                                                    break
+                                                print(f'\n\033[34m[+] Downloading \033[31m{ytb.title}\033[34m... \033[33mPlease, wait.\033[m')
+                                                if opt_download == 1:
+                                                    YouTube(url).streams.get_by_itag('313').download(filename='video')
+                                                    YouTube(url).streams.get_by_itag('251').download(filename='audio')
+                                                    print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                    print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                    sleep(2.5)
+                                                    call(["ffmpeg", "-i",
+                                                    path.join('video.webm'),
+                                                    "-i", 
+                                                    path.join('audio.webm'),
+                                                    path.join(f'{ytb.title}.mp4')
+                                                    ])
+                                                    remove('video.webm')
+                                                    remove('audio.webm')
+                                                    if platform == 'win32' or platform == 'win64':
+                                                        rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    elif platform == 'linux':
+                                                        rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    break
+                                                elif opt_download == 2:
+                                                    YouTube(url).streams.get_by_itag('271').download(filename='video')
+                                                    YouTube(url).streams.get_by_itag('251').download(filename='audio')
+                                                    print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                    print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                    sleep(2.5)
+                                                    call(["ffmpeg", "-i",
+                                                    path.join('video.webm'),
+                                                    "-i", 
+                                                    path.join('audio.webm'),
+                                                    path.join(f'{ytb.title}.mp4')
+                                                    ])
+                                                    remove('video.webm')
+                                                    remove('audio.webm')
+                                                    if platform == 'win32' or platform == 'win64':
+                                                        rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    elif platform == 'linux':
+                                                        rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    break
+                                                elif opt_download == 3:
+                                                    YouTube(url).streams.get_by_itag('137').download(filename='video')
+                                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                    print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                    print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                    sleep(2.5)
+                                                    call(["ffmpeg", "-i",
+                                                    path.join('video.mp4'),
+                                                    "-i", 
+                                                    path.join('audio.mp4'),
+                                                    path.join(f'{ytb.title}.mp4')
+                                                    ])
+                                                    remove('video.mp4')
+                                                    remove('audio.mp4')
+                                                    if platform == 'win32' or platform == 'win64':
+                                                        rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    elif platform == 'linux':
+                                                        rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    break
+                                                elif opt_download == 4:
+                                                    if YouTube(url).streams.get_by_itag('22') in ytb.streams:
+                                                        YouTube(url).streams.get_by_itag('22').download()
+                                                        print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                        if platform == 'win32' or platform == 'win64':
+                                                            rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                            print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                        elif platform == 'linux':
+                                                            rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                            print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                        break
+                                                    else:
+                                                        YouTube(url).streams.get_by_itag('136').download(filename='video')
+                                                        YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                        print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                        print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                        sleep(2.5)
+                                                        call(["ffmpeg", "-i",
+                                                        path.join('video.mp4'),
+                                                        "-i", 
+                                                        path.join('audio.mp4'),
+                                                        path.join(f'{ytb.title}.mp4')
+                                                        ])
+                                                        remove('video.mp4')
+                                                        remove('audio.mp4')
+                                                        if platform == 'win32' or platform == 'win64':
+                                                            rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                            print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                        elif platform == 'linux':
+                                                            rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                            print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                        break
+                                                elif opt_download == 5:
+                                                    YouTube(url).streams.get_by_itag('135').download(filename='video')
+                                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                    print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                    print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                    sleep(2.5)
+                                                    call(["ffmpeg", "-i",
+                                                    path.join('video.mp4'),
+                                                    "-i", 
+                                                    path.join('audio.mp4'),
+                                                    path.join(f'{ytb.title}.mp4')
+                                                    ])
+                                                    remove('video.mp4')
+                                                    remove('audio.mp4')
+                                                    if platform == 'win32' or platform == 'win64':
+                                                        rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    elif platform == 'linux':
+                                                        rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    break
+                                                elif opt_download == 6:
+                                                    if YouTube(url).streams.get_by_itag('18') in ytb.streams:
+                                                        YouTube(url).streams.get_by_itag('18').download()
+                                                        print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                        if platform == 'win32' or platform == 'win64':
+                                                            rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                            print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                        elif platform == 'linux':
+                                                            rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                            print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                        break
+                                                    else:
+                                                        YouTube(url).streams.get_by_itag('134').download(filename='video')
+                                                        YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                        print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                        print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                        sleep(2.5)
+                                                        call(["ffmpeg", "-i",
+                                                        path.join('video.mp4'),
+                                                        "-i", 
+                                                        path.join('audio.mp4'),
+                                                        path.join(f'{ytb.title}.mp4')
+                                                        ])
+                                                        remove('video.mp4')
+                                                        remove('audio.mp4')
+                                                        if platform == 'win32' or platform == 'win64':
+                                                            rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                            print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                        elif platform == 'linux':
+                                                            rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                            print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                        break
+                                                elif opt_download == 7:
+                                                    YouTube(url).streams.get_by_itag('133').download(filename='video')
+                                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                    print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                    print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                    sleep(2.5)
+                                                    call(["ffmpeg", "-i",
+                                                    path.join('video.mp4'),
+                                                    "-i", 
+                                                    path.join('audio.mp4'),
+                                                    path.join(f'{ytb.title}.mp4')
+                                                    ])
+                                                    remove('video.mp4')
+                                                    remove('audio.mp4')
+                                                    if platform == 'win32' or platform == 'win64':
+                                                        rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    elif platform == 'linux':
+                                                        rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    break
+                                                elif opt_download == 8:
+                                                    YouTube(url).streams.get_by_itag('160').download(filename='video')
+                                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                    print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                    print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                    sleep(2.5)
+                                                    call(["ffmpeg", "-i",
+                                                    path.join('video.mp4'),
+                                                    "-i", 
+                                                    path.join('audio.mp4'),
+                                                    path.join(f'{ytb.title}.mp4')
+                                                    ])
+                                                    remove('video.mp4')
+                                                    remove('audio.mp4')
+                                                    if platform == 'win32' or platform == 'win64':
+                                                        rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    elif platform == 'linux':
+                                                        rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    break
+                                            elif ytb.streams.get_by_itag('271') and ytb.streams.get_by_itag('137') and ytb.streams.get_by_itag('136') and ytb.streams.get_by_itag('135') and ytb.streams.get_by_itag('134') and ytb.streams.get_by_itag('133') and ytb.streams.get_by_itag('160') in ytb.streams:
+                                                opt_download = int(input('\033[33m[ 0 ] \033[33mCancel\n\033[33m[ 1 ] \033[34m1440p\n\033[33m[ 2 ] \033[34m1080p\n\033[33m[ 3 ] \033[34m720p\n\033[33m[ 4 ] \033[34m480p\n\033[33m[ 5 ] \033[34m360p\n\033[33m[ 6 ] \033[34m240p\n\033[33m[ 7 ] \033[34m144p\n> \033[m'))
+                                                if opt_download > 7 or opt_download < 0:
+                                                    print('\n\033[31m[-] Invalid option.\033[m\n')
+                                                    continue
+                                                if opt_download == 0:
+                                                    break
+                                                print(f'\n\033[34m[+] Downloading \033[31m{ytb.title}\033[34m... \033[33mPlease, wait.\033[m')
+                                                if opt_download == 1:
+                                                    YouTube(url).streams.get_by_itag('271').download(filename='video')
+                                                    YouTube(url).streams.get_by_itag('251').download(filename='audio')
+                                                    print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                    print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                    sleep(2.5)
+                                                    call(["ffmpeg", "-i",
+                                                    path.join('video.webm'),
+                                                    "-i", 
+                                                    path.join('audio.webm'),
+                                                    path.join(f'{ytb.title}.mp4')
+                                                    ])
+                                                    remove('video.webm')
+                                                    remove('audio.webm')
+                                                    if platform == 'win32' or platform == 'win64':
+                                                        rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    elif platform == 'linux':
+                                                        rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    break
+                                                elif opt_download == 2:
+                                                    YouTube(url).streams.get_by_itag('137').download(filename='video')
+                                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                    print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                    print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                    sleep(2.5)
+                                                    call(["ffmpeg", "-i",
+                                                    path.join('video.mp4'),
+                                                    "-i", 
+                                                    path.join('audio.mp4'),
+                                                    path.join(f'{ytb.title}.mp4')
+                                                    ])
+                                                    remove('video.mp4')
+                                                    remove('audio.mp4')
+                                                    if platform == 'win32' or platform == 'win64':
+                                                        rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    elif platform == 'linux':
+                                                        rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    break
+                                                elif opt_download == 3:
+                                                    if YouTube(url).streams.get_by_itag('22') in ytb.streams:
+                                                        YouTube(url).streams.get_by_itag('22').download()
+                                                        print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                        if platform == 'win32' or platform == 'win64':
+                                                            rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                            print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                        elif platform == 'linux':
+                                                            rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                            print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                        break
+                                                    else:
+                                                        YouTube(url).streams.get_by_itag('136').download(filename='video')
+                                                        YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                        print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                        print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                        sleep(2.5)
+                                                        call(["ffmpeg", "-i",
+                                                        path.join('video.mp4'),
+                                                        "-i", 
+                                                        path.join('audio.mp4'),
+                                                        path.join(f'{ytb.title}.mp4')
+                                                        ])
+                                                        remove('video.mp4')
+                                                        remove('audio.mp4')
+                                                        if platform == 'win32' or platform == 'win64':
+                                                            rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                            print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                        elif platform == 'linux':
+                                                            rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                            print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                        break
+                                                elif opt_download == 4:
+                                                    YouTube(url).streams.get_by_itag('135').download(filename='video')
+                                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                    print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                    print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                    sleep(2.5)
+                                                    call(["ffmpeg", "-i",
+                                                    path.join('video.mp4'),
+                                                    "-i", 
+                                                    path.join('audio.mp4'),
+                                                    path.join(f'{ytb.title}.mp4')
+                                                    ])
+                                                    remove('video.mp4')
+                                                    remove('audio.mp4')
+                                                    if platform == 'win32' or platform == 'win64':
+                                                        rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    elif platform == 'linux':
+                                                        rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    break
+                                                elif opt_download == 5:
+                                                    if YouTube(url).streams.get_by_itag('18') in ytb.streams:
+                                                        YouTube(url).streams.get_by_itag('18').download()
+                                                        print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                        if platform == 'win32' or platform == 'win64':
+                                                            rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                            print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                        elif platform == 'linux':
+                                                            rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                            print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                        break
+                                                    else:
+                                                        YouTube(url).streams.get_by_itag('134').download(filename='video')
+                                                        YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                        print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                        print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                        sleep(2.5)
+                                                        call(["ffmpeg", "-i",
+                                                        path.join('video.mp4'),
+                                                        "-i", 
+                                                        path.join('audio.mp4'),
+                                                        path.join(f'{ytb.title}.mp4')
+                                                        ])
+                                                        remove('video.mp4')
+                                                        remove('audio.mp4')
+                                                        if platform == 'win32' or platform == 'win64':
+                                                            rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                            print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                        elif platform == 'linux':
+                                                            rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                            print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                        break
+                                                elif opt_download == 6:
+                                                    YouTube(url).streams.get_by_itag('133').download(filename='video')
+                                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                    print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                    print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                    sleep(2.5)
+                                                    call(["ffmpeg", "-i",
+                                                    path.join('video.mp4'),
+                                                    "-i", 
+                                                    path.join('audio.mp4'),
+                                                    path.join(f'{ytb.title}.mp4')
+                                                    ])
+                                                    remove('video.mp4')
+                                                    remove('audio.mp4')
+                                                    if platform == 'win32' or platform == 'win64':
+                                                        rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    elif platform == 'linux':
+                                                        rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    break
+                                                elif opt_download == 7:
+                                                    YouTube(url).streams.get_by_itag('160').download(filename='video')
+                                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                    print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                    print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                    sleep(2.5)
+                                                    call(["ffmpeg", "-i",
+                                                    path.join('video.mp4'),
+                                                    "-i", 
+                                                    path.join('audio.mp4'),
+                                                    path.join(f'{ytb.title}.mp4')
+                                                    ])
+                                                    remove('video.mp4')
+                                                    remove('audio.mp4')
+                                                    if platform == 'win32' or platform == 'win64':
+                                                        rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    elif platform == 'linux':
+                                                        rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    break
+                                            elif ytb.streams.get_by_itag('137') and ytb.streams.get_by_itag('136') and ytb.streams.get_by_itag('135') and ytb.streams.get_by_itag('134') and ytb.streams.get_by_itag('133') and ytb.streams.get_by_itag('160') in ytb.streams:
+                                                opt_download = int(input('\033[33m[ 0 ] \033[33mCancel\n\033[33m[ 1 ] \033[34m1080p\n\033[33m[ 2 ] \033[34m720p\n\033[33m[ 3 ] \033[34m480p\n\033[33m[ 4 ] \033[34m360p\n\033[33m[ 5 ] \033[34m240p\n\033[33m[ 6 ] \033[34m144p\n> \033[m'))
+                                                if opt_download > 6 or opt_download < 0:
+                                                    print('\n\033[31m[-] Invalid option.\033[m\n')
+                                                    continue
+                                                if opt_download == 0:
+                                                    break
+                                                print(f'\n\033[34m> Downloading \033[31m{ytb.title}\033[34m... \033[33mPlease, wait.\033[m')
+                                                if opt_download == 1:
+                                                    YouTube(url).streams.get_by_itag('137').download(filename='video')
+                                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                    print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                    print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                    sleep(2.5)
+                                                    call(["ffmpeg", "-i",
+                                                    path.join('video.mp4'),
+                                                    "-i", 
+                                                    path.join('audio.mp4'),
+                                                    path.join(f'{ytb.title}.mp4')
+                                                    ])
+                                                    remove('video.mp4')
+                                                    remove('audio.mp4')
+                                                    if platform == 'win32' or platform == 'win64':
+                                                        rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    elif platform == 'linux':
+                                                        rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    break
+                                                elif opt_download == 2:
+                                                    if YouTube(url).streams.get_by_itag('22') in ytb.streams:
+                                                        YouTube(url).streams.get_by_itag('22').download()
+                                                        print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                        if platform == 'win32' or platform == 'win64':
+                                                            rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                            print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                        elif platform == 'linux':
+                                                            rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                            print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                        break
+                                                    else:
+                                                        YouTube(url).streams.get_by_itag('136').download(filename='video')
+                                                        YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                        print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                        print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                        sleep(2.5)
+                                                        call(["ffmpeg", "-i",
+                                                        path.join('video.mp4'),
+                                                        "-i", 
+                                                        path.join('audio.mp4'),
+                                                        path.join(f'{ytb.title}.mp4')
+                                                        ])
+                                                        remove('video.mp4')
+                                                        remove('audio.mp4')
+                                                        if platform == 'win32' or platform == 'win64':
+                                                            rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                            print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                        elif platform == 'linux':
+                                                            rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                            print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                        break
+                                                elif opt_download == 3:
+                                                    YouTube(url).streams.get_by_itag('135').download(filename='video')
+                                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                    print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                    print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                    sleep(2.5)
+                                                    call(["ffmpeg", "-i",
+                                                    path.join('video.mp4'),
+                                                    "-i", 
+                                                    path.join('audio.mp4'),
+                                                    path.join(f'{ytb.title}.mp4')
+                                                    ])
+                                                    remove('video.mp4')
+                                                    remove('audio.mp4')
+                                                    if platform == 'win32' or platform == 'win64':
+                                                        rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    elif platform == 'linux':
+                                                        rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    break
+                                                elif opt_download == 4:
+                                                    if YouTube(url).streams.get_by_itag('18') in ytb.streams:
+                                                        YouTube(url).streams.get_by_itag('18').download()
+                                                        print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                        if platform == 'win32' or platform == 'win64':
+                                                            rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                            print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                        elif platform == 'linux':
+                                                            rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                            print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                        break
+                                                    else:
+                                                        YouTube(url).streams.get_by_itag('134').download(filename='video')
+                                                        YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                        print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                        print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                        sleep(2.5)
+                                                        call(["ffmpeg", "-i",
+                                                        path.join('video.mp4'),
+                                                        "-i", 
+                                                        path.join('audio.mp4'),
+                                                        path.join(f'{ytb.title}.mp4')
+                                                        ])
+                                                        remove('video.mp4')
+                                                        remove('audio.mp4')
+                                                        if platform == 'win32' or platform == 'win64':
+                                                            rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                            print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                        elif platform == 'linux':
+                                                            rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                            print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                        break
+                                                elif opt_download == 5:
+                                                    YouTube(url).streams.get_by_itag('133').download(filename='video')
+                                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                    print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                    print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                    sleep(2.5)
+                                                    call(["ffmpeg", "-i",
+                                                    path.join('video.mp4'),
+                                                    "-i", 
+                                                    path.join('audio.mp4'),
+                                                    path.join(f'{ytb.title}.mp4')
+                                                    ])
+                                                    remove('video.mp4')
+                                                    remove('audio.mp4')
+                                                    if platform == 'win32' or platform == 'win64':
+                                                        rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    elif platform == 'linux':
+                                                        rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    break
+                                                elif opt_download == 6:
+                                                    YouTube(url).streams.get_by_itag('160').download(filename='video')
+                                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                    print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                    print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                    sleep(2.5)
+                                                    call(["ffmpeg", "-i",
+                                                    path.join('video.mp4'),
+                                                    "-i", 
+                                                    path.join('audio.mp4'),
+                                                    path.join(f'{ytb.title}.mp4')
+                                                    ])
+                                                    remove('video.mp4')
+                                                    remove('audio.mp4')
+                                                    if platform == 'win32' or platform == 'win64':
+                                                        rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    elif platform == 'linux':
+                                                        rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    break
+                                            elif ytb.streams.get_by_itag('136') and ytb.streams.get_by_itag('135') and ytb.streams.get_by_itag('134') and ytb.streams.get_by_itag('133') and ytb.streams.get_by_itag('160') in ytb.streams:
+                                                opt_download = int(input('\033[33m[ 0 ] \033[33mCancel\n\033[33m[ 1 ] \033[34m720p\n\033[33m[ 2 ] \033[34m480p\n\033[33m[ 3 ] \033[34m360p\n\033[33m[ 4 ] \033[34m240p\n\033[33m[ 5 ] \033[34m144p\n> \033[m'))
+                                                if opt_download > 5 or opt_download < 0:
+                                                    print('\n\033[31m[-] Invalid option.\033[m\n')
+                                                    continue
+                                                if opt_download == 0:
+                                                    break
+                                                print(f'\n\033[34m[+] Downloading \033[31m{ytb.title}\033[34m... \033[33mPlease, wait.\033[m')
+                                                if opt_download == 1:
+                                                    if YouTube(url).streams.get_by_itag('22') in ytb.streams:
+                                                        YouTube(url).streams.get_by_itag('22').download()
+                                                        print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                        if platform == 'win32' or platform == 'win64':
+                                                            rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                            print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                        elif platform == 'linux':
+                                                            rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                            print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                        break
+                                                    else:
+                                                        YouTube(url).streams.get_by_itag('136').download(filename='video')
+                                                        YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                        print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                        print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                        sleep(2.5)
+                                                        call(["ffmpeg", "-i",
+                                                        path.join('video.mp4'),
+                                                        "-i", 
+                                                        path.join('audio.mp4'),
+                                                        path.join(f'{ytb.title}.mp4')
+                                                        ])
+                                                        remove('video.mp4')
+                                                        remove('audio.mp4')
+                                                        if platform == 'win32' or platform == 'win64':
+                                                            rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                            print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                        elif platform == 'linux':
+                                                            rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                            print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                        break
+                                                elif opt_download == 2:
+                                                    YouTube(url).streams.get_by_itag('135').download(filename='video')
+                                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                    print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                    print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                    sleep(2.5)
+                                                    call(["ffmpeg", "-i",
+                                                    path.join('video.mp4'),
+                                                    "-i", 
+                                                    path.join('audio.mp4'),
+                                                    path.join(f'{ytb.title}.mp4')
+                                                    ])
+                                                    remove('video.mp4')
+                                                    remove('audio.mp4')
+                                                    if platform == 'win32' or platform == 'win64':
+                                                        rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    elif platform == 'linux':
+                                                        rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    break
+                                                elif opt_download == 3:
+                                                    if YouTube(url).streams.get_by_itag('18') in ytb.streams:
+                                                        YouTube(url).streams.get_by_itag('18').download()
+                                                        print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                        if platform == 'win32' or platform == 'win64':
+                                                            rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                            print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                        elif platform == 'linux':
+                                                            rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                            print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                        break
+                                                    else:
+                                                        YouTube(url).streams.get_by_itag('134').download(filename='video')
+                                                        YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                        print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                        print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                        sleep(2.5)
+                                                        call(["ffmpeg", "-i",
+                                                        path.join('video.mp4'),
+                                                        "-i", 
+                                                        path.join('audio.mp4'),
+                                                        path.join(f'{ytb.title}.mp4')
+                                                        ])
+                                                        remove('video.mp4')
+                                                        remove('audio.mp4')
+                                                        if platform == 'win32' or platform == 'win64':
+                                                            rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                            print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                        elif platform == 'linux':
+                                                            rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                            print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                        break
+                                                elif opt_download == 4:
+                                                    YouTube(url).streams.get_by_itag('133').download(filename='video')
+                                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                    print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                    print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                    sleep(2.5)
+                                                    call(["ffmpeg", "-i",
+                                                    path.join('video.mp4'),
+                                                    "-i", 
+                                                    path.join('audio.mp4'),
+                                                    path.join(f'{ytb.title}.mp4')
+                                                    ])
+                                                    remove('video.mp4')
+                                                    remove('audio.mp4')
+                                                    if platform == 'win32' or platform == 'win64':
+                                                        rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    elif platform == 'linux':
+                                                        rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    break
+                                                elif opt_download == 5:
+                                                    YouTube(url).streams.get_by_itag('160').download(filename='video')
+                                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                    print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                    print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                    sleep(2.5)
+                                                    call(["ffmpeg", "-i",
+                                                    path.join('video.mp4'),
+                                                    "-i", 
+                                                    path.join('audio.mp4'),
+                                                    path.join(f'{ytb.title}.mp4')
+                                                    ])
+                                                    remove('video.mp4')
+                                                    remove('audio.mp4')
+                                                    if platform == 'win32' or platform == 'win64':
+                                                        rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                        print('\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    elif platform == 'linux':
+                                                        rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                        print('\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    break
+                                            elif ytb.streams.get_by_itag('135') and ytb.streams.get_by_itag('134') and ytb.streams.get_by_itag('133') and ytb.streams.get_by_itag('160') in ytb.streams:
+                                                opt_download = int(input('\033[33m[ 0 ] \033[33mCancel\n\033[33m[ 1 ] \033[34m480p\n\033[33m[ 2 ] \033[34m360p\n\033[33m[ 3 ] \033[34m240p\n\033[33m[ 4 ] \033[34m144p\n> \033[m'))
+                                                if opt_download > 4 or opt_download < 0:
+                                                    print('\n\033[31m[-] Invalid option.\033[m\n')
+                                                    continue
+                                                if opt_download == 0:
+                                                    break
+                                                print(f'\n\033[34m[+] Downloading \033[31m{ytb.title}\033[34m... \033[33mPlease, wait.\033[m')
+                                                if opt_download == 1:
+                                                    YouTube(url).streams.get_by_itag('135').download(filename='video')
+                                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                    print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                    print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                    sleep(2.5)
+                                                    call(["ffmpeg", "-i",
+                                                    path.join('video.mp4'),
+                                                    "-i", 
+                                                    path.join('audio.mp4'),
+                                                    path.join(f'{ytb.title}.mp4')
+                                                    ])
+                                                    remove('video.mp4')
+                                                    remove('audio.mp4')
+                                                    if platform == 'win32' or platform == 'win64':
+                                                        rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    elif platform == 'linux':
+                                                        rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    break
+                                                elif opt_download == 2:
+                                                    if YouTube(url).streams.get_by_itag('18') in ytb.streams:
+                                                        YouTube(url).streams.get_by_itag('18').download()
+                                                        print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                        if platform == 'win32' or platform == 'win64':
+                                                            rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                            print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                        elif platform == 'linux':
+                                                            rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                            print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                        break
+                                                    else:
+                                                        YouTube(url).streams.get_by_itag('134').download(filename='video')
+                                                        YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                        print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                        print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                        sleep(2.5)
+                                                        call(["ffmpeg", "-i",
+                                                        path.join('video.mp4'),
+                                                        "-i", 
+                                                        path.join('audio.mp4'),
+                                                        path.join(f'{ytb.title}.mp4')
+                                                        ])
+                                                        remove('video.mp4')
+                                                        remove('audio.mp4')
+                                                        if platform == 'win32' or platform == 'win64':
+                                                            rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                            print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                        elif platform == 'linux':
+                                                            rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                            print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                        break
+                                                elif opt_download == 3:
+                                                    YouTube(url).streams.get_by_itag('133').download(filename='video')
+                                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                    print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                    print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                    sleep(2.5)
+                                                    call(["ffmpeg", "-i",
+                                                    path.join('video.mp4'),
+                                                    "-i", 
+                                                    path.join('audio.mp4'),
+                                                    path.join(f'{ytb.title}.mp4')
+                                                    ])
+                                                    remove('video.mp4')
+                                                    remove('audio.mp4')
+                                                    if platform == 'win32' or platform == 'win64':
+                                                        rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    elif platform == 'linux':
+                                                        rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    break
+                                                elif opt_download == 4:
+                                                    YouTube(url).streams.get_by_itag('160').download(filename='video')
+                                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                    print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                    print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                    sleep(2.5)
+                                                    call(["ffmpeg", "-i",
+                                                    path.join('video.mp4'),
+                                                    "-i", 
+                                                    path.join('audio.mp4'),
+                                                    path.join(f'{ytb.title}.mp4')
+                                                    ])
+                                                    remove('video.mp4')
+                                                    remove('audio.mp4')
+                                                    if platform == 'win32' or platform == 'win64':
+                                                        rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    elif platform == 'linux':
+                                                        rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    break
+                                            elif ytb.streams.get_by_itag('134') and ytb.streams.get_by_itag('133') and ytb.streams.get_by_itag('160') in ytb.streams:
+                                                opt_download = int(input('\033[33m[ 0 ] \033[33mCancel\n\033[33m[ 1 ] \033[34m360p\n\033[33m[ 2 ] \033[34m240p\n\033[33m[ 3 ] \033[34m144p\n> \033[m'))
+                                                if opt_download > 3 or opt_download < 0:
+                                                    print('\n\033[31m[-] Invalid option.\033[m\n')
+                                                    continue
+                                                if opt_download == 0:
+                                                    break
+                                                print(f'\n\033[34m[+] Downloading \033[31m{ytb.title}\033[34m... \033[33mPlease, wait.\033[m')
+                                                if opt_download == 1:
+                                                    if YouTube(url).streams.get_by_itag('18') in ytb.streams:
+                                                        YouTube(url).streams.get_by_itag('18').download()
+                                                        print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                        if platform == 'win32' or platform == 'win64':
+                                                            rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                            print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                        elif platform == 'linux':
+                                                            rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                            print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                        break
+                                                    else:
+                                                        YouTube(url).streams.get_by_itag('134').download(filename='video')
+                                                        YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                        print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                        print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                        sleep(2.5)
+                                                        call(["ffmpeg", "-i",
+                                                        path.join('video.mp4'),
+                                                        "-i", 
+                                                        path.join('audio.mp4'),
+                                                        path.join(f'{ytb.title}.mp4')
+                                                        ])
+                                                        remove('video.mp4')
+                                                        remove('audio.mp4')
+                                                        if platform == 'win32' or platform == 'win64':
+                                                            rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                            print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                        elif platform == 'linux':
+                                                            rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                            print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                        break
+                                                elif opt_download == 2:
+                                                    YouTube(url).streams.get_by_itag('133').download(filename='video')
+                                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                    print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                    print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                    sleep(2.5)
+                                                    call(["ffmpeg", "-i",
+                                                    path.join('video.mp4'),
+                                                    "-i", 
+                                                    path.join('audio.mp4'),
+                                                    path.join(f'{ytb.title}.mp4')
+                                                    ])
+                                                    remove('video.mp4')
+                                                    remove('audio.mp4')
+                                                    if platform == 'win32' or platform == 'win64':
+                                                        rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    elif platform == 'linux':
+                                                        rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    break
+                                                elif opt_download == 3:
+                                                    YouTube(url).streams.get_by_itag('160').download(filename='video')
+                                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                    print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                    print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                    sleep(2.5)
+                                                    call(["ffmpeg", "-i",
+                                                    path.join('video.mp4'),
+                                                    "-i", 
+                                                    path.join('audio.mp4'),
+                                                    path.join(f'{ytb.title}.mp4')
+                                                    ])
+                                                    remove('video.mp4')
+                                                    remove('audio.mp4')
+                                                    if platform == 'win32' or platform == 'win64':
+                                                        rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    elif platform == 'linux':
+                                                        rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    break
+                                            elif ytb.streams.get_by_itag('133') and ytb.streams.get_by_itag('160') in ytb.streams:
+                                                opt_download = int(input('\033[33m[ 0 ] \033[33mCancel\n\033[33m[ 1 ] \033[34m240p\n\033[33m[ 2 ] \033[34m144p\n> \033[m'))
+                                                if opt_download > 2 or opt_download < 0:
+                                                    print('\033[31m[-] Invalid option.\033[m')
+                                                    continue
+                                                if opt_download == 0:
+                                                    break
+                                                print(f'\n\033[34m[+] Downloading \033[31m{ytb.title}\033[34m... \033[33mPlease, wait.\033[m')
+                                                if opt_download == 1:
+                                                    YouTube(url).streams.get_by_itag('133').download(filename='video')
+                                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                    print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                    print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                    sleep(2.5)
+                                                    call(["ffmpeg", "-i",
+                                                    path.join('video.mp4'),
+                                                    "-i", 
+                                                    path.join('audio.mp4'),
+                                                    path.join(f'{ytb.title}.mp4')
+                                                    ])
+                                                    remove('video.mp4')
+                                                    remove('audio.mp4')
+                                                    if platform == 'win32' or platform == 'win64':
+                                                        rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    elif platform == 'linux':
+                                                        rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    break
+                                                elif opt_download == 2:
+                                                    YouTube(url).streams.get_by_itag('160').download(filename='video')
+                                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                    print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                    print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                    sleep(2.5)
+                                                    call(["ffmpeg", "-i",
+                                                    path.join('video.mp4'),
+                                                    "-i", 
+                                                    path.join('audio.mp4'),
+                                                    path.join(f'{ytb.title}.mp4')
+                                                    ])
+                                                    remove('video.mp4')
+                                                    remove('audio.mp4')
+                                                    if platform == 'win32' or platform == 'win64':
+                                                        rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    elif platform == 'linux':
+                                                        rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    break
+                                            elif ytb.streams.get_by_itag('160') in ytb.streams:
+                                                opt_download = int(input('\033[33m[ 0 ] \033[33mCancel\n\033[33m[ 1 ] \033[34m144p\n> \033[m'))
+                                                if opt_download > 1 or opt_download < 0:
+                                                    print('\n\033[31m[-] Invalid option.\033[m\n')
+                                                    continue
+                                                if opt_download == 0:
+                                                    break
+                                                print(f'\n\033[34m[+] Downloading \033[31m{ytb.title}\033[34m... \033[33mPlease, wait.\033[m')
+                                                if opt_download == 1:
+                                                    YouTube(url).streams.get_by_itag('160').download(filename='video')
+                                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                    print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                    print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                    sleep(2.5)
+                                                    call(["ffmpeg", "-i",
+                                                    path.join('video.mp4'),
+                                                    "-i", 
+                                                    path.join('audio.mp4'),
+                                                    path.join(f'{ytb.title}.mp4')
+                                                    ])
+                                                    remove('video.mp4')
+                                                    remove('audio.mp4')
+                                                    if platform == 'win32' or platform == 'win64':
+                                                        rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    elif platform == 'linux':
+                                                        rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    break
+                                            else:
+                                                print('\n\033[31m[-] An unknown error has occurred.\033[m')
+                                                break
+                                        except error.HTTPError:
+                                            print('\n\033[31m[-] This file is unavailable for download, please choose another.\033[m\n')
+                                            continue
+                                        except FileExistsError:
+                                            print('\n\033[31m[-] The file already exists.\033[m')
+                                            remove(f'{ytb.title}.mp4')
+                                            break   
+                                        except:
+                                            print('\n\033[31m[-] An unknown error has occurred.\033[m\n')
+                                            break
+                            elif opt_format60 == 3:
+                                try:
+                                    if ytb.streams.get_by_itag('140') in ytb.streams:
+                                        print(f'\n\033[34m[+] Downloading \033[31m{ytb.title}\033[34m... \033[33mPlease, wait.\033[m')
+                                        YouTube(url).streams.get_by_itag('140').download(filename='music')
+                                        print('\n\033[32m[+] Download Completed.\033[m')
+                                        print('\n\033[34m[+] Starting Conversion...\033[m\n')
+                                        sleep(2.5)
+                                        call(["ffmpeg", "-i",
+                                        path.join('music.mp4'),
+                                        path.join('music.mp3')
+                                        ])
+                                        remove('music.mp4')
+                                        sleep(0.5)
+                                        rename('music.mp3', f'{ytb.title}.mp3')
+                                        sleep(0.5)
+                                        if platform == 'win32' or platform == 'win64':
+                                            rename(f'{ytb.title}.mp3', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp3')
+                                            print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                        elif platform == 'linux':
+                                            rename(f'{ytb.title}.mp3', f'/home/{getuser()}/Downloads/{ytb.title}.mp3')
+                                            print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                        break
+                                    elif opt_format60 == 0:
+                                        print('\033[m')
+                                        break
+                                    else:
+                                        print('\033[31m[-] Invalid option.\033[m')
+                                        continue
+                                    break
+                                except error.HTTPError:
+                                    print('\n\033[31m[-] This file is unavailable for download, please choose another.\033[m\n')
+                                    continue
+                                except FileExistsError:
+                                    print('\n\033[31m[-] The file already exists.\033[m')
+                                    if opt_format60 == 3:
+                                        remove(f'{ytb.title}.mp3')
+                                    else:
+                                        remove(f'{ytb.title}.mp4')
+                                    break   
+                                except:
+                                    print('\n\033[31m[-] An unknown error has occurred.\033[m\n')
+                                    break
+                        else:
+                            opt_format30 = int(input('\033[33m[ 0 ] Cancel\n\033[33m[ 1 ] \033[34mVideo\n\033[33m[ 2 ] \033[34mAudio \033[33m(128 Kbps)\033[34m\n> \033[m'))
+                            print('\033[33m='*50,'\n')
+                            # 30FPS
+                            if opt_format30 == 1:
+                                while True:
+                                    try:
+                                        if ytb.streams.get_by_itag('313') and ytb.streams.get_by_itag('271') and ytb.streams.get_by_itag('137') and ytb.streams.get_by_itag('136') and ytb.streams.get_by_itag('135') and ytb.streams.get_by_itag('134') and ytb.streams.get_by_itag('133') and ytb.streams.get_by_itag('160') in ytb.streams:
+                                            opt_download = int(input('\033[33m[ 0 ] \033[33mCancel\n\033[33m[ 1 ] \033[34m2160p\n\033[33m[ 2 ] \033[34m1440p\n\033[33m[ 3 ] \033[34m1080p\n\033[33m[ 4 ] \033[34m720p\n\033[33m[ 5 ] \033[34m480p\n\033[33m[ 6 ] \033[34m360p\n\033[33m[ 7 ] \033[34m240p\n\033[33m[ 8 ] \033[34m144p\n> \033[m'))
+                                            if opt_download > 8 or opt_download < 0:
+                                                print('\n\033[31m[-] Invalid option.\033[m\n')
+                                                continue
+                                            if opt_download == 0:
+                                                break
+                                            print(f'\n\033[34m[+] Downloading \033[31m{ytb.title}\033[34m... \033[33mPlease, wait.\033[m')
+                                            if opt_download == 1:
+                                                YouTube(url).streams.get_by_itag('313').download(filename='video')
+                                                YouTube(url).streams.get_by_itag('251').download(filename='audio')
+                                                print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                sleep(2.5)
+                                                call(["ffmpeg", "-i",
+                                                path.join('video.webm'),
+                                                "-i", 
+                                                path.join('audio.webm'),
+                                                path.join(f'{ytb.title}.mp4')
+                                                ])
+                                                remove('video.webm')
+                                                remove('audio.webm')
+                                                if platform == 'win32' or platform == 'win64':
+                                                    rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                elif platform == 'linux':
+                                                    rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                break
+                                            elif opt_download == 2:
+                                                YouTube(url).streams.get_by_itag('271').download(filename='video')
+                                                YouTube(url).streams.get_by_itag('251').download(filename='audio')
+                                                print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                sleep(2.5)
+                                                call(["ffmpeg", "-i",
+                                                path.join('video.webm'),
+                                                "-i", 
+                                                path.join('audio.webm'),
+                                                path.join(f'{ytb.title}.mp4')
+                                                ])
+                                                remove('video.webm')
+                                                remove('audio.webm')
+                                                if platform == 'win32' or platform == 'win64':
+                                                    rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                elif platform == 'linux':
+                                                    rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                break
+                                            elif opt_download == 3:
+                                                YouTube(url).streams.get_by_itag('137').download(filename='video')
+                                                YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                sleep(2.5)
+                                                call(["ffmpeg", "-i",
+                                                path.join('video.mp4'),
+                                                "-i", 
+                                                path.join('audio.mp4'),
+                                                path.join(f'{ytb.title}.mp4')
+                                                ])
+                                                remove('video.mp4')
+                                                remove('audio.mp4')
+                                                if platform == 'win32' or platform == 'win64':
+                                                    rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                elif platform == 'linux':
+                                                    rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                break
+                                            elif opt_download == 4:
+                                                if YouTube(url).streams.get_by_itag('22') in ytb.streams:
+                                                    YouTube(url).streams.get_by_itag('22').download()
+                                                    print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                    if platform == 'win32' or platform == 'win64':
+                                                        rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    elif platform == 'linux':
+                                                        rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    break
+                                                else:
+                                                    YouTube(url).streams.get_by_itag('136').download(filename='video')
+                                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                    print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                    print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                    sleep(2.5)
+                                                    call(["ffmpeg", "-i",
+                                                    path.join('video.mp4'),
+                                                    "-i", 
+                                                    path.join('audio.mp4'),
+                                                    path.join(f'{ytb.title}.mp4')
+                                                    ])
+                                                    remove('video.mp4')
+                                                    remove('audio.mp4')
+                                                    if platform == 'win32' or platform == 'win64':
+                                                        rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    elif platform == 'linux':
+                                                        rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    break
+                                            elif opt_download == 5:
+                                                YouTube(url).streams.get_by_itag('135').download(filename='video')
+                                                YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                sleep(2.5)
+                                                call(["ffmpeg", "-i",
+                                                path.join('video.mp4'),
+                                                "-i", 
+                                                path.join('audio.mp4'),
+                                                path.join(f'{ytb.title}.mp4')
+                                                ])
+                                                remove('video.mp4')
+                                                remove('audio.mp4')
+                                                if platform == 'win32' or platform == 'win64':
+                                                    rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                elif platform == 'linux':
+                                                    rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                break
+                                            elif opt_download == 6:
+                                                if YouTube(url).streams.get_by_itag('18') in ytb.streams:
+                                                    YouTube(url).streams.get_by_itag('18').download()
+                                                    print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                    if platform == 'win32' or platform == 'win64':
+                                                        rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    elif platform == 'linux':
+                                                        rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    break
+                                                else:
+                                                    YouTube(url).streams.get_by_itag('134').download(filename='video')
+                                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                    print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                    print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                    sleep(2.5)
+                                                    call(["ffmpeg", "-i",
+                                                    path.join('video.mp4'),
+                                                    "-i", 
+                                                    path.join('audio.mp4'),
+                                                    path.join(f'{ytb.title}.mp4')
+                                                    ])
+                                                    remove('video.mp4')
+                                                    remove('audio.mp4')
+                                                    if platform == 'win32' or platform == 'win64':
+                                                        rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    elif platform == 'linux':
+                                                        rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    break
+                                            elif opt_download == 7:
+                                                YouTube(url).streams.get_by_itag('133').download(filename='video')
+                                                YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                sleep(2.5)
+                                                call(["ffmpeg", "-i",
+                                                path.join('video.mp4'),
+                                                "-i", 
+                                                path.join('audio.mp4'),
+                                                path.join(f'{ytb.title}.mp4')
+                                                ])
+                                                remove('video.mp4')
+                                                remove('audio.mp4')
+                                                if platform == 'win32' or platform == 'win64':
+                                                    rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                elif platform == 'linux':
+                                                    rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                break
+                                            elif opt_download == 8:
+                                                YouTube(url).streams.get_by_itag('160').download(filename='video')
+                                                YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                sleep(2.5)
+                                                call(["ffmpeg", "-i",
+                                                path.join('video.mp4'),
+                                                "-i", 
+                                                path.join('audio.mp4'),
+                                                path.join(f'{ytb.title}.mp4')
+                                                ])
+                                                remove('video.mp4')
+                                                remove('audio.mp4')
+                                                if platform == 'win32' or platform == 'win64':
+                                                    rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                elif platform == 'linux':
+                                                    rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                break
+                                        elif ytb.streams.get_by_itag('271') and ytb.streams.get_by_itag('137') and ytb.streams.get_by_itag('136') and ytb.streams.get_by_itag('135') and ytb.streams.get_by_itag('134') and ytb.streams.get_by_itag('133') and ytb.streams.get_by_itag('160') in ytb.streams:
+                                            opt_download = int(input('\033[33m[ 0 ] \033[33mCancel\n\033[33m[ 1 ] \033[34m1440p\n\033[33m[ 2 ] \033[34m1080p\n\033[33m[ 3 ] \033[34m720p\n\033[33m[ 4 ] \033[34m480p\n\033[33m[ 5 ] \033[34m360p\n\033[33m[ 6 ] \033[34m240p\n\033[33m[ 7 ] \033[34m144p\n> \033[m'))
+                                            if opt_download > 7 or opt_download < 0:
+                                                print('\n\033[31m[-] Invalid option.\033[m\n')
+                                                continue
+                                            if opt_download == 0:
+                                                break
+                                            print(f'\n\033[34m[+] Downloading \033[31m{ytb.title}\033[34m... \033[33mPlease, wait.\033[m')
+                                            if opt_download == 1:
+                                                YouTube(url).streams.get_by_itag('271').download(filename='video')
+                                                YouTube(url).streams.get_by_itag('251').download(filename='audio')
+                                                print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                sleep(2.5)
+                                                call(["ffmpeg", "-i",
+                                                path.join('video.webm'),
+                                                "-i", 
+                                                path.join('audio.webm'),
+                                                path.join(f'{ytb.title}.mp4')
+                                                ])
+                                                remove('video.webm')
+                                                remove('audio.webm')
+                                                if platform == 'win32' or platform == 'win64':
+                                                    rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                elif platform == 'linux':
+                                                    rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                break
+                                            elif opt_download == 2:
+                                                YouTube(url).streams.get_by_itag('137').download(filename='video')
+                                                YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                sleep(2.5)
+                                                call(["ffmpeg", "-i",
+                                                path.join('video.mp4'),
+                                                "-i", 
+                                                path.join('audio.mp4'),
+                                                path.join(f'{ytb.title}.mp4')
+                                                ])
+                                                remove('video.mp4')
+                                                remove('audio.mp4')
+                                                if platform == 'win32' or platform == 'win64':
+                                                    rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                elif platform == 'linux':
+                                                    rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                break
+                                            elif opt_download == 3:
+                                                if YouTube(url).streams.get_by_itag('22') in ytb.streams:
+                                                    YouTube(url).streams.get_by_itag('22').download()
+                                                    print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                    if platform == 'win32' or platform == 'win64':
+                                                        rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    elif platform == 'linux':
+                                                        rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    break
+                                                else:
+                                                    YouTube(url).streams.get_by_itag('136').download(filename='video')
+                                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                    print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                    print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                    sleep(2.5)
+                                                    call(["ffmpeg", "-i",
+                                                    path.join('video.mp4'),
+                                                    "-i", 
+                                                    path.join('audio.mp4'),
+                                                    path.join(f'{ytb.title}.mp4')
+                                                    ])
+                                                    remove('video.mp4')
+                                                    remove('audio.mp4')
+                                                    if platform == 'win32' or platform == 'win64':
+                                                        rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    elif platform == 'linux':
+                                                        rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    break
+                                            elif opt_download == 4:
+                                                YouTube(url).streams.get_by_itag('135').download(filename='video')
+                                                YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                sleep(2.5)
+                                                call(["ffmpeg", "-i",
+                                                path.join('video.mp4'),
+                                                "-i", 
+                                                path.join('audio.mp4'),
+                                                path.join(f'{ytb.title}.mp4')
+                                                ])
+                                                remove('video.mp4')
+                                                remove('audio.mp4')
+                                                if platform == 'win32' or platform == 'win64':
+                                                    rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                elif platform == 'linux':
+                                                    rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                break
+                                            elif opt_download == 5:
+                                                if YouTube(url).streams.get_by_itag('18') in ytb.streams:
+                                                    YouTube(url).streams.get_by_itag('18').download()
+                                                    print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                    if platform == 'win32' or platform == 'win64':
+                                                        rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    elif platform == 'linux':
+                                                        rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    break
+                                                else:
+                                                    YouTube(url).streams.get_by_itag('134').download(filename='video')
+                                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                    print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                    print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                    sleep(2.5)
+                                                    call(["ffmpeg", "-i",
+                                                    path.join('video.mp4'),
+                                                    "-i", 
+                                                    path.join('audio.mp4'),
+                                                    path.join(f'{ytb.title}.mp4')
+                                                    ])
+                                                    remove('video.mp4')
+                                                    remove('audio.mp4')
+                                                    if platform == 'win32' or platform == 'win64':
+                                                        rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    elif platform == 'linux':
+                                                        rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    break
+                                            elif opt_download == 6:
+                                                YouTube(url).streams.get_by_itag('133').download(filename='video')
+                                                YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                sleep(2.5)
+                                                call(["ffmpeg", "-i",
+                                                path.join('video.mp4'),
+                                                "-i", 
+                                                path.join('audio.mp4'),
+                                                path.join(f'{ytb.title}.mp4')
+                                                ])
+                                                remove('video.mp4')
+                                                remove('audio.mp4')
+                                                if platform == 'win32' or platform == 'win64':
+                                                    rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                elif platform == 'linux':
+                                                    rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                break
+                                            elif opt_download == 7:
+                                                YouTube(url).streams.get_by_itag('160').download(filename='video')
+                                                YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                sleep(2.5)
+                                                call(["ffmpeg", "-i",
+                                                path.join('video.mp4'),
+                                                "-i", 
+                                                path.join('audio.mp4'),
+                                                path.join(f'{ytb.title}.mp4')
+                                                ])
+                                                remove('video.mp4')
+                                                remove('audio.mp4')
+                                                if platform == 'win32' or platform == 'win64':
+                                                    rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                elif platform == 'linux':
+                                                    rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                break
+                                        elif ytb.streams.get_by_itag('137') and ytb.streams.get_by_itag('136') and ytb.streams.get_by_itag('135') and ytb.streams.get_by_itag('134') and ytb.streams.get_by_itag('133') and ytb.streams.get_by_itag('160') in ytb.streams:
+                                            opt_download = int(input('\033[33m[ 0 ] \033[33mCancel\n\033[33m[ 1 ] \033[34m1080p\n\033[33m[ 2 ] \033[34m720p\n\033[33m[ 3 ] \033[34m480p\n\033[33m[ 4 ] \033[34m360p\n\033[33m[ 5 ] \033[34m240p\n\033[33m[ 6 ] \033[34m144p\n> \033[m'))
+                                            if opt_download > 6 or opt_download < 0:
+                                                print('\n\033[31m[-] Invalid option.\033[m\n')
+                                                continue
+                                            if opt_download == 0:
+                                                break
+                                            print(f'\n\033[34m[+] Downloading \033[31m{ytb.title}\033[34m... \033[33mPlease, wait.\033[m')
+                                            if opt_download == 1:
+                                                YouTube(url).streams.get_by_itag('137').download(filename='video')
+                                                YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                sleep(2.5)
+                                                call(["ffmpeg", "-i",
+                                                path.join('video.mp4'),
+                                                "-i", 
+                                                path.join('audio.mp4'),
+                                                path.join(f'{ytb.title}.mp4')
+                                                ])
+                                                remove('video.mp4')
+                                                remove('audio.mp4')
+                                                if platform == 'win32' or platform == 'win64':
+                                                    rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                elif platform == 'linux':
+                                                    rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                break
+                                            elif opt_download == 2:
+                                                if YouTube(url).streams.get_by_itag('22') in ytb.streams:
+                                                    YouTube(url).streams.get_by_itag('22').download()
+                                                    print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                    if platform == 'win32' or platform == 'win64':
+                                                        rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    elif platform == 'linux':
+                                                        rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    break
+                                                else:
+                                                    YouTube(url).streams.get_by_itag('136').download(filename='video')
+                                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                    print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                    print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                    sleep(2.5)
+                                                    call(["ffmpeg", "-i",
+                                                    path.join('video.mp4'),
+                                                    "-i", 
+                                                    path.join('audio.mp4'),
+                                                    path.join(f'{ytb.title}.mp4')
+                                                    ])
+                                                    remove('video.mp4')
+                                                    remove('audio.mp4')
+                                                    if platform == 'win32' or platform == 'win64':
+                                                        rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    elif platform == 'linux':
+                                                        rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    break
+                                            elif opt_download == 3:
+                                                YouTube(url).streams.get_by_itag('135').download(filename='video')
+                                                YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                sleep(2.5)
+                                                call(["ffmpeg", "-i",
+                                                path.join('video.mp4'),
+                                                "-i", 
+                                                path.join('audio.mp4'),
+                                                path.join(f'{ytb.title}.mp4')
+                                                ])
+                                                remove('video.mp4')
+                                                remove('audio.mp4')
+                                                if platform == 'win32' or platform == 'win64':
+                                                    rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                elif platform == 'linux':
+                                                    rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                break
+                                            elif opt_download == 4:
+                                                if YouTube(url).streams.get_by_itag('18') in ytb.streams:
+                                                    YouTube(url).streams.get_by_itag('18').download()
+                                                    print('\n\033[32m> Download Completed.\033[m\n')
+                                                    if platform == 'win32' or platform == 'win64':
+                                                        rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    elif platform == 'linux':
+                                                        rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    break
+                                                else:
+                                                    YouTube(url).streams.get_by_itag('134').download(filename='video')
+                                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                    print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                    print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                    sleep(2.5)
+                                                    call(["ffmpeg", "-i",
+                                                    path.join('video.mp4'),
+                                                    "-i", 
+                                                    path.join('audio.mp4'),
+                                                    path.join(f'{ytb.title}.mp4')
+                                                    ])
+                                                    remove('video.mp4')
+                                                    remove('audio.mp4')
+                                                    if platform == 'win32' or platform == 'win64':
+                                                        rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    elif platform == 'linux':
+                                                        rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    break
+                                            elif opt_download == 5:
+                                                YouTube(url).streams.get_by_itag('133').download(filename='video')
+                                                YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                sleep(2.5)
+                                                call(["ffmpeg", "-i",
+                                                path.join('video.mp4'),
+                                                "-i", 
+                                                path.join('audio.mp4'),
+                                                path.join(f'{ytb.title}.mp4')
+                                                ])
+                                                remove('video.mp4')
+                                                remove('audio.mp4')
+                                                if platform == 'win32' or platform == 'win64':
+                                                    rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                elif platform == 'linux':
+                                                    rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                break
+                                            elif opt_download == 6:
+                                                YouTube(url).streams.get_by_itag('160').download(filename='video')
+                                                YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                sleep(2.5)
+                                                call(["ffmpeg", "-i",
+                                                path.join('video.mp4'),
+                                                "-i", 
+                                                path.join('audio.mp4'),
+                                                path.join(f'{ytb.title}.mp4')
+                                                ])
+                                                remove('video.mp4')
+                                                remove('audio.mp4')
+                                                if platform == 'win32' or platform == 'win64':
+                                                    rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                elif platform == 'linux':
+                                                    rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                break
+                                        elif ytb.streams.get_by_itag('136') and ytb.streams.get_by_itag('135') and ytb.streams.get_by_itag('134') and ytb.streams.get_by_itag('133') and ytb.streams.get_by_itag('160') in ytb.streams:
+                                            opt_download = int(input('\033[33m[ 0 ] \033[33mCancel\n\033[33m[ 1 ] \033[34m720p\n\033[33m[ 2 ] \033[34m480p\n\033[33m[ 3 ] \033[34m360p\n\033[33m[ 4 ] \033[34m240p\n\033[33m[ 5 ] \033[34m144p\n> \033[m'))
+                                            if opt_download > 5 or opt_download < 0:
+                                                print('\n\033[31m[-] Invalid option.\033[m\n')
+                                                continue
+                                            if opt_download == 0:
+                                                break
+                                            print(f'\n\033[34m[+] Downloading \033[31m{ytb.title}\033[34m... \033[33mPlease, wait.\033[m')
+                                            if opt_download == 1:
+                                                if YouTube(url).streams.get_by_itag('22') in ytb.streams:
+                                                    YouTube(url).streams.get_by_itag('22').download()
+                                                    print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                    if platform == 'win32' or platform == 'win64':
+                                                        rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    elif platform == 'linux':
+                                                        rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    break
+                                                else:
+                                                    YouTube(url).streams.get_by_itag('136').download(filename='video')
+                                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                    print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                    print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                    sleep(2.5)
+                                                    call(["ffmpeg", "-i",
+                                                    path.join('video.mp4'),
+                                                    "-i", 
+                                                    path.join('audio.mp4'),
+                                                    path.join(f'{ytb.title}.mp4')
+                                                    ])
+                                                    remove('video.mp4')
+                                                    remove('audio.mp4')
+                                                    if platform == 'win32' or platform == 'win64':
+                                                        rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    elif platform == 'linux':
+                                                        rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    break
+                                            elif opt_download == 2:
+                                                YouTube(url).streams.get_by_itag('135').download(filename='video')
+                                                YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                sleep(2.5)
+                                                call(["ffmpeg", "-i",
+                                                path.join('video.mp4'),
+                                                "-i", 
+                                                path.join('audio.mp4'),
+                                                path.join(f'{ytb.title}.mp4')
+                                                ])
+                                                remove('video.mp4')
+                                                remove('audio.mp4')
+                                                if platform == 'win32' or platform == 'win64':
+                                                    rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                elif platform == 'linux':
+                                                    rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                break
+                                            elif opt_download == 3:
+                                                if YouTube(url).streams.get_by_itag('18') in ytb.streams:
+                                                    YouTube(url).streams.get_by_itag('18').download()
+                                                    print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                    if platform == 'win32' or platform == 'win64':
+                                                        rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    elif platform == 'linux':
+                                                        rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    break
+                                                else:
+                                                    YouTube(url).streams.get_by_itag('134').download(filename='video')
+                                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                    print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                    print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                    sleep(2.5)
+                                                    call(["ffmpeg", "-i",
+                                                    path.join('video.mp4'),
+                                                    "-i", 
+                                                    path.join('audio.mp4'),
+                                                    path.join(f'{ytb.title}.mp4')
+                                                    ])
+                                                    remove('video.mp4')
+                                                    remove('audio.mp4')
+                                                    if platform == 'win32' or platform == 'win64':
+                                                        rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    elif platform == 'linux':
+                                                        rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    break
+                                            elif opt_download == 4:
+                                                YouTube(url).streams.get_by_itag('133').download(filename='video')
+                                                YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                sleep(2.5)
+                                                call(["ffmpeg", "-i",
+                                                path.join('video.mp4'),
+                                                "-i", 
+                                                path.join('audio.mp4'),
+                                                path.join(f'{ytb.title}.mp4')
+                                                ])
+                                                remove('video.mp4')
+                                                remove('audio.mp4')
+                                                if platform == 'win32' or platform == 'win64':
+                                                    rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                elif platform == 'linux':
+                                                    rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                break
+                                            elif opt_download == 5:
+                                                YouTube(url).streams.get_by_itag('160').download(filename='video')
+                                                YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                sleep(2.5)
+                                                call(["ffmpeg", "-i",
+                                                path.join('video.mp4'),
+                                                "-i", 
+                                                path.join('audio.mp4'),
+                                                path.join(f'{ytb.title}.mp4')
+                                                ])
+                                                remove('video.mp4')
+                                                remove('audio.mp4')
+                                                if platform == 'win32' or platform == 'win64':
+                                                    rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                    print('\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                elif platform == 'linux':
+                                                    rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                    print('\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                break
+                                        elif ytb.streams.get_by_itag('135') and ytb.streams.get_by_itag('134') and ytb.streams.get_by_itag('133') and ytb.streams.get_by_itag('160') in ytb.streams:
+                                            opt_download = int(input('\033[33m[ 0 ] \033[33mCancel\n\033[33m[ 1 ] \033[34m480p\n\033[33m[ 2 ] \033[34m360p\n\033[33m[ 3 ] \033[34m240p\n\033[33m[ 4 ] \033[34m144p\n> \033[m'))
+                                            if opt_download > 4 or opt_download < 0:
+                                                print('\n\033[31m[-] Invalid option.\033[m\n')
+                                                continue
+                                            if opt_download == 0:
+                                                break
+                                            print(f'\n\033[34m[+] Downloading \033[31m{ytb.title}\033[34m... \033[33mPlease, wait.\033[m')
+                                            if opt_download == 1:
+                                                YouTube(url).streams.get_by_itag('135').download(filename='video')
+                                                YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                sleep(2.5)
+                                                call(["ffmpeg", "-i",
+                                                path.join('video.mp4'),
+                                                "-i", 
+                                                path.join('audio.mp4'),
+                                                path.join(f'{ytb.title}.mp4')
+                                                ])
+                                                remove('video.mp4')
+                                                remove('audio.mp4')
+                                                if platform == 'win32' or platform == 'win64':
+                                                    rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                elif platform == 'linux':
+                                                    rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                break
+                                            elif opt_download == 2:
+                                                if YouTube(url).streams.get_by_itag('18') in ytb.streams:
+                                                    YouTube(url).streams.get_by_itag('18').download()
+                                                    print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                    if platform == 'win32' or platform == 'win64':
+                                                        rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    elif platform == 'linux':
+                                                        rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    break
+                                                else:
+                                                    YouTube(url).streams.get_by_itag('134').download(filename='video')
+                                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                    print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                    print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                    sleep(2.5)
+                                                    call(["ffmpeg", "-i",
+                                                    path.join('video.mp4'),
+                                                    "-i", 
+                                                    path.join('audio.mp4'),
+                                                    path.join(f'{ytb.title}.mp4')
+                                                    ])
+                                                    remove('video.mp4')
+                                                    remove('audio.mp4')
+                                                    if platform == 'win32' or platform == 'win64':
+                                                        rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    elif platform == 'linux':
+                                                        rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    break
+                                            elif opt_download == 3:
+                                                YouTube(url).streams.get_by_itag('133').download(filename='video')
+                                                YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                sleep(2.5)
+                                                call(["ffmpeg", "-i",
+                                                path.join('video.mp4'),
+                                                "-i", 
+                                                path.join('audio.mp4'),
+                                                path.join(f'{ytb.title}.mp4')
+                                                ])
+                                                remove('video.mp4')
+                                                remove('audio.mp4')
+                                                if platform == 'win32' or platform == 'win64':
+                                                    rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                elif platform == 'linux':
+                                                    rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                break
+                                            elif opt_download == 4:
+                                                YouTube(url).streams.get_by_itag('160').download(filename='video')
+                                                YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                sleep(2.5)
+                                                call(["ffmpeg", "-i",
+                                                path.join('video.mp4'),
+                                                "-i", 
+                                                path.join('audio.mp4'),
+                                                path.join(f'{ytb.title}.mp4')
+                                                ])
+                                                remove('video.mp4')
+                                                remove('audio.mp4')
+                                                if platform == 'win32' or platform == 'win64':
+                                                    rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                elif platform == 'linux':
+                                                    rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                break
+                                        elif ytb.streams.get_by_itag('134') and ytb.streams.get_by_itag('133') and ytb.streams.get_by_itag('160') in ytb.streams:
+                                            opt_download = int(input('\033[33m[ 0 ] \033[33mCancel\n\033[33m[ 1 ] \033[34m360p\n\033[33m[ 2 ] \033[34m240p\n\033[33m[ 3 ] \033[34m144p\n> \033[m'))
+                                            if opt_download > 3 or opt_download < 0:
+                                                print('\n\033[31m[-] Invalid option.\033[m\n')
+                                                continue
+                                            if opt_download == 0:
+                                                break
+                                            print(f'\n\033[34m[+] Downloading \033[31m{ytb.title}\033[34m... \033[33mPlease, wait.\033[m')
+                                            if opt_download == 1:
+                                                if YouTube(url).streams.get_by_itag('18') in ytb.streams:
+                                                    YouTube(url).streams.get_by_itag('18').download()
+                                                    print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                    if platform == 'win32' or platform == 'win64':
+                                                        rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    elif platform == 'linux':
+                                                        rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    break
+                                                else:
+                                                    YouTube(url).streams.get_by_itag('134').download(filename='video')
+                                                    YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                    print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                    print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                    sleep(2.5)
+                                                    call(["ffmpeg", "-i",
+                                                    path.join('video.mp4'),
+                                                    "-i", 
+                                                    path.join('audio.mp4'),
+                                                    path.join(f'{ytb.title}.mp4')
+                                                    ])
+                                                    remove('video.mp4')
+                                                    remove('audio.mp4')
+                                                    if platform == 'win32' or platform == 'win64':
+                                                        rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    elif platform == 'linux':
+                                                        rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                        print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                    break
+                                            elif opt_download == 2:
+                                                YouTube(url).streams.get_by_itag('133').download(filename='video')
+                                                YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                sleep(2.5)
+                                                call(["ffmpeg", "-i",
+                                                path.join('video.mp4'),
+                                                "-i", 
+                                                path.join('audio.mp4'),
+                                                path.join(f'{ytb.title}.mp4')
+                                                ])
+                                                remove('video.mp4')
+                                                remove('audio.mp4')
+                                                if platform == 'win32' or platform == 'win64':
+                                                    rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                elif platform == 'linux':
+                                                    rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                break
+                                            elif opt_download == 3:
+                                                YouTube(url).streams.get_by_itag('160').download(filename='video')
+                                                YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                sleep(2.5)
+                                                call(["ffmpeg", "-i",
+                                                path.join('video.mp4'),
+                                                "-i", 
+                                                path.join('audio.mp4'),
+                                                path.join(f'{ytb.title}.mp4')
+                                                ])
+                                                remove('video.mp4')
+                                                remove('audio.mp4')
+                                                if platform == 'win32' or platform == 'win64':
+                                                    rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                elif platform == 'linux':
+                                                    rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                break
+                                        elif ytb.streams.get_by_itag('133') and ytb.streams.get_by_itag('160') in ytb.streams:
+                                            opt_download = int(input('\033[33m[ 0 ] \033[33mCancel\n\033[33m[ 1 ] \033[34m240p\n\033[33m[ 2 ] \033[34m144p\n> \033[m'))
+                                            if opt_download > 2 or opt_download < 0:
+                                                print('\033[31m[-] Invalid option.\033[m')
+                                                continue
+                                            if opt_download == 0:
+                                                break
+                                            print(f'\n\033[34m> Downloading \033[31m{ytb.title}\033[34m... \033[33mPlease, wait.\033[m')
+                                            if opt_download == 1:
+                                                YouTube(url).streams.get_by_itag('133').download(filename='video')
+                                                YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                sleep(2.5)
+                                                call(["ffmpeg", "-i",
+                                                path.join('video.mp4'),
+                                                "-i", 
+                                                path.join('audio.mp4'),
+                                                path.join(f'{ytb.title}.mp4')
+                                                ])
+                                                remove('video.mp4')
+                                                remove('audio.mp4')
+                                                if platform == 'win32' or platform == 'win64':
+                                                    rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                elif platform == 'linux':
+                                                    rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                break
+                                            elif opt_download == 2:
+                                                YouTube(url).streams.get_by_itag('160').download(filename='video')
+                                                YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                sleep(2.5)
+                                                call(["ffmpeg", "-i",
+                                                path.join('video.mp4'),
+                                                "-i", 
+                                                path.join('audio.mp4'),
+                                                path.join(f'{ytb.title}.mp4')
+                                                ])
+                                                remove('video.mp4')
+                                                remove('audio.mp4')
+                                                if platform == 'win32' or platform == 'win64':
+                                                    rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                elif platform == 'linux':
+                                                    rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                break
+                                        elif ytb.streams.get_by_itag('160') in ytb.streams:
+                                            opt_download = int(input('\033[33m[ 0 ] \033[33mCancel\n\033[33m[ 1 ] \033[34m144p\n> \033[m'))
+                                            if opt_download > 1 or opt_download < 0:
+                                                print('\n\033[31m[-] Invalid option.\033[m\n')
+                                                continue
+                                            if opt_download == 0:
+                                                break
+                                            print(f'\n\033[34m[+] Downloading \033[31m{ytb.title}\033[34m... \033[33mPlease, wait.\033[m')
+                                            if opt_download == 1:
+                                                YouTube(url).streams.get_by_itag('160').download(filename='video')
+                                                YouTube(url).streams.get_by_itag('140').download(filename='audio')
+                                                print('\n\033[32m[+] Download Completed.\033[m\n')
+                                                print('\n\033[34m[+] Starting Merging...\033[m\n')
+                                                sleep(2.5)
+                                                call(["ffmpeg", "-i",
+                                                path.join('video.mp4'),
+                                                "-i", 
+                                                path.join('audio.mp4'),
+                                                path.join(f'{ytb.title}.mp4')
+                                                ])
+                                                remove('video.mp4')
+                                                remove('audio.mp4')
+                                                if platform == 'win32' or platform == 'win64':
+                                                    rename(f'{ytb.title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                elif platform == 'linux':
+                                                    rename(f'{ytb.title}.mp4', f'/home/{getuser()}/Downloads/{ytb.title}.mp4')
+                                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                                break
+                                        else:
+                                            print('\n\033[31m[-] An unknown error has occurred.\033[m')
+                                            break
+                                    except error.HTTPError:
+                                        print('\n\033[31m[-] This file is unavailable for download, please choose another.\033[m\n')
+                                        continue
+                                    except FileExistsError:
+                                        print('\n\033[31m[-] The file already exists.\033[m')
+                                        remove(f'{ytb.title}.mp4')
+                                        break   
+                                    except:
+                                        print('\n\033[31m[-] An unknown error has occurred.\033[m\n')
+                                        break
+                            elif opt_format30 == 2:
+                                try:
+                                    if ytb.streams.get_by_itag('140') in ytb.streams:
+                                        print(f'\n\033[34m[+] Downloading \033[31m{ytb.title}\033[34m... \033[33mPlease, wait.\033[m')
+                                        YouTube(url).streams.get_by_itag('140').download(filename='music')
+                                        print('\n\033[32m[+] Download Completed.\033[m')
+                                        print('\n\033[34m[+] Starting Conversion...\033[m\n')
+                                        sleep(2.5)
+                                        call(["ffmpeg", "-i",
+                                        path.join('music.mp4'),
+                                        path.join('music.mp3')
+                                        ])
+                                        remove('music.mp4')
+                                        sleep(0.5)
+                                        rename('music.mp3', f'{ytb.title}.mp3')
+                                        sleep(0.5)
+                                        if platform == 'win32' or platform == 'win64':
+                                            rename(f'{ytb.title}.mp3', f'C:\\Users\\{getuser()}\\Downloads\\{ytb.title}.mp3')
+                                            print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                        elif platform == 'linux':
+                                            rename(f'{ytb.title}.mp3', f'/home/{getuser()}/Downloads/{ytb.title}.mp3')
+                                            print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                        break
+                                    elif opt_format30 == 0:
+                                        print('\033[m')
+                                        break
+                                    else:
+                                        print('\033[31m[-] Invalid option.\033[m')
+                                        continue
+                                    break
+                                except error.HTTPError:
+                                    print('\n\033[31m[-] This file is unavailable for download, please choose another.\033[m\n')
+                                    continue
+                                except FileExistsError:
+                                    print('\n\033[31m[-] The file already exists.\033[m')
+                                    remove(f'{ytb.title}.mp3')
+                                    break   
+                                except:
+                                    print('\n\033[31m[-] An unknown error has occurred.\033[m\n')
+                                    break
+                        break
+                    except:
+                        print('\033[m')
+                        break
+            elif opt_type == 2:
+                try:
+                    playlist = Playlist(url)
+                    playlist._video_regex = compile(r"\"url\":\"(/watch\?v=[\w-]*)")
+                    print(f'\n\n\033[32m[+] Videos in the following playlist: \033[34m{len(playlist.video_urls)}\033[m')
+                    print('\033[33m='*50)
+                    while True:
+                        opt_pl = int(input('\n\033[33m[ 0 ] Cancel\n\033[33m[ 1 ] \033[34mVideo\n\033[33m[ 2 ] \033[34mMusic\n> \033[m'))
+                        print('\033[33m='*50)
+                        if opt_pl > 2 or opt_pl < 0:
+                            print('\n\033[31m[-] Invalid option.\033[m')
+                            continue
+                        elif opt_pl == 1:
+                            for video in playlist.video_urls:
+                                print(f'\n\033[34m[+] Downloading \033[31m{YouTube(video).title}\033[34m... \033[33mPlease, wait.\033[m')
                                 YouTube(video).streams.get_highest_resolution().download()
                                 if i == 0:
-                                    window['return'].update(f'Downloading {YouTube(video).title}... Please Wait.\n\n{i} Download Completed.')
+                                    print(f'\n\033[32m[+] {i} Download Completed.\033[m')
                                 else:
-                                    window['return'].update(f'Downloading {YouTube(video).title}... Please Wait.\n\n{i} Downloads Completed.')
+                                    print(f'\n\033[32m[+] {i} Downloads Completed.\033[m')
                                 if platform == 'win32' or platform == 'win64':
-                                    if path_file != '':
-                                        rename(f'{YouTube(video).title}.mp4', f'{path_file}\\{YouTube(video).title}.mp4')
+                                    rename(f'{YouTube(video).title}.mp4', f'C:\\Users\\{getuser()}\\Downloads\\{YouTube(video).title}.mp4')
                                 elif platform == 'linux':
-                                    if path_file != '':
-                                        rename(f'{YouTube(video).title}.mp4', f'{path_file}/{YouTube(video).title}.mp4')
-                                if i == len(pl.video_urls):
-                                    window['return'].update(f'Downloading {YouTube(video).title}... Please Wait.\n\n{i} Downloads Completed.\n\nDownloaded files has moved to output path.')
+                                    rename(f'{YouTube(video).title}.mp4', f'/home/{getuser()}/Downloads/{YouTube(video).title}.mp4')
+                                if i == len(playlist.video_urls):
+                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
                                 i += 1
-                    except KeyError:
-                        window['return'].update('An error with the cipher has ocurred. See documentation in Github to resolve.')
-                    except FileExistsError:
-                        window['return'].update('Another file with same name already exists.')
-                        if extension == 'mp4':
-                            remove(f'{yt.title}.mp4')
-                        elif extension == 'mp4p':
-                            remove(f'{YouTube(video).title}.mp4')
-                    #AUDIO
-                    try:
-                        if combo == '128kbps':
-                            extension = 'mp3'
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.')
-                            window.Refresh()
-                            YouTube(values['url']).streams.get_by_itag('140').download(filename = 'audio')
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.')
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.\n\nConverting... Check terminal to follow the process.')
-                            window.Refresh()
-                            call(["ffmpeg", "-i",
-                            path.join('audio.mp4'),
-                            path.join(f'{yt.title}.mp3')
-                            ])
-                            sleep(0.5)
-                            remove('audio.mp4')
-                            sleep(0.5)
-                            if platform == 'win32' or platform == 'win64':
-                                if path_file != '':
-                                    rename(f'{yt.title}.mp3', f'{path_file}\\{yt.title}.mp3')
-                            elif platform == 'linux':
-                                if path_file != '':
-                                    rename(f'{yt.title}.mp3', f'{path_file}/{yt.title}.mp3')
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.\n\nConverting... Check terminal to follow the process.\n\nConverting completed, downloaded files has moved to output path.')
-                        elif combo == '160kbps':
-                            extension = 'mp3'
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.')
-                            window.Refresh()
-                            YouTube(values['url']).streams.get_by_itag('251').download(filename = 'audio')
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.')
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.\n\nConverting... Check terminal to follow the process.')
-                            window.Refresh()
-                            call(["ffmpeg", "-i",
-                            path.join('audio.webm'),
-                            path.join(f'{yt.title}.mp3')
-                            ])
-                            sleep(0.5)
-                            remove('audio.webm')
-                            sleep(0.5)
-                            if platform == 'win32' or platform == 'win64':
-                                if path_file != '':
-                                    rename(f'{yt.title}.mp3', f'{path_file}\\{yt.title}.mp3')
-                            elif platform == 'linux':
-                                if path_file != '':
-                                    rename(f'{yt.title}.mp3', f'{path_file}/{yt.title}.mp3')
-                            window['return'].update(f'Downloading {yt.title}... Please Wait.\n\nDownload Completed.\n\nConverting... Check terminal to follow the process.\n\nConverting completed, downloaded files has moved to output path.')
-                        elif combo == 'Audio (128kbps)':
-                            extension = 'mp3p'
-                            for music in pl.video_urls:
-                                window['return'].update(f'Downloading {YouTube(music).title}... Please Wait.')
-                                window.Refresh()
-                                YouTube(music).streams.get_by_itag('140').download(filename = f'music{i}')
+                        elif opt_pl == 2:
+                            for music in playlist.video_urls:
+                                print(f'\n\033[34m[+] Downloading \033[31m{YouTube(music).title}\033[34m... \033[33mPlease, wait.\033[m')
+                                YouTube(music).streams.get_audio_only().download(filename=f'music{i}')
                                 if i == 0:
-                                    window['return'].update(f'Downloading {YouTube(music).title}... Please Wait.\n\n{i} Download Completed.')
+                                    print(f'\n\033[32m[+] {i} Download Completed.\033[m')
                                 else:
-                                    window['return'].update(f'Downloading {YouTube(music).title}... Please Wait.\n\n{i} Downloads Completed.')
-                                window['return'].update(f'Downloading {YouTube(music).title}... Please Wait.\n\n{i} Downloads Completed.\n\nStarting conversion... Check terminal to follow the process.')
-                                window.Refresh()
+                                    print(f'\n\033[32m[+] {i} Downloads Completed.\033[m')
+                                print('\n\033[34m[+] Starting Conversion...\033[m\n')
+                                sleep(2.5)
                                 call(["ffmpeg", "-i",
                                 path.join(f'music{i}.mp4'),
                                 path.join(f'music{i}.mp3')
@@ -656,27 +2315,46 @@ AUDIO
                                 rename(f'music{i}.mp3', f'{YouTube(music).title}.mp3')
                                 sleep(0.5)
                                 if platform == 'win32' or platform == 'win64':
-                                    if path_file != '':
-                                        rename(f'{YouTube(video).title}.mp3', f'{path_file}\\{YouTube(video).title}.mp3')
+                                    rename(f'{YouTube(music).title}.mp3', f'C:\\Users\\{getuser()}\\Downloads\\{YouTube(music).title}.mp3')
                                 elif platform == 'linux':
-                                    if path_file != '':
-                                        rename(f'{YouTube(video).title}.mp3', f'{path_file}/{YouTube(video).title}.mp3')
-                                if i == len(pl.video_urls):
-                                    window['return'].update(f'Downloading {YouTube(music).title}... Please Wait.\n\n{i} Downloads Completed.\n\nConverting completed, downloaded files has moved to output path.')
-                                i +=1
-                    except KeyError:
-                        window['return'].update('An error with the cipher has ocurred. See documentation in Github to resolve.')
-                    except FileExistsError:
-                        window['return'].update('Another file with same name already exists.')
-                        if extension == 'mp3':
-                            remove(f'{yt.title}.mp3')
-                        elif extension == 'mp3p':
-                            remove(f'{YouTube(music).title}.mp3')
-                except KeyError:
-                    window['return'].update('An error with the cipher has ocurred. See documentation in Github to resolve.')
-                except error.HTTPError:
-                    window['return'].update('This file is unavailable. Try another.')
-        window.close()
+                                    rename(f'{YouTube(music).title}.mp3', f'/home/{getuser()}/Downloads/{YouTube(music).title}.mp3')
+                                if i == len(playlist.video_urls):
+                                    print('\n\033[34m[+] Downloaded files moved to Downloads folder.\033[m')
+                                i += 1
+                        elif opt_pl == 0:
+                            print('\033[m')
+                            break
+                        break
+                except FileExistsError:
+                    print('\n\033[31m[+] The file already exists.\033[m')
+                    if opt_pl == 1:
+                        remove(f'{YouTube(video).title}.mp4')
+                    elif opt_pl == 2:
+                        remove(f'{YouTube(music).title}.mp3')
+                    break
+            print('\n\033[33mThanks for using.\033[m\n')
+            break
 
     class main:
-        ytdownloader()
+        print('\n\033[34mCoded by f4ll_py\033[m')
+        print('\n\033[34mVersion: \033[31m0.3\033[m')
+        print('''    \033[31m       _ \033[39m     _                     _                 _           
+    \033[31m _   _| |_\033[39m __| | _____      ___ __ | | ___   __ _  __| | ___ _ __ 
+    \033[31m| | | | __\033[39m/ _` |/ _ \ \ /\ / / '_ \| |/ _ \ / _` |/ _` |/ _ \ '__|
+    \033[31m| |_| | || \033[39m(_| | (_) \ V  V /| | | | | (_) | (_| | (_| |  __/ |   
+    \033[31m \__, |\__\033[39m\__,_|\___/ \_/\_/ |_| |_|_|\___/ \__,_|\__,_|\___|_|   
+    \033[31m |___/''')
+        while True:
+            try:
+                url = str(input('\n\033[34m[=] Insert the link: \033[m'))
+                yt(url)
+                break
+            except KeyError:
+                print('\n\033[31m[-] An error with the cipher has ocurred. See documentation in Github to resolve.\033[m\n')
+                break
+            except KeyboardInterrupt:
+                print('\n\n\033[33mThanks for using.\033[m\n')
+                break
+            except:
+                print('\n\033[31m[-] An unknown error has occurred.\033[m\n')
+                break
