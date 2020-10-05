@@ -51,7 +51,7 @@ def main() -> None:
     window.close()
 
 
-def handle_exceptions(func):
+def handle_exceptions(func) -> object:
     """
     This is needed since pytube current version is 
     quite unstable and can raise some unexpected errors.
@@ -80,9 +80,22 @@ def handle_exceptions(func):
 @handle_exceptions
 def search(url:    str,
            path:   str,) -> Tuple[Union[YouTube, None],
-                                  Union[Playlist, None]]:
+                                  Union[None, Playlist]]:
     """
+    Function to handle search for a video/playlist.
     
+    Parameters
+    ----------
+    url : `str`
+        Searched video/playlist url.
+    
+    path: `str`
+        Path where the video will be downloaded
+        
+    Returns
+    -------
+    It can returns a YouTube or Playlist object,
+    or nothing if any exception was raised
     """
     window.s_append(f'Searching for {url}...')
 
@@ -119,9 +132,17 @@ def search(url:    str,
 def download(youtube : Union[YouTube, None],
              playlist: Union[Playlist, None],
              stream:   str,
-             path:     str):
+             path:     str) -> None:
     """
+    Function to handle download for a video/playlist.
     
+    Parameters
+    ----------  
+    stream : `str`
+        Selected value of the window stream
+    
+    path: `str`
+        Path where the video will be downloaded
     """
 
     if not playlist and not youtube:
@@ -154,7 +175,11 @@ def download(youtube : Union[YouTube, None],
 
         window.s_append('All downloads finished!')
 
-    else:
+    if youtube:
+
+        if youtube.path != path:
+            youtube.path = path
+
         quality = stream[:5].strip()
         fps = int(stream[-7:-5])
 
