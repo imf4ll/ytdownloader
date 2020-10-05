@@ -1,3 +1,0 @@
-pytube3
-PySimpleGUI
-ffmpeg
