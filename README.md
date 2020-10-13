@@ -19,7 +19,7 @@ Dependencies:
 - Python 3
 - pytube3
 - PySimpleGUI
-- <a href="https://ffmpeg.zeranoe.com/builds/">FFmpeg</a>
+- <a href="https://ffmpeg.org/download.html#build-windows">FFmpeg</a>
 
 Documentation:
 
