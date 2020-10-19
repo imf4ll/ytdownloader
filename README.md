@@ -1,5 +1,6 @@
 # ytdownloader 0.5
 
+[![CodeFactor](https://www.codefactor.io/repository/github/f4ll-py/ytdownloader/badge)](https://www.codefactor.io/repository/github/f4ll-py/ytdownloader)
 ![LastCommit](https://img.shields.io/github/last-commit/f4ll-py/ytdownloader)
 ![Issues](https://img.shields.io/github/issues/f4ll-py/ytdownloader)
 ![PullRequests](https://img.shields.io/github/issues-pr/f4ll-py/ytdownloader)
