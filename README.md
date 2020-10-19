@@ -1,6 +1,5 @@
 # ytdownloader 0.5
 
-![Downloads](https://img.shields.io/github/downloads/f4ll-py/ytdownloader/total)
 ![LastCommit](https://img.shields.io/github/last-commit/f4ll-py/ytdownloader)
 ![Issues](https://img.shields.io/github/issues/f4ll-py/ytdownloader)
 ![PullRequests](https://img.shields.io/github/issues-pr/f4ll-py/ytdownloader)
