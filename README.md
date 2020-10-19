@@ -1,12 +1,14 @@
 # ytdownloader 0.5
 
+<img src="https://i.imgur.com/PFr5ejx.gif">
+
 [![CodeFactor](https://www.codefactor.io/repository/github/f4ll-py/ytdownloader/badge)](https://www.codefactor.io/repository/github/f4ll-py/ytdownloader)
 ![LastCommit](https://img.shields.io/github/last-commit/f4ll-py/ytdownloader)
 ![Issues](https://img.shields.io/github/issues/f4ll-py/ytdownloader)
 ![PullRequests](https://img.shields.io/github/issues-pr/f4ll-py/ytdownloader)
 ![Followers](https://img.shields.io/github/followers/f4ll-py?label=Follow)
 
-<img src="https://i.imgur.com/PFr5ejx.gif">
+<br>
 
 **IF YOU HAVE ANOTHER PYTHON VERSION BEYOND Python 3, USE 'python3' BEFORE THE PARAMETERS**
 
