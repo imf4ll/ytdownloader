@@ -117,7 +117,8 @@ class YouTube(pytube.YouTube):
                         video = v
                         break
 
-                    if video: break
+                    if video:
+                        break
 
         self.window.s_append(f'Downloading now video for {self.title}')
 
@@ -159,7 +160,7 @@ class YouTube(pytube.YouTube):
                                                               filename=fn))
 
             return str(path.rename(path.with_suffix('.mp3')))
-
+            
         else:
             audio = self.audios.filter(abr=bitrate).first()
 
@@ -191,7 +192,8 @@ class YouTube(pytube.YouTube):
         while not ffmpeg.poll():
             # Await until process is complete
             # before deleting input files
-            if ffmpeg.poll() == 0: break
+            if ffmpeg.poll() == 0:
+                break
             time.sleep(0.5)
 
         os.remove(self._audio_path)
