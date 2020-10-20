@@ -1,5 +1,3 @@
-# ytdownloader 0.5
-
 <img src="https://i.imgur.com/PFr5ejx.gif">
 
 [![CodeFactor](https://www.codefactor.io/repository/github/f4ll-py/ytdownloader/badge)](https://www.codefactor.io/repository/github/f4ll-py/ytdownloader)
