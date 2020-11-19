@@ -1,10 +1,10 @@
 <img src="https://i.imgur.com/PFr5ejx.gif">
 
-[![CodeFactor](https://www.codefactor.io/repository/github/ff4LL/ytdownloader/badge)](https://www.codefactor.io/repository/github/ff4LL/ytdownloader)
-![LastCommit](https://img.shields.io/github/last-commit/ff4LL/ytdownloader)
-![Issues](https://img.shields.io/github/issues/ff4LL/ytdownloader)
-![PullRequests](https://img.shields.io/github/issues-pr/ff4LL/ytdownloader)
-![Followers](https://img.shields.io/github/followers/ff4LL?label=Follow)
+[![CodeFactor](https://www.codefactor.io/repository/github/h4lkun1/ytdownloader/badge)](https://www.codefactor.io/repository/github/h4lkun1//ytdownloader)
+![LastCommit](https://img.shields.io/github/last-commit/h4lkun1//ytdownloader)
+![Issues](https://img.shields.io/github/issues/h4lkun1//ytdownloader)
+![PullRequests](https://img.shields.io/github/issues-pr/h4lkun1//ytdownloader)
+![Followers](https://img.shields.io/github/followers/h4lkun1/?label=Follow)
 
 <br><br>
 
