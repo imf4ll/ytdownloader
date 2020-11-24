@@ -1,8 +1,8 @@
-[![CodeFactor](https://www.codefactor.io/repository/github/h4ikun1/ytdownloader/badge)](https://www.codefactor.io/repository/github/h4ikun1/ytdownloader)
-![LastCommit](https://img.shields.io/github/last-commit/h4ikun1/ytdownloader)
-![Issues](https://img.shields.io/github/issues/h4ikun1/ytdownloader)
-![PullRequests](https://img.shields.io/github/issues-pr/h4ikun1/ytdownloader)
-![Followers](https://img.shields.io/github/followers/h4ikun1?label=Follow)
+[![CodeFactor](https://www.codefactor.io/repository/github/h3llr1s1ng/ytdownloader/badge)](https://www.codefactor.io/repository/github/h3llr1s1ng/ytdownloader)
+![LastCommit](https://img.shields.io/github/last-commit/h3llr1s1ng/ytdownloader)
+![Issues](https://img.shields.io/github/issues/h3llr1s1ng/ytdownloader)
+![PullRequests](https://img.shields.io/github/issues-pr/h3llr1s1ng/ytdownloader)
+![Followers](https://img.shields.io/github/followers/h3llr1s1ng?label=Follow)
 
 <br><br>
 
