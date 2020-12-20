@@ -1,9 +1,3 @@
-[![CodeFactor](https://www.codefactor.io/repository/github/z3ox1s/ytdownloader/badge)](https://www.codefactor.io/repository/github/z3ox1s/ytdownloader)
-![LastCommit](https://img.shields.io/github/last-commit/z3ox1s/ytdownloader)
-![Issues](https://img.shields.io/github/issues/z3ox1s/ytdownloader)
-![PullRequests](https://img.shields.io/github/issues-pr/z3ox1s/ytdownloader)
-![Followers](https://img.shields.io/github/followers/z3ox1s?label=Follow)
-
 <br><br>
 
 ## 🤔 What is YTDownloader?
